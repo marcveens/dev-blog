@@ -27,6 +27,10 @@ export default function Post({
         css={css`
           width: 100%;
           display: flex;
+      
+          a {
+            text-decoration: underline;
+          }
         `}
       >
         <Container>
