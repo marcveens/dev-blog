@@ -63,7 +63,15 @@ That being said, I added these 2 lines of code to `/src/cms/cms.tsx`:
 ```typescript
 import { Control as customSelectorControl, Preview as customSelectorPreview } from './widgets/CustomSelector';
 
-CMS.registerWidget('campingSelector', customSelectorControl, customSelectorPreview);
+CMS.registerWidget('customSelector', customSelectorControl, customSelectorPreview);
+```
+
+And now you can use it like this in your `static/admin/config.yml` file:
+
+```yml
+- label: Custom selector
+  name: customFields
+  widget: customSelector
 ```
 
 And that gives you a custom select component in the Netlify CMS with dynamic values.
