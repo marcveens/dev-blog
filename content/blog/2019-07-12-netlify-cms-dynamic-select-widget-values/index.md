@@ -51,7 +51,6 @@ You can imagine it's now easy to set it with any value you want. You can fetch n
 The widget preview I haven't worked out completely, but a really basic implementation looks like this:
 
 ```typescript
-
 export const preview = (props) => {
     return (
         <div>{props.value}</div>
