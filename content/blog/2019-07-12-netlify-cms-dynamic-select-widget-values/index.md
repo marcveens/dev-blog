@@ -33,8 +33,6 @@ export class Control extends React.Component<ControlProps> {
             ])
         );
 
-        console.log(selectProps.field);
-
         return (
             <SelectControl {...selectProps} />
         );
@@ -74,4 +72,3 @@ And now you can use it like this in your `static/admin/config.yml` file:
 ```
 
 And that gives you a custom select component in the Netlify CMS with dynamic values.
-
