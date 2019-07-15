@@ -36,7 +36,7 @@ const Hero = () => {
             max-width: ${rhythm(15)};
           `}
         >
-          In programming you don't understand things. You just get used to them.
+          &lt;body&gt;
         </h1>
       </Container>
       <div
@@ -58,7 +58,7 @@ export default function Index({ data: { site, allMdx } }) {
   const theme = useTheme()
   return (
     <Layout site={site} noSubscribeForm>
-      <Hero />
+      {/* <Hero /> */}
       <Container
         css={css`
           padding-bottom: 0;
