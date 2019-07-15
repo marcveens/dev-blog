@@ -43,17 +43,16 @@ function getSitemapEntryFromFile(file: string): Promise<SitemapEntry> {
 }
 
 function processSitemap(sitemapRecords: Sitemap) {
-    const fileContent = `
-<?xml version="1.0" encoding="UTF-8"?>
+    const fileContent = 
+`<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    ${sitemapRecords.filter(x => x.published).map(s => `
-    <url>
+    ${sitemapRecords.filter(x => x.published).map(s => 
+    `<url>
         <loc>https://www.marcveens.nl/${s.url}</loc>
         <lastmod>${s.lastModified}</lastmod>
-    </url>
-`).toString().replace(/\,/g, '')}
-</urlset>
-`;
+    </url>`
+    ).toString().replace(/\,/g, '')}
+</urlset>`;
 
     fs.writeFile(routingTableFileName, fileContent, (err) => {
         if (err) console.log(err);
