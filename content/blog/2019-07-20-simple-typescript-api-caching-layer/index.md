@@ -36,7 +36,7 @@ export class ApiCache {
         return this;
     }
 
-    public set = (url: string, result: any, body?: string) => {
+    public set = (url: string, result: any, body?: string): void => {
         if (!this.recordExists(url, body)) {
             this.cache.push({
                 url,
