@@ -23,6 +23,7 @@ export default class HTML extends React.Component {
             dangerouslySetInnerHTML={{ __html: this.props.body }}
           />
           {this.props.postBodyComponents}
+          <script id="dsq-count-scr" src="//marcveens-nl.disqus.com/count.js" async />
         </body>
       </html>
     )

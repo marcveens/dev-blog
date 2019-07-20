@@ -10,6 +10,7 @@ import { fonts } from '../lib/typography'
 import Share from '../components/Share'
 import config from '../../config/website'
 import { bpMaxSM } from '../lib/breakpoints'
+import Disqus from 'disqus-react';
 
 export default function Post({
   data: { site, mdx },
@@ -19,6 +20,13 @@ export default function Post({
   const date = mdx.frontmatter.date
   const title = mdx.frontmatter.title
   const banner = mdx.frontmatter.banner
+
+  const disqusShortname = 'marcveens-nl';
+  const disqusConfig = {
+      url: `${config.siteUrl}/${mdx.frontmatter.slug}`,
+      identifier: mdx.frontmatter.slug,
+      title: title,
+  };
 
   return (
     <Layout site={site} frontmatter={mdx.frontmatter}>
@@ -84,11 +92,13 @@ export default function Post({
       </article>
       <Container noVerticalPadding>
         <Share
-          url={`${config.siteUrl}/${mdx.frontmatter.slug}/`}
+          url={`${config.siteUrl}/${mdx.frontmatter.slug}`}
           title={title}
           twitterHandle={config.twitterHandle}
         />
         <br />
+        <Disqus.DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
+
       </Container>
     </Layout>
   )
