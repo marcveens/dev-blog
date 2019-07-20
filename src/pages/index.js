@@ -40,19 +40,23 @@ export default function Index({ data: { site, allMdx } }) {
               })}
             >
               <Link
-                to={post.frontmatter.slug}
+                to={`/${post.frontmatter.slug}`}
                 aria-label={`View ${post.frontmatter.title}`}
               >
                 {post.frontmatter.title}
               </Link>
             </h2>
+            <small css={css({
+              display: 'block',
+              marginBottom: rhythm(0.1)
+            })}>{post.frontmatter.date}</small>
             <Description>
               {post.excerpt}{' '}
               <Link
-                to={post.frontmatter.slug}
+                to={`/${post.frontmatter.slug}`}
                 aria-label={`View ${post.frontmatter.title}`}
               >
-                Read Article →
+                Read more →
               </Link>
             </Description>
           </div>
