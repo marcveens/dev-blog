@@ -74,8 +74,8 @@ The implementation will look something like this:
 export class Api {
     private apiCache = new ApiCache();
 
-    public get = async (body: Object) => {
-        return this.getData<any>(`/url-to-fetch`);
+    public getResults = async () => {
+        return this.getData<any>(`/url-for-results`);
     }
 
     private async getData<ReturnT>(url: string): Promise<ReturnT> {
