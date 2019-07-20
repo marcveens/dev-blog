@@ -68,4 +68,42 @@ export class ApiCache {
 }
 ```
 
+The implementation will look something like this:
+
+```typescript
+export class Api {
+    private apiCache = new ApiCache();
+
+    public get = async (body: Object) => {
+        return this.getData<any>(`/url-to-fetch`);
+    }
+
+    private async getData<ReturnT>(url: string): Promise<ReturnT> {
+        if (this.apiCache.recordExists(url)) {
+            return new Promise(resolve => 
+                resolve(this.apiCache.get(url))
+            );
+        }
+
+        try {
+            return await fetch(url)
+                .then(async (res) => {
+                    if (!res.ok) {
+                        throw (res);
+                    }
+
+                    const text = await res.text();
+                    const json = JSON.parse(text);
+
+                    this.apiCache.set(url, json);
+
+                    return json;
+                });
+        } catch (e) {
+            console.error(`API call '${url}' fails with code: ${e.statusCode}. Exception: ${e.toString()}`);
+        }
+    }
+}
+```
+
 Are you using another way to cache your responses? Having some comments about this implementation? Let me know!
