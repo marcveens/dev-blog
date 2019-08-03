@@ -15,6 +15,7 @@ const Description = styled.p`
 
 export default function Index({ data: { site, allMdx } }) {
   const theme = useTheme()
+
   return (
     <Layout site={site} noSubscribeForm>
       {/* <Hero /> */}

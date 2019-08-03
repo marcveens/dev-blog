@@ -148,9 +148,20 @@ export default ({
 
   const [themeName, setTheme] = useState(initializeTheme)
 
+  const unregisterServiceWorker = () => {
+    navigator.serviceWorker.getRegistrations().then(registrations => {
+      console.log(registrations);
+      for (let registration of registrations) {
+        registration.unregister();
+      }
+    });
+  };
+
   useEffect(
     () => {
       localStorage.setItem('theme', themeName)
+
+      unregisterServiceWorker();
     },
     [themeName],
   )
