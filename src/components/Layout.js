@@ -150,7 +150,6 @@ export default ({
 
   const unregisterServiceWorker = () => {
     navigator.serviceWorker.getRegistrations().then(registrations => {
-      console.log(registrations);
       for (let registration of registrations) {
         registration.unregister();
       }
