@@ -140,8 +140,6 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
             .replace(/-/g, '/')}/${titleSlugged}`
         : node.frontmatter.slug || titleSlugged
 
-    console.log(node.frontmatter.description);
-
     createNodeField({
       name: 'id',
       node,

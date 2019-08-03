@@ -159,7 +159,6 @@ module.exports = {
       options: {
         pathToConfigModule: `src/lib/typography`,
       },
-    },
-    'gatsby-plugin-offline',
+    }
   ],
 }

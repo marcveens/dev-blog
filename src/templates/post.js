@@ -21,8 +21,6 @@ export default function Post({
   const title = mdx.frontmatter.title
   const banner = mdx.frontmatter.banner
 
-  console.log(mdx, site);
-
   const disqusShortname = 'marcveens-nl';
   const disqusConfig = {
       url: `${config.siteUrl}/${mdx.frontmatter.slug}`,
