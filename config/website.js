@@ -3,10 +3,11 @@ module.exports = {
   siteTitle: 'Dev stuff by Marc Veens', // Navigation and Site Title
   siteTitleAlt: 'Small blog posts about front-end development', // Alternative Site title for SEO
   siteTitleShort: 'Dev stuff by Marc Veens', // short_name for manifest
-  siteUrl: 'https://marcveens.nl', // Domain of your site. No trailing slash!
+  siteUrl: 'https://www.marcveens.nl', // Domain of your site. No trailing slash!
   siteLanguage: 'en', // Language Tag on <html> element
   siteLogo: 'images/logo.png', // Used for SEO and manifest, path to your image you placed in the 'static' folder
   siteDescription: 'Small blog posts about front-end development',
+  siteKeywords: ['frontend','development','tech','javascript','typescript','react'],
   author: 'Marc Veens', // Author for schemaORGJSONLD
   organization: 'Macaw',
 
