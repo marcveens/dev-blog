@@ -34,7 +34,7 @@ const Footer = ({ author, noSubscribeForm }) => (
             opacity: 0.7;
           `}
         >
-          {author && `${author} \u00A9 ${new Date().getFullYear()}`}
+          {author && `${author} - ${new Date().getFullYear()}`}
         </div>
         <div>
           {/* <Twitter /> */}
