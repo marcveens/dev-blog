@@ -1,7 +1,7 @@
 ---
 slug: testing-your-react-components-with-jest
 date: 2019-09-15
-title: 'Testing your React components with Jest and @testing-framework'
+title: 'Testing your React components with Jest and @testing-library'
 description: 'An example of testing a custom datepicker using React, Jest and @testing-library'
 published: true
 ---
