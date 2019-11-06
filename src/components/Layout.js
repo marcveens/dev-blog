@@ -87,6 +87,9 @@ const getGlobalStyles = theme => {
         opacity: 0.4;
       }
     }
+    .gatsby-resp-image-background-image {
+      display: none !important;
+    }
     .gatsby-resp-image-image {
       background: none !important;
       box-shadow: 0;

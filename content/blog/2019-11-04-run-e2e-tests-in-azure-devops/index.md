@@ -1,6 +1,6 @@
 ---
 slug: run-e2e-js-tests-in-azure-devops
-date: 2019-11-6
+date: 2019-11-06
 title: 'Run E2E JavaScript tests in Azure Devops'
 description: 'Create E2E scripts that can run in a Azure Devops CI build'
 published: true
@@ -27,9 +27,9 @@ The most important command is `test-e2e-ci`. That's the one that should be run o
 ## Used packages for E2E testing
 | Package | Description |
 |-|-|
-| [`jest`](https://www.npmjs.com/package/jest) | JavaScript testing framework |
-| [`puppeteer`](https://www.npmjs.com/package/puppeteer) | Node library which provides a high-level API to control Chrome or Chromium over the DevTools Protocol. Puppeteer runs headless by default, but can be configured to run full (non-headless) Chrome or Chromium. |
-| [`jest-puppeteer`](https://www.npmjs.com/package/jest-puppeteer) | Jest preset containing all required configuration for writing integration tests using Puppeteer. |
+| <a href="https://www.npmjs.com/package/jest" target="_blank" rel="noopener noreferrer">`jest`</a> | JavaScript testing framework |
+| <a href="https://www.npmjs.com/package/puppeteer" target="_blank" rel="noopener noreferrer">`puppeteer`</a> | Node library which provides a high-level API to control Chrome or Chromium over the DevTools Protocol. Puppeteer runs headless by default, but can be configured to run full (non-headless) Chrome or Chromium. |
+| <a href="https://www.npmjs.com/package/jest-puppeteer" target="_blank" rel="noopener noreferrer">`jest-puppeteer`</a> | Jest preset containing all required configuration for writing integration tests using Puppeteer. |
 
 ## Important npm commands
 | Command | Description |
@@ -40,6 +40,7 @@ The most important command is `test-e2e-ci`. That's the one that should be run o
 
 ## Configuring Azure Devops
 It's actually quite easy to run the tests in Azure Devops. Only two steps are mandatory:
+
 1. `npm install`
 2. `npm run test-e2e-ci`
 
