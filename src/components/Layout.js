@@ -93,6 +93,7 @@ const getGlobalStyles = theme => {
     .gatsby-resp-image-image {
       background: none !important;
       box-shadow: 0;
+      position: relative !important;
     }
     button {
       border-radius: 4px;
