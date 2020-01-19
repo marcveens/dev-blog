@@ -2,7 +2,7 @@
 slug: react-context-mutex
 date: 2020-01-19
 title: 'react-context-mutex: make sure your code only runs as often as you want'
-description: 'Make sure you can lock a process from running multiple times and unlock it when it\'s allowed to run again'
+description: "Make sure you can lock a process from running multiple times and unlock it when it's allowed to run again"
 published: true
 ---
 
