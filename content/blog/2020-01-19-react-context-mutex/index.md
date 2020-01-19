@@ -1,10 +1,14 @@
 ---
 slug: react-context-mutex
 date: 2020-01-19
-title: 'react-context-mutex: make sure your code only runs as often as you want'
+title: 'react-context-mutex: lock a function and prevent it from running multiple times unwanted'
 description: "Make sure you can lock a process from running multiple times and unlock it when it's allowed to run again"
 published: true
 ---
+
+Demo: [![Edit react-context-mutex](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/react-context-mutex-w27h0?expanddevtools=1&fontsize=14&hidenavigation=1&module=%2Fsrc%2FuseFetchHook.ts&theme=dark) <br />
+npm: [![npm version](https://badgen.net/npm/v/react-context-mutex)](https://www.npmjs.com/package/react-context-mutex)
+
 
 I recently stumbled upon an issue I had to fix. I had created a React hook with a `useEffect` function in which I executed a fetch call. The data was then put into a Redux storage. All good it seemed, until I connected the hook to a second component, which only had to use the data from Redux. At least, that's how I wanted it to work. Obviously it also ran the `useEffect` function and thus, also executed the fetch. 
 

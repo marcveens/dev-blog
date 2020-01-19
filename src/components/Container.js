@@ -21,6 +21,9 @@ const Container = props => {
           padding: ${noVerticalPadding ? 0 : '20'}px
             ${noHorizontalPadding ? 0 : '20'}px;
         }
+        img[src*=codesandbox] {
+          margin-bottom: 0;
+        }
       `}
       {...restProps}
     >
