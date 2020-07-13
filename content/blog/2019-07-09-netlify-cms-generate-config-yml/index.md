@@ -6,7 +6,7 @@ description: 'Make use of the power of Typescript in order to generate a Netlify
 published: true
 ---
 
-Regularly while working with a [Netlify CMS](https://www.netlifycms.org/) you need the `config.yml` file to configure your entire CMS. I found this to suboptimal and wanted to use the power of Typescript to generate the config file. In the end it's really easy to do.
+Regularly while working with a [Netlify CMS](https://www.netlifycms.org/) you need the `config.yml` file to configure your entire CMS. I found this to be suboptimal and wanted to use the power of Typescript to generate the config file. In the end it's really easy to do.
 
 In order to run this "tool" you need a couple of npm packages:
  - `yml` ([npm](https://www.npmjs.com/package/yaml)) - Used for converting to yml
