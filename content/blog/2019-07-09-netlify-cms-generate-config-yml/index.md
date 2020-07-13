@@ -16,7 +16,7 @@ Now start by creating a `config.src.ts` file in the `static/admin` folder, next 
 
 This is what my basic version of the file looks like:
 ```typescript
-    import { CmsConfig, CmsCollection, CmsField } from 'netlify-cms-core';
+import { CmsConfig, CmsCollection, CmsField } from 'netlify-cms-core';
 import * as YAML from 'yaml';
 import * as fs from 'fs';
 import * as path from 'path';
