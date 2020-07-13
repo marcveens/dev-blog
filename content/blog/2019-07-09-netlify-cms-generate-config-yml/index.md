@@ -16,12 +16,12 @@ Now start by creating a `config.src.ts` file in the `static/admin` folder, next 
 
 This is what my basic version of the file looks like:
 ```typescript
-    import { NetlifyCmsConfig, NetlifyCmsCollection, NetlifyCmsField } from './types/NetlifyCmsConfig';
+    import { CmsConfig, CmsCollection, CmsField } from 'netlify-cms-core';
 import * as YAML from 'yaml';
 import * as fs from 'fs';
 import * as path from 'path';
 
-const defaultMetaFields: NetlifyCmsField[] = [
+const defaultMetaFields: CmsField[] = [
     { label: 'Title', name: 'title', widget: 'string' },
     { label: 'Page URL', name: 'url', widget: 'string' },
     {
@@ -32,7 +32,7 @@ const defaultMetaFields: NetlifyCmsField[] = [
     }
 ];
 
-const demoPage: NetlifyCmsCollection = {
+const demoPage: CmsCollection = {
     name: 'demopage',
     label: 'Demo page',
     folder: 'src/pages/demopage',
@@ -47,7 +47,7 @@ const demoPage: NetlifyCmsCollection = {
     ]
 };
 
-const config: NetlifyCmsConfig = {
+const config: CmsConfig = {
     backend: {
         name: 'git-gateway',
         branch: 'master'
@@ -78,5 +78,3 @@ As you can see the Typescript is placed on top. After that the generation code i
     "generate-config-yml": "ts-node static/admin/config.src.ts"
 }
 ```
-
-Last we need the Netlify CMS types, which are unfortunately not provided by Netlify itself yet. That's why I created my own types, based on the Netlify CMS documentation. You can find them [over here as a Gist](https://gist.github.com/marcveens/c723f6ce70f7f231ebde323b71ce7954#file-config-src-ts).
