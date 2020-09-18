@@ -7,6 +7,8 @@ published: true
 ---
 
 Demo: [![Edit react-context-mutex](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/react-context-mutex-w27h0?expanddevtools=1&fontsize=14&hidenavigation=1&module=%2Fsrc%2FuseFetchHook.ts&theme=dark) <br />
+npm: [![npm version](https://img.shields.io/npm/v/react-context-mutex)](https://www.npmjs.com/package/react-context-mutex)
+
 
 I recently stumbled upon an issue I had to fix. I had created a React hook with a `useEffect` function in which I executed a fetch call. The data was then put into a Redux storage. All good it seemed, until I connected the hook to a second component, which only had to use the data from Redux. At least, that's how I wanted it to work. Obviously it also ran the `useEffect` function and thus, also executed the fetch. 
 
@@ -40,8 +42,6 @@ const useFetchHook = () => {
     });
 };
 ```
-
-<div class="tests">test</div>
 
 You create a new `MutexRunner` with a unique key. This key is used to add the function to a "in-use" list. As long as the key is in that list, the function won't be executed by someone else. `mutex.run` adds the callback that should or shouldn't be executed. It always executes, except for when it's locked. The locking process is done by a simple `mutex.lock()`. The fetch will now be executed an you can add the data to Redux if you want. After that you run `mutex.unlock()` to unlock the function again. 
 
