@@ -41,6 +41,8 @@ const useFetchHook = () => {
 };
 ```
 
+<div class="test-1">test</div>
+
 You create a new `MutexRunner` with a unique key. This key is used to add the function to a "in-use" list. As long as the key is in that list, the function won't be executed by someone else. `mutex.run` adds the callback that should or shouldn't be executed. It always executes, except for when it's locked. The locking process is done by a simple `mutex.lock()`. The fetch will now be executed an you can add the data to Redux if you want. After that you run `mutex.unlock()` to unlock the function again. 
 
 Like the example shows, you can run `useFetchHook()` multiple times but the fetch will only be executed once while the HTTP request is still in progress. 
