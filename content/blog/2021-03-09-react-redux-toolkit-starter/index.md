@@ -4,6 +4,7 @@ date: 2021-03-09
 title: 'react-redux-toolkit-starter: a jump-start for every hobby project'
 description: "A simple React+Typescript+Redux starter project including a neat folder structure, fetching data and global state management"
 published: true
+excerpt: "A simple React+Typescript+Redux starter project including a neat folder structure, fetching data and global state management..."
 ---
 
 [![Edit react-context-mutex](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/marcveens/react-redux-toolkit-starter) <br />
