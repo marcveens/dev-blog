@@ -7,7 +7,7 @@ published: true
 excerpt: "A simple React+Typescript+Redux starter project including a neat folder structure, fetching data and global state management..."
 ---
 
-<a href="https://codesandbox.io/s/github/marcveens/react-redux-toolkit-starter" target="_blank" rel="noopener noreferrer"><img src="https://codesandbox.io/static/img/play-codesandbox.svg" alt="Edit on CodeSandbox" /><br />
+<a href="https://codesandbox.io/s/github/marcveens/react-redux-toolkit-starter" target="_blank" rel="noopener noreferrer"><img src="https://codesandbox.io/static/img/play-codesandbox.svg" alt="Edit on CodeSandbox" /></a><br />
 <a href="https://marcveens-react-redux-toolkit-starter-q325.github.dev/" target="_blank" rel="noopener noreferrer">✏️ Edit on GitHub Codespaces</a><br />
 <a href="https://github.com/marcveens/react-redux-toolkit-starter" target="_blank" rel="noopener noreferrer">⌨️ View on GitHub</a>
 
