@@ -46,7 +46,7 @@ Since the Service Worker lives separately from the main browser thread, it has i
 clientsClaim();
 ```
 
-This will make sure unclaimed client are <a href="https://developers.google.com/web/tools/workbox/modules/workbox-core#skip_waiting_and_clients_claim" target="_blank" rel="noopener noreferrer">claimed again</a>. I read sometimes that people might not need this, so see for yourself if you find this necessary. I don't think it hurts if you add it anyway. 
+This will make sure unclaimed clients are <a href="https://developers.google.com/web/tools/workbox/modules/workbox-core#skip_waiting_and_clients_claim" target="_blank" rel="noopener noreferrer">claimed again</a>. I read sometimes that people might not need this, so see for yourself if you find this necessary. I don't think it hurts if you add it anyway. 
 
 ```typescript
 const manifest = self.__WB_MANIFEST;
