@@ -23,7 +23,7 @@ module.exports = {
   author: {
     name: 'Marc Veens',
     photo: '/photo.jpg',
-    bio: 'My journeys in the wondrous world of front-end development.',
+    bio: 'Stories about my adventures in the wondrous world of front-end development.',
     contacts: {
       email: '',
       facebook: '',
