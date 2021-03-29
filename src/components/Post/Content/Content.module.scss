@@ -50,8 +50,17 @@
       margin-right: auto
     }
 
+    & iframe {
+      display: block;
+    }
+
     & img {
       max-width: 100%;
+    }
+
+    & a img:only-child {
+      margin-left: 0;
+      margin-right: 0;
     }
 
   }
