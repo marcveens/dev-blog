@@ -190,7 +190,7 @@ module.exports = {
         background_color: '#FFF',
         theme_color: '#25374B',
         display: 'standalone',
-        icon: 'static/media/logo.png'
+        icon: 'static/photo.jpg'
       },
     },
     {
