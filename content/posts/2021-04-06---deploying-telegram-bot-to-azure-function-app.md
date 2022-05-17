@@ -17,7 +17,7 @@ tags:
 
 <a href="https://github.com/marcveens/telegram-bot-nodejs-azure-function-starter" target="_blank" rel="noopener noreferrer">⌨️ View on GitHub</a>
 
-I create a starter template for creating and deploying a Node.js Telegram bot to an Azure Function App using GitHub Actions. 
+I created a starter template for creating and deploying a Node.js Telegram bot to an Azure Function App using GitHub Actions. 
 
 The stack that's used by this starter: 
 - <a href="https://telegraf.js.org/" target="_blank" rel="noopener noreferrer">telegraf.js</a> - Node.js Telegram bot
