@@ -1,23 +1,16 @@
-import { config } from '@/config/config'
-import './globals.css'
-import { Inter } from 'next/font/google'
-
-const inter = Inter({ subsets: ['latin'] })
+import { config } from '@/config/config';
+import '../styles/global.css';
+import { themeClass } from '@/styles/theme.css';
 
 export const metadata = {
   title: config.title,
-  description: config.subtitle,
-  
-}
+  description: config.subtitle
+};
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={themeClass}>{children}</body>
     </html>
-  )
+  );
 }

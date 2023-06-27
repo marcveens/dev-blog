@@ -5,6 +5,7 @@ description: "Make sure you can lock a process from running multiple times and u
 template: "post"
 draft: false
 category: "React"
+excerpt: "I recently stumbled upon an issue I had to fix. I had created a React hook with a `useEffect` function in which I executed a fetch call. The data was then put into a Redux storage. All good it seemed, until I connected the hook to a second component, which only had to use the data from Redux."
 tags:
   - "React"
   - "mutex"
