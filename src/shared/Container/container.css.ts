@@ -6,8 +6,15 @@ export const container = style({
   width: '100%',
   marginLeft: 'auto',
   marginRight: 'auto',
-  paddingLeft: '24px',
-  paddingRight: '24px'
+  paddingLeft: '16px',
+  paddingRight: '16px',
+
+  '@media': {
+    [`(min-width: ${breakpoints.sm})`]: {
+      paddingLeft: '24px',
+      paddingRight: '24px'
+    }
+  }
 });
 
 const maxWidthMap: { [key: string]: { maxWidth: string } } = {};
