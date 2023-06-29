@@ -1,0 +1,21 @@
+---
+template: post
+title: "Nx + Apollo Server: Automatically generate Typescript types"
+draft: false
+date: '2022-05-18T11:00:00.000Z'
+description: How to automatically generate Typescript types from GraphQL schema using Nx
+excerpt: "I created a repository where I show how to automatically generate Typescript types from a GraphQL schema using Nx. This works both while running the 'serve' and the 'build' commands..."
+category: GraphQL
+---
+
+<a href="https://github.com/marcveens/nx-apollo-auto-generate-types" target="_blank" rel="noopener noreferrer">⌨️ View on GitHub</a>
+
+I created a repository where I show how to automatically generate Typescript types from a GraphQL schema using Nx. This works both while running the `serve` and the `build` commands. The repository consists of a Node.js Apollo Server application which can be run using `npm run serve`. 
+
+In order to get the generation of types working, I used <a href="https://www.graphql-code-generator.com/" target="_blank" rel="noopener noreferrer">`@graphql-codegen/cli`</a>. This honestly is an amazing package. It generates the Typescript types in a neat way, and it can even generate types for your resolvers. This way it is pretty easy to make your entire application type safe. 
+
+The portion I added myself can be found in the <a href="https://github.com/marcveens/nx-apollo-auto-generate-types/blob/main/packages/apollo-server/webpack.config.js" target="_blank" rel="noopener noreferrer">`webpack.config.js` override</a>. I added a custom Webpack plugin which runs every time a watch or a build is triggered. This plugins checks if the changed file is `typeDefs.ts`, and if so, it runs the `npm run generate-gql-types` command. A pretty simple trick, but it can save a lot of frustration over time!
+
+Cheers!
+
+<a href="https://github.com/marcveens/nx-apollo-auto-generate-types" target="_blank" rel="noopener noreferrer">⌨️ View on GitHub</a>
