@@ -2,6 +2,7 @@
 date: '2019-07-09T00:00:00.000Z'
 title: 'Generate your Netlify CMS config.yml using Typescript'
 description: 'Make use of the power of Typescript in order to generate a Netlify CMS config.yml.'
+excerpt: "Regularly while working with a Netlify CMS you need the config.yml file to configure your entire CMS. I found this to be suboptimal and wanted to use the power of Typescript to generate the config file. In the end it's really easy to do."
 template: "post"
 draft: false
 category: "Netlify CMS"
