@@ -1,13 +1,14 @@
 import * as styles from './sidebar.css';
 import { config } from '@/config/config';
 import { Socials } from './Socials';
+import Image from 'next/image';
 
 export const Sidebar = () => {
   return (
     <aside className={styles.sidebar}>
       <div>
         <a href="/">
-          <img className={styles.logo} src={config.logo} alt={config.title} width={125} height={125} />
+          <Image className={styles.logo} src={config.logo} alt={config.title} width={125} height={125} />
         </a>
 
         <h2 className={styles.author}>

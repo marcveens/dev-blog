@@ -24,7 +24,7 @@ export async function generateMetadata(props: BlogPostProps): Promise<Metadata> 
   }
 }
 
-const BlogPost = async (props: BlogPostProps) => {
+export default async function BlogPost(props: BlogPostProps) {
   const { params } = props;
   const post = getPostBySlug(params.slug, ['title', 'date', 'slug', 'description', 'content', 'category', 'tags']);
 
@@ -54,5 +54,3 @@ const BlogPost = async (props: BlogPostProps) => {
     </Container>
   );
 };
-
-export default BlogPost;

@@ -6,7 +6,7 @@ export default function NotFound() {
     <Layout>
       <main>
         <h1 className={styles.pageTitle}>Not found</h1>
-        <p>You just hit a route that doesn't exist... the sadness.</p>
+        <p>You just hit a route that doesn&apos;t exist... the sadness.</p>
       </main>
     </Layout>
   );

@@ -19,5 +19,5 @@ export const Markdown = (props: { content: string }) => {
 };
 
 const Img = (props: { src: string; alt: string }) => {
-  return <img {...props} className="markdown-img" loading="lazy" />;
+  return <img {...props} alt="" className="markdown-img" loading="lazy" />;
 };
