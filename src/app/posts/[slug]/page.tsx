@@ -5,12 +5,24 @@ import * as styles from './post.css';
 import { format, parseISO } from 'date-fns';
 import { slugify } from '@/utils/slugify';
 import { Markdown } from '@/shared/Markdown/Markdown';
+import { Metadata } from 'next';
+import { getPageTitle } from '@/utils/getPageTitle';
 
 type BlogPostProps = {
   params: {
     slug: string;
   };
 };
+
+export async function generateMetadata(props: BlogPostProps): Promise<Metadata> {
+  const { params } = props;
+  const post = getPostBySlug(params.slug, ['title', 'date', 'slug', 'description', 'content', 'category', 'tags']);
+
+  return {
+    title: getPageTitle(post.title),
+    description: post.description,
+  }
+}
 
 const BlogPost = async (props: BlogPostProps) => {
   const { params } = props;

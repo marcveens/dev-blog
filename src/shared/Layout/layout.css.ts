@@ -16,6 +16,7 @@ export const main = style({
   flexGrow: 1,
   flexBasis: 0,
   marginBottom: '50px',
+  paddingTop: '30px',
 
   '@media': {
     [`(min-width: ${breakpoints.sm})`]: {

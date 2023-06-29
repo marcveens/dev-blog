@@ -8,11 +8,16 @@ export const Markdown = (props: { content: string }) => {
     <MarkdownJsx
       options={{
         overrides: {
-          code: Code
+          code: Code,
+          img: Img
         }
       }}
     >
       {props.content}
     </MarkdownJsx>
   );
+};
+
+const Img = (props: { src: string; alt: string }) => {
+  return <img {...props} className="markdown-img" loading="lazy" />;
 };

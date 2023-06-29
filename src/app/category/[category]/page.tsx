@@ -1,12 +1,25 @@
+import { config } from '@/config/config';
 import Layout from '@/shared/Layout/layout';
 import { Posts } from '@/shared/Post/Posts';
+import { getPageTitle } from '@/utils/getPageTitle';
 import { slugify } from '@/utils/slugify';
+import { capitalizeFirstLetter } from '@/utils/textUtils';
+import { Metadata } from 'next';
 
 type CategoryPageProps = {
   params: {
     category: string;
   };
 };
+
+export async function generateMetadata(props: CategoryPageProps): Promise<Metadata> {
+  const { params } = props;
+
+  return {
+    title: getPageTitle(capitalizeFirstLetter(params.category)),
+    description: config.subtitle
+  };
+}
 
 export default function CategoryPage(props: CategoryPageProps) {
   const { params } = props;
