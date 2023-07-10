@@ -21,6 +21,7 @@ In order to run this "tool" you need a couple of npm packages:
 Now start by creating a `config.src.ts` file in the `static/admin` folder, next to the `config.yml`. I added `.src` to it just to indicate the difference between the files.
 
 This is what my basic version of the file looks like:
+
 ```typescript
 import { CmsConfig, CmsCollection, CmsField } from 'netlify-cms-core';
 import * as YAML from 'yaml';

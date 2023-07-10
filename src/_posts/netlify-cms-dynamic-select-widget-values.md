@@ -16,6 +16,7 @@ What I wanted to achieve was a custom select widget, filled with dynamic values,
 I spent some time figuring out how to add a custom select widget to the Netlify CMS with dynamic values. Turned out not to be so straight forward as I expected it to be. For example you can't make the control widget a Functional Component, that's when you'll end up with this error: `netlify-cms-app.js:247 Uncaught TypeError: this.wrappedControlValid is not a function`. 
 
 How it actually does work is like this. 
+
 ```typescript
 import React from 'react';
 import CMS from 'netlify-cms-app';
@@ -62,6 +63,7 @@ export const preview = (props) => {
 ```
 
 That being said, I added these 2 lines of code to `/src/cms/cms.tsx`:
+
 ```typescript
 import { Control as customSelectorControl, Preview as customSelectorPreview } from './widgets/CustomSelector';
 
