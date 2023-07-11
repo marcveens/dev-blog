@@ -7,6 +7,7 @@ import { slugify } from '@/utils/slugify';
 import { Markdown } from '@/shared/Markdown/Markdown';
 import { Metadata } from 'next';
 import { getPageTitle } from '@/utils/getPageTitle';
+import { Octokit } from '@octokit/core';
 
 type BlogPostProps = {
   params: {
@@ -27,6 +28,18 @@ export async function generateMetadata(props: BlogPostProps): Promise<Metadata> 
 export default async function BlogPost(props: BlogPostProps) {
   const { params } = props;
   const post = getPostBySlug(params.slug, ['title', 'date', 'slug', 'description', 'content', 'category', 'tags']);
+  const octokit = new Octokit({ auth: process.env.GITHUB_ACCESS_TOKEN });
+
+  const { data } = await octokit.request('GET /repos/{owner}/{repo}/contents/{path}', {
+    owner: 'marcveens',
+    repo: 'multiple-graphql-endpoints',
+    path: `src/apollo/useApolloClient.ts`,
+    mediaType: {
+      format: 'raw'
+    }
+  });
+
+  // console.log(data);
 
   return (
     <Container maxWidth="smd">
