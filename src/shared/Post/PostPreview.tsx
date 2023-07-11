@@ -28,10 +28,10 @@ export const PostPreview = (props: PostPreviewProps) => {
         </a>
       </div>
       <h2 className={styles.title}>
-        <a href={`/posts/${slug}`}>{title}</a>
+        <a href={slug}>{title}</a>
       </h2>
       <p>{cutStringToWholeWord(strippedDescription, 185)}</p>
-      <a className={styles.link} href={`/posts/${slug}`}>
+      <a className={styles.link} href={slug}>
         Read more <ArrowRight size={16} />
       </a>
     </div>

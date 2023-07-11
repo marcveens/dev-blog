@@ -3,17 +3,18 @@ import { PostPreview } from './PostPreview';
 import * as styles from '../../styles/layout.css';
 import { slugify } from '@/utils/slugify';
 import { notFound } from 'next/navigation';
+import { Post } from 'contentlayer/generated';
 
 type PostProps = {
   limit?: number;
   offset?: number;
   byFilter?: (post: any) => boolean;
-  findPageTitle?: { property: string; slugifiedValue: string };
+  findPageTitle?: { property: keyof Post; slugifiedValue: string };
 };
 
 export const Posts = (props: PostProps) => {
   const { limit = 20, offset = 0, byFilter, findPageTitle } = props;
-  let posts = getAllPosts(['title', 'date', 'slug', 'content', 'category', 'excerpt', 'tags']);
+  let posts = getAllPosts();
   posts = posts.filter(byFilter || (() => true));
   const postsToShow = posts.slice(offset, offset + limit);
   let pageTitle: string | undefined = undefined;
@@ -41,10 +42,10 @@ export const Posts = (props: PostProps) => {
 
       {postsToShow.map((post) => (
         <PostPreview
-          key={post.slug}
+          key={post._id}
           title={post.title}
-          description={post.excerpt || post.content}
-          slug={post.slug}
+          description={post.excerpt || post.body.raw}
+          slug={post.url}
           category={post.category}
           date={post.date}
         />

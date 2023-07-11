@@ -1,22 +1,19 @@
 'use client';
 
-import { CodeComponent } from 'react-markdown/lib/ast-to-react';
-import SyntaxHighlighter from 'react-syntax-highlighter';
-import { hybrid } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import hljs from 'highlight.js/lib/core';
+import { useEffect } from 'react';
 
-export const Code: CodeComponent = (props) => {
-  const { node, inline, className, children, ...restProps } = props;
+export const Code = (props: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>) => {
+  const { className, children } = props;
   const match = /language-(\w+)/.exec(className || '');
+
+  useEffect(() => {
+    hljs.highlightAll();
+  }, []);
 
   if (!className) {
     return <code>{children}</code>;
   }
 
-  return !inline && match ? (
-    <SyntaxHighlighter {...restProps} children={String(children).replace(/\n$/, '')} style={hybrid} language={match[1]} PreTag="div" />
-  ) : (
-    <code {...restProps} className={className}>
-      {children}
-    </code>
-  );
+  return match ? <code className={className}>{children}</code> : <code className={className}>{children}</code>;
 };
