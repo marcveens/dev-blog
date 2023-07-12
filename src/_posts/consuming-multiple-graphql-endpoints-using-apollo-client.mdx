@@ -36,5 +36,13 @@ In <a href="https://github.com/marcveens/multiple-graphql-endpoints/blob/main/sr
 
 In <a href="https://github.com/marcveens/multiple-graphql-endpoints/blob/main/src/apollo/useApolloClient.ts" target="_blank" rel="noopener noreferrer">useApolloClient.ts</a> you can see how to return the correct GraphQL endpoint for your data. By creating 2 Apollo Clients (or more if you need them) you can use either of them in your data calls. 
 
-Because we created the custom `useXQuery` hook, we don't ever have to think of configuring the Apollo Client again, we can just use it as easily as when you only had one `useQuery` hook. Pretty easy, huh?!
+Because we created the custom `useXQuery` hook, we don't ever have to think of configuring the Apollo Client again, we can just use it as easily as when you only had one `useQuery` hook. 
 
+## GraphQL Code Generator
+I use the [GraphQL Code Generator](https://the-guild.dev/graphql/codegen) for generating Typescript types and documents based on a schema and `operation.grapql` files. Usually that works pretty straight forward if you only have a single endpoint. Since I have 2 of them, I simply added 2 `codegen.ts` files. 
+
+My countries [`codegen.ts`](https://github.com/marcveens/multiple-graphql-endpoints/blob/main/src/libs/graphql/countries/codegen.ts) file responds to `operations.countries.graphql` files, and my SpaceX [`codegen.ts`](https://github.com/marcveens/multiple-graphql-endpoints/blob/main/src/libs/graphql/spacex/codegen.ts) file to `operations.spacex.graphql` files.
+
+I found this the most straight forward solution to a sub-optimal situation. Hopefully this helps you out as well.
+
+Cheers!
