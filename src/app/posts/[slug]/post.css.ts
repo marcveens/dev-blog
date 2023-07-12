@@ -30,12 +30,12 @@ export const title = style({
 
 export const content = style({});
 
-globalStyle(`${content} a`, {
+globalStyle(`${content} a:not([class])`, {
   color: vars.color.link,
   textDecoration: 'underline'
 });
 
-globalStyle(`${content} a:hover`, {
+globalStyle(`${content} a:not([class]):hover`, {
   color: vars.color.orange
 });
 
