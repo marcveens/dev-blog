@@ -21,16 +21,20 @@ I created a demo application on <a href="https://github.com/marcveens/multiple-g
 
 ## Consumption of data
 First I want to show what I ended up with on the consumption part of the application. 
-(embed https://github.com/marcveens/multiple-graphql-endpoints/blob/main/src/components/HelloWorld.tsx)
 
-<github-embed owner="marcveens"></github-embed>
+<GithubEmbed owner="marcveens" repo="multiple-graphql-endpoints" file="src/components/HelloWorld.tsx" startLine={6} endLine={20} />
 
 As you can see, instead of the default `useQuery` hook from Apollo I now have `useSpacexQuery` and `useCountriesQuery` hooks. As you can imagine, they both fetch data from their corresponding data source. I made `useSpacexMutation` and `useCountriesMutation` available as well, I just don't use them in this example.
 
 ## Setting up Apollo clients
-In (embed https://github.com/marcveens/multiple-graphql-endpoints/blob/main/src/apollo/useApollo.ts) I made the hooks available. What I basically do, is create a generic instance of `useQuery` and inject the correct Apollo Client based on whether you want SpaceX data or Countries data.
 
-In (embed https://github.com/marcveens/multiple-graphql-endpoints/blob/main/src/apollo/useApolloClient.ts) you can see how to return the correct GraphQL endpoint for your data. By creating 2 Apollo Clients (or more if you need them) you can use either of them in your data calls. 
+In <a href="https://github.com/marcveens/multiple-graphql-endpoints/blob/main/src/apollo/useApollo.ts" target="_blank" rel="noopener noreferrer">useApollo.ts</a> I made the hooks available. What I basically do, is create a generic instance of `useQuery` and inject the correct Apollo Client based on whether you want SpaceX data or Countries data.
+
+<GithubEmbed owner="marcveens" repo="multiple-graphql-endpoints" file="src/apollo/useApollo.ts" startLine={16} endLine={29} />
+
+<GithubEmbed owner="marcveens" repo="multiple-graphql-endpoints" file="src/apollo/useApollo.ts" startLine={46} endLine={47} />
+
+In <a href="https://github.com/marcveens/multiple-graphql-endpoints/blob/main/src/apollo/useApolloClient.ts" target="_blank" rel="noopener noreferrer">useApolloClient.ts</a> you can see how to return the correct GraphQL endpoint for your data. By creating 2 Apollo Clients (or more if you need them) you can use either of them in your data calls. 
 
 Because we created the custom `useXQuery` hook, we don't ever have to think of configuring the Apollo Client again, we can just use it as easily as when you only had one `useQuery` hook. Pretty easy, huh?!
 

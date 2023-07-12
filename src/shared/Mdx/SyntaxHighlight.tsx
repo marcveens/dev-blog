@@ -6,6 +6,7 @@ import typescript from 'highlight.js/lib/languages/typescript';
 import yml from 'highlight.js/lib/languages/yaml';
 
 import 'highlight.js/styles/github-dark-dimmed.css';
+import { addLineNumbers } from './SyntaxHighlightLineNumbers';
 
 hljs.registerLanguage('typescript', typescript);
 hljs.registerLanguage('yml', yml);
@@ -14,6 +15,7 @@ hljs.registerLanguage('yml', yml);
 export const SyntaxHighlight = () => {
   useEffect(() => {
     hljs.highlightAll();
+    addLineNumbers(hljs);  
   }, []);
 
   return null;

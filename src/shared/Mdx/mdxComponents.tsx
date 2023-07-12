@@ -1,5 +1,5 @@
-import { MDXComponents } from "mdx/types";
-import { Code } from "../Code/Code";
+import { MDXComponents } from 'mdx/types';
+import { GithubEmbed } from '../GithubEmbed/GithubEmbed';
 
 const Img = (props: React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>) => {
   return <img {...props} alt="" className="markdown-img" loading="lazy" />;
@@ -20,6 +20,5 @@ const Link = (props: React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnch
 export const mdxComponents: MDXComponents = {
   a: Link,
   img: Img,
-  // code: Code,
-  MyComponent: () => <div>Hello World!</div>,
-}
+  GithubEmbed: GithubEmbed
+};

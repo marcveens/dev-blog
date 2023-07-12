@@ -54,6 +54,10 @@ globalStyle(`${content} pre code.hljs`, {
   backgroundColor: '#22272e'
 });
 
+globalStyle(`${content} .hljs-ln-numbers`, {
+  paddingRight: '20px',
+});
+
 globalStyle(`${content} img`, {
   maxWidth: '100%',
   display: 'block'

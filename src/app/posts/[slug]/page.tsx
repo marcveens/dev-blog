@@ -5,7 +5,6 @@ import { format, parseISO } from 'date-fns';
 import { slugify } from '@/utils/slugify';
 import { Metadata } from 'next';
 import { getPageTitle } from '@/utils/getPageTitle';
-import { Octokit } from '@octokit/core';
 import { getMDXComponent } from 'next-contentlayer/hooks';
 import { mdxComponents } from '@/shared/Mdx/mdxComponents';
 import { SyntaxHighlight } from '@/shared/Mdx/SyntaxHighlight';
@@ -29,17 +28,7 @@ export async function generateMetadata(props: BlogPostProps): Promise<Metadata> 
 export default async function BlogPost(props: BlogPostProps) {
   const { params } = props;
   const post = getPostBySlug(params.slug);
-  const octokit = new Octokit({ auth: process.env.GITHUB_ACCESS_TOKEN });
   const Content = getMDXComponent(post?.body.code || '');
-
-  const { data } = await octokit.request('GET /repos/{owner}/{repo}/contents/{path}', {
-    owner: 'marcveens',
-    repo: 'multiple-graphql-endpoints',
-    path: `src/apollo/useApolloClient.ts`,
-    mediaType: {
-      format: 'raw'
-    }
-  });
 
   return (
     <Container maxWidth="smd">
