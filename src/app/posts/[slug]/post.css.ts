@@ -14,7 +14,7 @@ export const button = style({
   color: vars.color.font,
   lineHeight: '35px',
   padding: '0 40px',
-  whiteSpace: 'nowrap',
+  whiteSpace: 'nowrap'
 });
 
 globalStyle(`${button}:hover`, {
@@ -30,12 +30,12 @@ export const title = style({
 
 export const content = style({});
 
-globalStyle(`${content} a`, {
+globalStyle(`${content} a:not([class])`, {
   color: vars.color.link,
   textDecoration: 'underline'
 });
 
-globalStyle(`${content} a:hover`, {
+globalStyle(`${content} a:not([class]):hover`, {
   color: vars.color.orange
 });
 
@@ -46,7 +46,16 @@ globalStyle(`${content} code`, {
 });
 
 globalStyle(`${content} pre code`, {
-  backgroundColor: 'transparent',
+  backgroundColor: 'transparent'
+});
+
+globalStyle(`${content} pre code.hljs`, {
+  color: '#adbac7',
+  backgroundColor: '#22272e'
+});
+
+globalStyle(`${content} .hljs-ln-numbers`, {
+  paddingRight: '20px',
 });
 
 globalStyle(`${content} img`, {
