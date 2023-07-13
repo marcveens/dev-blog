@@ -8,6 +8,7 @@ import { getPageTitle } from '@/utils/getPageTitle';
 import { getMDXComponent } from 'next-contentlayer/hooks';
 import { mdxComponents } from '@/shared/Mdx/mdxComponents';
 import { SyntaxHighlight } from '@/shared/Mdx/SyntaxHighlight';
+import { Comments } from '@/shared/Post/Comments';
 
 type BlogPostProps = {
   params: {
@@ -54,6 +55,8 @@ export default async function BlogPost(props: BlogPostProps) {
           </a>
         ))}
       </div>
+
+      <Comments />
     </Container>
   );
 }
