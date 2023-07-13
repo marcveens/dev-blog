@@ -2,6 +2,7 @@ import { format, parseISO } from 'date-fns';
 import * as styles from './postpreview.css';
 import { slugify } from '@/utils/slugify';
 import { ArrowRight } from '../../utils/Icons';
+import Link from 'next/link';
 
 type PostPreviewProps = {
   title: string;
@@ -23,17 +24,17 @@ export const PostPreview = (props: PostPreviewProps) => {
         <time className={styles.time} dateTime={date}>
           {formattedDate}
         </time>
-        <a className={styles.category} href={`/category/${slugify(category)}`}>
+        <Link className={styles.category} href={`/category/${slugify(category)}`}>
           {category}
-        </a>
+        </Link>
       </div>
       <h2 className={styles.title}>
-        <a href={slug}>{title}</a>
+        <Link href={slug}>{title}</Link>
       </h2>
       <p>{cutStringToWholeWord(strippedDescription, 185)}</p>
-      <a className={styles.link} href={slug}>
+      <Link className={styles.link} href={slug}>
         Read more <ArrowRight size={16} />
-      </a>
+      </Link>
     </div>
   );
 };

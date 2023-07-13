@@ -9,6 +9,7 @@ import { getMDXComponent } from 'next-contentlayer/hooks';
 import { mdxComponents } from '@/shared/Mdx/mdxComponents';
 import { SyntaxHighlight } from '@/shared/Mdx/SyntaxHighlight';
 import { Comments } from '@/shared/Post/Comments';
+import Link from 'next/link';
 
 type BlogPostProps = {
   params: {
@@ -35,9 +36,9 @@ export default async function BlogPost(props: BlogPostProps) {
     <Container maxWidth="smd">
       <SyntaxHighlight />
       <div className={styles.allPostsButtonBox}>
-        <a href="/" className={styles.button}>
+        <Link href="/" className={styles.button}>
           All posts
-        </a>
+        </Link>
       </div>
 
       <h1 className={styles.title}>{post?.title}</h1>
@@ -50,9 +51,9 @@ export default async function BlogPost(props: BlogPostProps) {
 
       <div className={styles.tags}>
         {post?.tags?.map((tag) => (
-          <a key={tag} className={styles.button} href={`/tag/${slugify(tag)}`}>
+          <Link key={tag} className={styles.button} href={`/tag/${slugify(tag)}`}>
             {tag}
-          </a>
+          </Link>
         ))}
       </div>
 
