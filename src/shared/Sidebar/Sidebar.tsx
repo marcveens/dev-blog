@@ -2,19 +2,20 @@ import * as styles from './sidebar.css';
 import { config } from '@/config/config';
 import { Socials } from './Socials';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export const Sidebar = () => {
   return (
     <aside className={styles.sidebar}>
       <div>
-        <a href="/">
+        <Link href="/">
           <Image className={styles.logo} src={config.logo} alt={config.title} width={125} height={125} />
-        </a>
+        </Link>
 
         <h2 className={styles.author}>
-          <a href="/" className={styles.authorLink}>
+          <Link href="/" className={styles.authorLink}>
             {config.author}
-          </a>
+          </Link>
         </h2>
 
         <p className={styles.subtitle}>{config.subtitle}</p>
@@ -23,7 +24,7 @@ export const Sidebar = () => {
       <nav className={styles.menu}>
         <ul>
           <li>
-            <a href="/">Posts</a>
+            <Link href="/">Posts</Link>
           </li>
         </ul>
       </nav>
