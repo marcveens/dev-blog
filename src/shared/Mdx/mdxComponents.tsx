@@ -1,6 +1,6 @@
 import { MDXComponents } from 'mdx/types';
 import { GithubEmbed } from '../GithubEmbed/GithubEmbed';
-import { Button, GithubButton } from '../Button/Button';
+import { Button, CodesandboxButton, GithubButton, GithubCodeSpaceButton } from '../Button/Button';
 
 const Img = (props: React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>) => {
   return <img {...props} alt="" className="markdown-img" loading="lazy" />;
@@ -23,5 +23,7 @@ export const mdxComponents: MDXComponents = {
   img: Img,
   GithubEmbed: GithubEmbed,
   Button: Button,
-  GithubButton: GithubButton
+  GithubButton: GithubButton,
+  GithubCodeSpaceButton: GithubCodeSpaceButton,
+  CodesandboxButton: CodesandboxButton
 };

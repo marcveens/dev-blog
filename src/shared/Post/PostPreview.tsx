@@ -31,7 +31,7 @@ export const PostPreview = (props: PostPreviewProps) => {
       <h2 className={styles.title}>
         <Link href={slug}>{title}</Link>
       </h2>
-      <p>{cutStringToWholeWord(strippedDescription, 185)}</p>
+      <p className={styles.paragraph}>{cutStringToWholeWord(strippedDescription, 185)}</p>
       <Link className={styles.link} href={slug}>
         Read more <ArrowRight size={16} />
       </Link>

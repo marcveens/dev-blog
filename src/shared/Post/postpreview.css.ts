@@ -2,7 +2,7 @@ import { vars } from '@/styles/theme.css';
 import { globalStyle, style } from '@vanilla-extract/css';
 
 export const postPreview = style({
-  marginBottom: '32px'
+  marginBottom: '40px'
 });
 
 export const time = style({
@@ -30,6 +30,10 @@ export const title = style({
   lineHeight: 1.44,
   marginBottom: '13px',
   fontWeight: 600
+});
+
+export const paragraph = style({ 
+  marginBottom: '12px'
 });
 
 globalStyle(`${title} a`, {
