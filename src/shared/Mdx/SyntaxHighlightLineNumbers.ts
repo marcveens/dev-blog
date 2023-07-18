@@ -154,7 +154,6 @@ export const addLineNumbers = (hljs: HLJSApi) => {
   }
 
   function documentReady(options?: LineNumbersOptions) {
-    console.log('ready');
     try {
       const blocks = document.querySelectorAll('code.hljs,code.nohighlight');
 
