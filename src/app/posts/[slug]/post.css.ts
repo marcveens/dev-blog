@@ -49,6 +49,18 @@ globalStyle(`${content} pre code`, {
   backgroundColor: 'transparent'
 });
 
+globalStyle(`${content} .code-like`, {
+  padding: '1em',
+  backgroundColor: '#22272e',
+  color: '#adbac7',
+});
+
+globalStyle(`${content} .code-like p`, {
+  margin: 0,
+  fontFamily: vars.font.code,
+  fontSize: '14px',
+});
+
 globalStyle(`${content} pre code.hljs`, {
   color: '#adbac7',
   backgroundColor: '#22272e'

@@ -1,14 +1,14 @@
 ---
 date: '2021-03-30T00:00:00.000Z'
 title: 'Front-end development with mock APIs'
-description: "How front-end development is made easier and better testable by mocking API endpoints"
-category: "Front-end"
+description: 'How front-end development is made easier and better testable by mocking API endpoints'
+category: 'Front-end'
 tags:
-  - "NodeJS"
-  - "JavaScript"
-  - "Typescript"
-  - "mock"
-  - "API"
+  - 'NodeJS'
+  - 'JavaScript'
+  - 'Typescript'
+  - 'mock'
+  - 'API'
 ---
 
 NodeJS mock server: <br /><a href="https://codesandbox.io/s/mockserver-ohwt9" target="_blank" rel="noopener noreferrer"><img src="https://codesandbox.io/static/img/play-codesandbox.svg" alt="Edit on CodeSandbox" /></a><br />
@@ -17,6 +17,7 @@ JavaScript client: <br /><a href="https://codesandbox.io/s/mockserver-client-g7z
 ---
 
 If you've ever worked with APIs or backend developers these scenarios might sound familiar:
+
 - My front-end doesn't work because an API is down, now what?!
 - The API response changed and now my front-end is broken, now what?!
 - I want to see how my front-end looks in case of an API error response, but the API never returns an error, now what?!
@@ -25,68 +26,108 @@ If you've ever worked with APIs or backend developers these scenarios might soun
 
 Luckily there's a solution to all your issues; mock APIs!
 
-At a project I'm working on we created a mock for almost every API we talk to. Since we're running a Single Page Application (SPA), we consume a looot of data using APIs. In this blog post I'll explain how we set up our code to use either production/mock APIs and I'll provide you with a really clean, framework-independent example of how you can do so too. 
+At a project I'm working on we created a mock for almost every API we talk to. Since we're running a Single Page Application (SPA), we consume a looot of data using APIs. In this blog post I'll explain how we set up our code to use either production/mock APIs and I'll provide you with a really clean, framework-independent example of how you can do so too.
 
-For this example I'll use the genius free <a href="https://kanye.rest/" target="_blank" rel="noopener noreferrer">KanyeRest API</a> providing a random meaningful quote of his. 
+For this example I'll use the genius free <a href="https://kanye.rest/" target="_blank" rel="noopener noreferrer">KanyeRest API</a> providing a random meaningful quote of his.
 
 ## The API clients
-To start I created a `KanyeRestClient.ts`, which contains all endpoints that you need in your application. 
 
-<iframe src="https://codesandbox.io/embed/mockserver-client-g7ztw?fontsize=14&hidenavigation=1&module=%2Fsrc%2Fapi%2FKanyeRestClient.ts&theme=dark&view=editor"
-     style="width:100%; height:400px; border:0; border-radius: 4px; overflow:hidden;"
-     title="mockserver-client"
-     allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-     sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-   ></iframe>
+To start I created a `KanyeRestClient.ts`, which contains all endpoints that you need in your application.
 
-Next to that lives the mock variant of this client; `KanyeRestClientMock.ts`. It implements the same interface as the actual client, so all functions should exist in both clients. 
+<iframe
+  src="https://codesandbox.io/embed/mockserver-client-g7ztw?fontsize=14&hidenavigation=1&module=%2Fsrc%2Fapi%2FKanyeRestClient.ts&theme=dark&view=editor"
+  style={{
+    width: '100%',
+    height: '500px',
+    border: 0,
+    borderRadius: '4px',
+    overflow: 'hidden'
+  }}
+  title="mockserver-client"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+></iframe>
 
-<iframe src="https://codesandbox.io/embed/mockserver-client-g7ztw?fontsize=14&hidenavigation=1&module=%2Fsrc%2Fapi%2FKanyeRestClientMock.ts&theme=dark&view=editor"
-     style="width:100%; height:400px; border:0; border-radius: 4px; overflow:hidden;"
-     title="mockserver-client"
-     allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-     sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-   ></iframe>
+Next to that lives the mock variant of this client; `KanyeRestClientMock.ts`. It implements the same interface as the actual client, so all functions should exist in both clients.
+
+<iframe
+  src="https://codesandbox.io/embed/mockserver-client-g7ztw?fontsize=14&hidenavigation=1&module=%2Fsrc%2Fapi%2FKanyeRestClientMock.ts&theme=dark&view=editor"
+  style={{
+    width: '100%',
+    height: '500px',
+    border: 0,
+    borderRadius: '4px',
+    overflow: 'hidden'
+  }}
+  title="mockserver-client"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+></iframe>
 
 In this file you see that not fetched from `https://api.kanye.rest/`, but from another <a href="https://codesandbox.io/s/mockserver-ohwt9?file=/src/index.js" target="_blank" rel="noopener noreferrer">codesandbox source</a>; the mock server. It's a really simple <a href="https://github.com/typicode/json-server" target="_blank" rel="noopener noreferrer">json-server</a> NodeJS environment which serves our mock files. In this case only a single endpoint exists, our mock Kanye Rest endpoint:
 
-<iframe src="https://codesandbox.io/embed/mockserver-ohwt9?fontsize=14&hidenavigation=1&initialpath=%2Fkanye-rest&theme=dark&view=preview"
-     style="width:100%; height:170px; border:0; border-radius: 4px; overflow:hidden;"
-     title="mockserver"
-     allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-     sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-   ></iframe>
+<iframe
+  src="https://codesandbox.io/embed/mockserver-ohwt9?fontsize=14&hidenavigation=1&initialpath=%2Fkanye-rest&theme=dark&view=preview"
+  style={{
+    width: '100%',
+    height: '500px',
+    border: 0,
+    borderRadius: '4px',
+    overflow: 'hidden'
+  }}
+  title="mockserver"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+></iframe>
 
-When developing we simply run this NodeJS environment on our local machines and access the mock server from a localhost URL. 
+When developing we simply run this NodeJS environment on our local machines and access the mock server from a localhost URL.
 
 ## Dependency injection
-Now is where things get more interesting. You have two API clients, but how can you make sure the correct one is used? That's where dependency injection comes in handy. Even though dependency injection is a common pattern in almost every other programming language, in the front-end world it is still fairly uncommon.  
+
+Now is where things get more interesting. You have two API clients, but how can you make sure the correct one is used? That's where dependency injection comes in handy. Even though dependency injection is a common pattern in almost every other programming language, in the front-end world it is still fairly uncommon.
 
 A simple explanation of how dependency works over here: the API clients are the dependencies, and either one of them is injected in our application, which I will show you in a bit. The part we're looking at down here, is where the dependencies are being registered. By default the `KanyeRestClient` function/dependency is bound by using a unique key; `TYPE.KanyeRestClient`. We will use this key later on to inject the correct dependency.
 
 On line 13 we see how the mock client is used. If the kanyeRest mock is enabled (in this example a sessionStorage value), the `TYPE.KanyeRestClient` key is rebound to return the `KanyeRestClientMock` function/dependency.
 
-<iframe src="https://codesandbox.io/embed/mockserver-client-g7ztw?fontsize=14&hidenavigation=1&module=%2Fsrc%2Fservices%2Fcontainer.ts&theme=dark&view=editor"
-     style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
-     title="mockserver-client"
-     allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-     sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-   ></iframe>
+<iframe
+  src="https://codesandbox.io/embed/mockserver-client-g7ztw?fontsize=14&hidenavigation=1&module=%2Fsrc%2Fservices%2Fcontainer.ts&theme=dark&view=editor"
+  style={{
+    width: '100%',
+    height: '500px',
+    border: 0,
+    borderRadius: '4px',
+    overflow: 'hidden'
+  }}
+  title="mockserver-client"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+></iframe>
 
 So, now we bound the correct function/dependency to the unique key, now we want to actually use it of course. Let's take a look down here. The most important part is line 8. We resolve (inject) the correct function by using our same unique ID we registered our dependency with. Now the `KanyeRestClient` variable can either refer to the production client OR the mock client, but since both clients implemented the same interface, code-wise it doesn't matter which one is injected. All functions returning from the client are always the same.
 
-<iframe src="https://codesandbox.io/embed/mockserver-client-g7ztw?fontsize=14&hidenavigation=1&module=%2Fsrc%2Findex.ts&theme=dark&view=editor"
-     style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
-     title="mockserver-client"
-     allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-     sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-   ></iframe>
+<iframe
+  src="https://codesandbox.io/embed/mockserver-client-g7ztw?fontsize=14&hidenavigation=1&module=%2Fsrc%2Findex.ts&theme=dark&view=editor"
+  style={{
+    width: '100%',
+    height: '500px',
+    border: 0,
+    borderRadius: '4px',
+    overflow: 'hidden'
+  }}
+  title="mockserver-client"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+></iframe>
 
 Now you can fetch the data, and based on a sessionStorage value, either the production data or the mock data is returned. Hooray!
 
 If you want to see a working demo, check out this CodeSandbox:
+
 <br />
-<a href="https://codesandbox.io/s/mockserver-client-g7ztw" target="_blank" rel="noopener noreferrer"><img src="https://codesandbox.io/static/img/play-codesandbox.svg" alt="Edit on CodeSandbox" /></a>
+<a href="https://codesandbox.io/s/mockserver-client-g7ztw" target="_blank" rel="noopener noreferrer">
+  <img src="https://codesandbox.io/static/img/play-codesandbox.svg" alt="Edit on CodeSandbox" />
+</a>
 <br />
 Just toggle the checkbox, refresh the page and see how the different dependencies are injected.
 

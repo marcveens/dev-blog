@@ -1,0 +1,88 @@
+---
+date: '2023-08-02T00:00:00.000Z'
+title: 'How to fix "The AzureDevOps SDK is already loaded" for the azure-devops-extension-sdk package'
+description: "When consuming the Azure DevOps extension SDK, you may encounter the error 'The AzureDevOps SDK is already loaded' when running your extension. This post explains how to fix it."
+excerpt: "I recently ran into an issue when developing an Azure DevOps extension. I was using the azure-devops-extension-sdk package get data from the Azure DevOps project I was running the extension in."
+category: "DevOps Extension"
+tags:
+  - "Azure"
+  - "DevOps"
+  - "extension"
+  - "azure-devops-extension-sdk"
+---
+
+I recently ran into an issue when developing an Azure DevOps extension. I was using the [azure-devops-extension-sdk](https://www.npmjs.com/package/azure-devops-extension-sdk) package get data from the Azure DevOps project I was running the extension in. I used the package in multiple files but then encountered this error in my console:
+
+<div class="code-like">
+The AzureDevOps SDK is already loaded. Only one version of this module can be loaded in a given document.
+</div>
+
+This is because, well, the SDK isn't particularly well programmed in my opinion. In the [source code](https://github.com/microsoft/azure-devops-extension-sdk/blob/master/src/SDK.ts) of the SDK, we see this:
+
+```typescript
+const global = window as any;
+if (global._AzureDevOpsSDKVersion) {
+    console.error("The AzureDevOps SDK is already loaded. Only one version of this module can be loaded in a given document.");
+}
+
+global._AzureDevOpsSDKVersion = sdkVersion;
+```
+
+This means that we should actually only load the script once. Once for our whole contribution...
+
+## Solution
+My solution was to create an `SDKContext`. That's the only place I reference the `azure-devops-extension-sdk` package. Then I just simply pass the reference to all the consuming components.
+
+```typescript
+import * as SDK from 'azure-devops-extension-sdk';
+
+type SDKContextProps = {
+  SDK: typeof SDK;
+};
+
+export const SDKContext = React.createContext<SDKContextProps>({} as SDKContextProps);
+
+export const SDKProvider: React.FC = (props) => {
+  const context: SDKContextProps = {
+    SDK
+  };
+
+  const initSDK = async () => {
+    await SDK.init();
+  };
+
+  React.useEffect(() => {
+    initSDK();
+  }, []);
+
+  return (
+    <SDKContext.Provider value={context}>{props.children}</SDKContext.Provider>
+  );
+};
+```
+
+Now you wrap your component/app in the `SDKProvider`:
+
+```typescript
+ReactDOM.render(
+  <SDKProvider>
+    <MyContribution />
+  </SDKProvider>,
+  document.getElementById('root')
+);
+```
+
+And then you're able to consume the context wherever you like, happy days!
+
+```typescript
+export const MyContribution = () => {
+  const { SDK } = React.useContext(ApiContext);
+
+  const getConfiguration = async () => {
+    const data = await SDK.getConfiguration();
+    // ...
+  };
+
+  // ...
+};
+```
