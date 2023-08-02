@@ -11,6 +11,12 @@ globalStyle('html, body', {
   fontSize: '16px',
   textRendering: 'optimizeLegibility',
   WebkitFontSmoothing: 'antialiased',
+
+  '@media': {
+    'screen and (max-device-width: 480px)': {
+      WebkitTextSizeAdjust: '100%'
+    }
+  }
 });
 
 globalStyle('*, ::before, ::after', {
