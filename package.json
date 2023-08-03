@@ -26,11 +26,13 @@
     "next-contentlayer": "^0.3.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "rss": "^1.2.2",
     "slugify": "^1.6.6",
     "typescript": "5.1.3"
   },
   "devDependencies": {
     "@types/mdx": "^2.0.5",
+    "@types/rss": "^0.0.30",
     "@vanilla-extract/next-plugin": "^2.1.3"
   },
   "overrides": {
