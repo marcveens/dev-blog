@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@giscus/react": "^2.3.0",
-    "@octokit/core": "^4.2.4",
     "@phosphor-icons/react": "^2.0.10",
     "@types/node": "20.3.1",
     "@types/react": "18.2.13",

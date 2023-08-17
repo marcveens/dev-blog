@@ -1,4 +1,3 @@
-import { Octokit } from '@octokit/core';
 import * as styles from './GithubEmbed.css';
 
 type GithubEmbedProps = {
@@ -16,15 +15,17 @@ export const GithubEmbed = (props: GithubEmbedProps) => {
 export const GithubEmbedInternal = async (props: GithubEmbedProps) => {
   const { owner, repo, file, startLine, endLine } = props;
 
-  const octokit = new Octokit({ auth: process.env.GITHUB_ACCESS_TOKEN });
-  const { data } = await octokit.request('GET /repos/{owner}/{repo}/contents/{path}', {
-    owner,
-    repo,
-    path: file,
-    mediaType: {
-      format: 'raw'
+  console.log(process.env.GITHUB_ACCESS_TOKEN);
+
+   const response = fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${file}`, {
+    headers:{ 
+      Accept: 'application/vnd.github.raw',
+      Authorization: `Bearer ${process.env.GITHUB_ACCESS_TOKEN}`,
+      'X-GitHub-Api-Version': '2022-11-28'
     }
   });
+
+  const data = await (await response).text();
 
   const url = `https://github.com/${owner}/${repo}/blob/main/${file}`;
   let urlWithLineNumbers: string | undefined = undefined;
