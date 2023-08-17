@@ -1,4 +1,4 @@
-import { vars } from '@/styles/theme.css';
+import { breakpoints, vars } from '@/styles/theme.css';
 import { globalStyle, style } from '@vanilla-extract/css';
 
 export const allPostsButtonBox = style({
@@ -41,7 +41,8 @@ globalStyle(`${content} a:not([class]):hover`, {
 
 globalStyle(`${content} code`, {
   fontFamily: vars.font.code,
-  backgroundColor: '#ececec',
+  backgroundColor: vars.color.code.backgroundColor,
+  color: vars.color.code.color,
   fontSize: '14px'
 });
 
@@ -50,9 +51,19 @@ globalStyle(`${content} pre code`, {
 });
 
 globalStyle(`${content} .code-like`, {
+  marginLeft: '-1em',
+  marginRight: '-1em',
   padding: '1em',
   backgroundColor: '#22272e',
   color: '#adbac7',
+
+  '@media': {
+    [`(min-width: ${breakpoints.sm})`]: {
+      marginLeft: '-1.5em',
+      marginRight: '-1.5em',
+      padding: '1em 1.5em'
+    }
+  }
 });
 
 globalStyle(`${content} .code-like p`, {
@@ -62,8 +73,19 @@ globalStyle(`${content} .code-like p`, {
 });
 
 globalStyle(`${content} pre code.hljs`, {
+  marginLeft: '-1rem',
+  marginRight: '-1rem',
+  padding: '1rem',
   color: '#adbac7',
-  backgroundColor: '#22272e'
+  backgroundColor: '#22272e',
+
+  '@media': {
+    [`(min-width: ${breakpoints.sm})`]: {
+      marginLeft: '-1.5rem',
+      marginRight: '-1.5rem',
+      padding: '1rem 1.5rem'
+    }
+  }
 });
 
 globalStyle(`${content} .hljs-ln-numbers`, {

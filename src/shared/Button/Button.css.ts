@@ -1,3 +1,4 @@
+import { vars } from '@/styles/theme.css';
 import { globalStyle, style, styleVariants } from '@vanilla-extract/css';
 
 const baseButton = style({
@@ -7,11 +8,11 @@ const baseButton = style({
   border: '1px solid #d6d6d6',
   textDecoration: 'none',
   borderRadius: '50px',
-  color: '#516373',
+  color: vars.color.button.color,
 
   ':hover': {
-    backgroundColor: '#fcfcfd',
-    color: '#516373'
+    backgroundColor: vars.color.button.hover.backgroundColor,
+    color: vars.color.button.hover.color
   }
 });
 

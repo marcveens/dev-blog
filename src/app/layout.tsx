@@ -1,18 +1,22 @@
 import { config } from '@/config/config';
 import '../styles/global.css';
-import { themeClass } from '@/styles/theme.css';
+import { darkThemeClass, themeClass } from '@/styles/theme.css';
 import Script from 'next/script';
 import { DeleteOldCaches } from '@/shared/Cache/DeleteOldCaches';
+import * as style from './layout.css';
+import { getCurrentTheme } from '@/utils/colorScheme';
 
 export const metadata = {
   title: config.title,
   description: config.subtitle
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const theme = await getCurrentTheme() === 'dark' ? darkThemeClass : themeClass;
+
   return (
     <html lang="en">
-      <body className={themeClass}>
+      <body className={`${theme} ${style.body}`}>
         {children}
 
         <DeleteOldCaches />

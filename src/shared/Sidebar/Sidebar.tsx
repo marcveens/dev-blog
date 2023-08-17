@@ -3,6 +3,7 @@ import { config } from '@/config/config';
 import { Socials } from './Socials';
 import Image from 'next/image';
 import Link from 'next/link';
+import { DarkModeToggle } from './DarkModeToggle';
 
 export const Sidebar = () => {
   return (
@@ -30,6 +31,8 @@ export const Sidebar = () => {
       </nav>
 
       <Socials />
+
+      <DarkModeToggle />
 
       <div className={styles.copyright}>© All rights reserved.</div>
     </aside>

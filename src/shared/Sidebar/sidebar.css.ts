@@ -13,7 +13,7 @@ export const sidebar = style({
     right: '10px',
     bottom: '0',
     width: '1px',
-    background: 'linear-gradient(180deg,#e6e6e6 0,#e6e6e6 48%,#fff)'
+    background: vars.color.divider
   },
 
   '@media': {
