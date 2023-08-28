@@ -1,0 +1,143 @@
+---
+date: '2023-08-29T00:00:00.000Z'
+title: 'React: Let the parent trigger functions of a child component'
+description: 'Let React parent components trigger functions of child components by using useImperativeHandle'
+excerpt: 'In React, the way of communicating between parent and child components is usually done in 2 ways; the parent sends `props` to the child and the child can send data back to the parent by using callbacks'
+category: 'React'
+tags:
+  - 'React'
+  - 'hooks'
+  - 'useImperativeHandle'
+---
+
+**`useImperativeHandle`** is the magic word. More about it later!
+
+In React, the way of communicating between parent and child components is usually done in 2 ways:
+
+- The parent sends `props` to the child
+- The child can send data back to the parent by using callbacks
+
+## Classic ways
+
+An example of using `props`:
+
+```typescript
+// Parent component
+const MyPage = () => {
+  return <Modal open={true} title="Submit your score" />;
+};
+
+// Child component
+const Modal = (props: ModalProps) => {
+  const { open, title } = props;
+
+  if (!open) {
+    return null;
+  }
+
+  return (
+    <div className="modal">
+      <h3>{title}</h3>
+      ...
+    </div>
+  );
+};
+```
+
+And an example of using a callback function:
+
+```typescript
+// Parent component
+const MyPage = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  return (
+    <Modal
+      open={isOpen}
+      title="Submit your score"
+      // This is the callback function
+      toggleOpen={() => setIsOpen(!isOpen)}
+    />
+  );
+};
+
+// Child component
+const Modal = (props: ModalProps) => {
+  const { open, title, toggleOpen } = props;
+
+  if (!open) {
+    return null;
+  }
+
+  return (
+    <div className="modal">
+      <button onClick={toggleOpen}>Close</button>
+      <h3>{title}</h3>
+      ...
+    </div>
+  );
+};
+```
+
+## useImperativeHandle
+
+Sometimes you encounter a situation where you have functions in the child component, that need to be called from a parent component. For example I recently encountered this when creating the <a href="https://www.npmjs.com/package/react-drawio" target="_blank" rel="noopener noreferrer">react-drawio</a> package.
+
+The package I created contained a few functions to interact with the embedded iframe. I wanted to expose those functions to any component that would implement the `react-drawio` package.
+
+I was looking for a solution when I stumbled upon the React <a href="https://react.dev/reference/react/useImperativeHandle" target="_blank" rel="noopener noreferrer">`useImperativeHandle`</a> hook. The React docs describe the hook like this: _`useImperativeHandle` is a React Hook that lets you customize the handle exposed as a ref_.
+
+Let me break that down a bit.
+
+You have probably used `useRef` before to get access to the API of a certain DOM element. For example to put `.focus()` on an element, or to get a certain attribute from an element by using `getAttribute()`.
+
+That's all good, but did you know you can use `useRef` for accessing the API of a React component?
+
+### The magic
+```typescript
+// Parent component
+const MyPage = () => {
+  const modalRef = useRef<ModalRef>(null);
+
+  useEffect(() => {
+    if (modalRef.current) {
+      drawioRef.current.myExtraFunction();
+    }
+  }, [modalRef.current]);
+
+  return (
+    <Modal ref={modalRef} />
+  );
+};
+
+// Child component
+const Modal = forwardRef<ModalRef, ModalProps>((props, ref) => {
+  const focus = () => {
+      // Do something
+  };
+
+  const myExtraFunction = () => {
+      // Do something
+  };
+
+  useImperativeHandle(ref, () => ({
+    focus,
+    myExtraFunction
+  }), []);  
+
+  return (
+    <div className="modal">
+      ...
+    </div>
+  );
+});
+```
+
+Two things to notice here.
+
+1. I wrapped the Modal component in a React `forwardRef` function. React docs describe this function as _`forwardRef` lets your component receive a ref and forward it to a child component_.
+2. I used `useRef` in the parent component which can now access both `focus` and `myExtraFunction` from the child component, because I only exposed those 2 functions.
+
+This is _not_ a replacement for `props` or callback functions, and you might not even need it that often, but just know that it's there!
+
+Let me know if you found this useful, or if you're already using it for other use cases!
