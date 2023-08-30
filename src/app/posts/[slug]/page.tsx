@@ -10,6 +10,7 @@ import { mdxComponents } from '@/shared/Mdx/mdxComponents';
 import { SyntaxHighlight } from '@/shared/Mdx/SyntaxHighlight';
 import { Comments } from '@/shared/Post/Comments';
 import Link from 'next/link';
+import { Credits } from '@/shared/Post/Credits';
 
 type BlogPostProps = {
   params: {
@@ -56,6 +57,8 @@ export default async function BlogPost(props: BlogPostProps) {
           </Link>
         ))}
       </div>
+
+      <Credits />
 
       <Comments />
     </Container>
