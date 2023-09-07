@@ -1,0 +1,99 @@
+---
+date: '2023-09-08T00:00:00.000Z'
+title: 'Use MUI (Emotion) sourcemaps with Vite'
+description: 'With a simple Vite config change you enable sourcemaps for MUI (Emotion) in your Vite project.'
+excerpt: "Regularly while working with a Netlify CMS you need the config.yml file to configure your entire CMS. I found this to be suboptimal and wanted to use the power of Typescript to generate the config file. In the end it's really easy to do."
+category: "Front-end"
+tags:
+  - "Vite"
+  - "MUI"
+  - "Emotion"
+---
+
+When installing Vite with React, this is what the `vite.config.ts` looks like. Pretty simple, but it has some issues in combination with MUI. 
+
+```typescript
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+export default defineConfig({
+  plugins: [react()],
+})
+```
+
+When running `npm run dev`, the project runs locally and everything works fine. The only thing that doesn't work out of the box, are Emotion sourcemaps. For those of you who don't know, Emotion is the default CSS-in-JS library for MUI.
+
+What my sample code looks like:
+
+```typescript
+import { Card, CardContent, styled } from '@mui/material';
+
+function App() {
+  return (
+    <Card>
+      <CardContent>
+        <MyBox>Hello 1</MyBox>
+      </CardContent>
+    </Card>
+  );
+}
+
+const MyBox = styled('div')({
+  padding: '10px'
+});
+```
+When inspecting the element in the browser, the class name is unrecognizable and we don't see the source file. This is perfect for a production environment, but really annoying when developing.
+
+<img src="/media/mui-vite/devtools-before.jpg" />
+
+Luckily, there is a fix for this! Simple change your `vite.config.ts` to the following:
+
+```typescript
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+
+export default defineConfig({
+  plugins: [
+    react({
+      jsxImportSource: '@emotion/react',
+      babel: {
+        plugins: [
+          [
+            '@emotion/babel-plugin',
+            {
+              importMap: {
+                '@mui/system': {
+                  styled: {
+                    canonicalImport: ['@emotion/styled', 'default'],
+                    styledBaseImport: ['@mui/system', 'styled']
+                  }
+                },
+                '@mui/material/styles': {
+                  styled: {
+                    canonicalImport: ['@emotion/styled', 'default'],
+                    styledBaseImport: ['@mui/material/styles', 'styled']
+                  }
+                },
+                '@mui/material': {
+                  styled: {
+                    canonicalImport: ['@emotion/styled', 'default'],
+                    styledBaseImport: ['@mui/material', 'styled']
+                  }
+                }
+              }
+            }
+          ]
+        ]
+      }
+    })
+  ]
+});
+```
+
+This will make sure the mapping is correct and the sourcemaps are working again!
+
+<img src="/media/mui-vite/devtools-after.jpg" />
+
+Without any other changes to the config file, it will actually still remove the sourcemaps in production. Just like we want.
+
+Cheers!
