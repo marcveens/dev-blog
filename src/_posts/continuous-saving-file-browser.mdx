@@ -1,0 +1,45 @@
+---
+date: '2024-01-19T00:00:00.000Z'
+title: 'Continuous file saving in React'
+description: "Learn how to implement continuous file saving in your React applications using FileSystemFileHandle"
+category: "React"
+tags:
+  - "React"
+  - "JavaScript"
+  - "Typescript"
+  - "FileSystemFileHandle"
+---
+
+<DemoButton to="https://continuous-saving-file-browser.stackblitz.io">Go to demo</DemoButton>
+
+Here's a short tutorial on how to implement saving custom content to the file system of an end user. This not only gives us the opportunity to save the file once, but by working in a smart way, the save action can be called continuously. 
+This can be very useful for example when working on a text editor, or a drawing application.
+
+In order to achieve this, we make use of `window.showSaveFilePicker`. Please be aware that this is not supported in all browsers yet. For example, Firefox does not support this at all. You can check the current support at <a href="https://caniuse.com/mdn-api_window_showsavefilepicker" target="_blank" rel="noopener noreferrer">caniuse.com</a>.
+
+`window.showSaveFilePicker` results in a prompt where a filename and folder must be selected. This is fine to show when you only need to save to a file once, but let's imagine you're working in a text editor. You would then want to save on a continous basis, but without selecting the file and folder over and over again. Luckily, we can achieve that!
+
+## The code
+
+<div className="breakout">
+  <iframe 
+    src="https://stackblitz.com/edit/continuous-saving-file-browser?embed=1&file=src%2FApp.tsx"
+    style={{
+      width: '100%',
+      height: '500px',
+      border: 0,
+      borderRadius: '4px',
+      overflow: 'hidden'
+    }}
+  />
+</div>
+
+The magic is in caching the return value from `window.showSaveFilePicker`. Sometimes the solution can be so simple! You can cache it by storing it in React state, or in a React Ref, a custom `window` property, anything that remains stored for the current browser session.
+
+In the demo I implemented a button to save the file, but `Ctrl+S` or `Cmd+S` also works. They both call the same `saveToFile` function. The cool thing is, this function can also be called by using a `setInterval` to implement an autosave feature!
+
+Please have a look at the demo to see how it works in a browser.
+
+<DemoButton to="https://continuous-saving-file-browser.stackblitz.io">Go to demo</DemoButton>
+
+Cheers!
