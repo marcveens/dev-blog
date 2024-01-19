@@ -72,7 +72,7 @@ globalStyle(`${content} .code-like p`, {
   fontSize: '14px',
 });
 
-globalStyle(`${content} pre code.hljs`, {
+globalStyle(`${content} pre code.hljs, ${content} .breakout`, {
   marginLeft: '-1rem',
   marginRight: '-1rem',
   padding: '1rem',

@@ -1,5 +1,5 @@
 import * as styles from './Button.css';
-import { GithubLogo, Code, CodesandboxLogo } from '@/utils/Icons';
+import { GithubLogo, Code, CodesandboxLogo, Play } from '@/utils/Icons';
 
 type ButtonProps = {
   to?: string;
@@ -18,6 +18,10 @@ export const CodesandboxButton = (props: ButtonProps) => {
 
 export const GithubCodeSpaceButton = (props: ButtonProps) => {
   return <Button {...props} startIcon={<Code size={22} weight="light" />} />;
+};
+
+export const DemoButton = (props: ButtonProps) => {
+  return <Button {...props} startIcon={<Play size={22} weight="light" />} />;
 };
 
 export const Button = (props: ButtonProps) => {
