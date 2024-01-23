@@ -1,0 +1,74 @@
+---
+date: '2024-01-23T00:00:00.000Z'
+title: 'Developing Azure DevOps extensions: Good Practices'
+description: "My experience with developing Azure DevOps extensions and the learnings I'd like to share"
+excerpt: "I've spent a good amount of months developing an Azure DevOps extension for a customer, and I'd like to share my learnings so you can have an easy start."
+category: "DevOps Extension"
+tags:
+  - "Azure"
+  - "DevOps"
+  - "extension"
+  - "azure-devops-extension-sdk"
+---
+
+I've spent a good amount of months developing an Azure DevOps extension for a customer, and I'd like to share my learnings so you can have an easy start. 
+
+## 1. Prioritize using the <a href="https://learn.microsoft.com/en-us/rest/api/azure/devops" target="_blank" rel="noopener noreferrer">DevOps REST API</a> over the <a href="https://www.npmjs.com/package/azure-devops-extension-sdk" target="_blank" rel="noopener noreferrer">SDK</a>
+As you might know, there is a <a href="https://learn.microsoft.com/en-us/rest/api/azure/devops" target="_blank" rel="noopener noreferrer">REST API</a>, an <a href="https://www.npmjs.com/package/azure-devops-extension-sdk" target="_blank" rel="noopener noreferrer">SDK</a> and an <a href="https://www.npmjs.com/package/vss-web-extension-sdk" target="_blank" rel="noopener noreferrer">old SDK</a>. Even though the old one is deprecated, you still need it for developing custom widget for a dashboard, unfortunately.
+
+However, the current SDK works fine. It provides you with an access token, information about the user, data about the extension and contribution etc. While its suitable for getting basic data, it is not ideal for fetching more complex data like work items, queries and wiki pages. I think it's possible to fetch some of that data, but definitely not all of it. 
+For that reason I'd recommend using the REST API where possible, and fall back on the SDK when needed. That way you keep your code clean and you don't have to switching between API and SDK calls all the time.
+
+**Tip:** If you're using the SDK, make sure to only <a href="/posts/azure-devops-extension-sdk-fix-already-loaded">load it once</a>.
+
+## 2. Use TypeScript, Microsoft does too
+Microsoft created TypeScript, so naturally, they provide type definitions for both the SDK and API. It makes your life a **lot** easier if you use the types, since some SDK methods and API responses can be quite complex.
+
+We use the <a href="https://www.npmjs.com/package/azure-devops-extension-api" target="_blank" rel="noopener noreferrer">azure-devops-extension-api</a> package for API type references (for example: `import { WorkItem, WorkItemType } from "azure-devops-extension-api/WorkItemTracking";`) and <a href="https://www.npmjs.com/package/azure-devops-extension-sdk" target="_blank" rel="noopener noreferrer">azure-devops-extension-sdk</a> for SDK types (for example: `import { IUserContext } from 'azure-devops-extension-sdk';`)
+
+## 3. Prevent using the <a href="https://www.npmjs.com/package/azure-devops-ui" target="_blank" rel="noopener noreferrer">azure-devops-ui</a> package
+Microsoft provides a UI library with React components that integrate seamlessly with the Azure DevOps UI. Even though it looks really good, I do not recommend using it. 
+
+- At the time of writing, the package is at version 2.167.87. This version has a peer dependency on React 16.8.1 (which dates back to February 2019!), while we're at React 18 now.
+- The package is not open source, so you can't contribute to it or fix bugs yourself.
+- New versions are released, but it's without any changelog. Since it's not open source, you have no idea what is updated.
+
+My recommendation: use <a href="https://react.fluentui.dev/" target="_blank" rel="noopener noreferrer">Fluent UI</a>. It's a solid library (also by Microsoft) which is updated on a regular basis, is open source and has much more components to offer. 
+
+## 4. Build your components in a container/presentational way
+Even though I think it's a good practice in general, especially for Azure DevOps extensions it's a good idea to split your components up in a presentational component, and a container component. 
+This means that the presentational component is primarily responsible for rendering UI elements and displaying data. The container component is then responsible for fetching data and maintaining state, which is provided to the presentational component. 
+
+The separation of concerns makes it easier to test your components, and to show the presentational components in for example Storybook. 
+
+In the context of Azure DevOps extensions, it especially makes creating widgets for dashboards a bit easier. If you have a presentational component, you can create a container component that implements the old DevOps SDK. 
+Do you want to use the same component in a hub? No problem, just create a new container component that implements the new DevOps SDK.
+
+## 5. Make use of the <a href="https://learn.microsoft.com/en-us/azure/devops/extend/develop/data-storage?view=azure-devops#update-a-document" target="_blank" rel="noopener noreferrer">DevOps Data Storage SDK</a> for saving settings and preferences
+Did you know that DevOps comes with a built in data storage for extensions? It allows you to store a JSON blob per user, per organization or per project. 
+Technically you only have the option to save it on user or extension level. However, the extension is installed on organization level (so that part is covered already), and if you add your project ID to the key you're saving, you also have settings on a project level!
+
+## 6. Remember that you're running in an iframe
+This is a bit of a no-brainer, but it's easy to forget that you're running in an iframe. This means that you can't access the parent window or the DevOps UI. If you're able to run code, you'll be in an iframe. Take that into account if you're planning on using modals, tooltips or other components that usually have to overflow the parent window.
+
+The iframe is also running on a different host than dev.azure.com, so you can't embed an existing DevOps page in an iframe. Microsoft disabled that for other hosts. 
+
+## 7. Subjective tip: use <a href="https://nx.dev/" target="_blank" rel="noopener noreferrer">Nx</a> for structuring your code
+I have no affiliations with Nx, but I really like the way it allows you to structure your code. In our DevOps extension project it helped tremendously. We have it structured as follows:
+- `apps`
+  - `extensions`
+    - `extensionA`
+    - `extensionB`
+- `packages` (only internal packages/libs, nothing is pubished)
+  - `api` (for providing the extensions an API client)
+  - `modules`
+    - `forms`
+    - `ui`
+    - ...
+  - `utils`
+
+And that's only a brief example. Nx allows us to focus on coding, not on maintaining the structure of our code base. With a single command a new shared package is created, with Typescript enabled and all. The big advantage we also have, is that Nx allows us to easily build our extensions independently, so they can be deployed separately. 
+
+I hope these tips were useful to you. If you're just starting, have a look at the GitHub repo Microsoft created with <a href="https://github.com/microsoft/azure-devops-extension-sample" target="_blank" rel="noopener noreferrer">extension samples</a>. Even though some are a bit outdated, it still was of great help for us to get started. 
+
+Good luck and have fun developing your Azure DevOps extension!
