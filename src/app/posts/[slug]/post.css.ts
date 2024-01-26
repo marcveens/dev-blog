@@ -22,6 +22,7 @@ globalStyle(`${button}:hover`, {
 });
 
 export const title = style({
+  marginTop: '75px',
   fontSize: '32px',
   lineHeight: '42px',
   textAlign: 'center',

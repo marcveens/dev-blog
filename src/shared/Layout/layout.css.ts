@@ -3,13 +3,7 @@ import { style } from '@vanilla-extract/css';
 
 export const layout = style({
   display: 'flex',
-  flexDirection: 'column',
-
-  '@media': {
-    [`(min-width: ${breakpoints.sm})`]: {
-      flexDirection: 'row'
-    }
-  }
+  flexDirection: 'column'
 });
 
 export const main = style({

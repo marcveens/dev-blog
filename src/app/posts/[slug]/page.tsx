@@ -11,6 +11,7 @@ import { SyntaxHighlight } from '@/shared/Mdx/SyntaxHighlight';
 import { Comments } from '@/shared/Post/Comments';
 import Link from 'next/link';
 import { Credits } from '@/shared/Post/Credits';
+import { Header } from '@/shared/Header/Header';
 
 type BlogPostProps = {
   params: {
@@ -34,33 +35,34 @@ export default async function BlogPost(props: BlogPostProps) {
   const Content = getMDXComponent(post?.body.code || '');
 
   return (
-    <Container maxWidth="smd">
-      <SyntaxHighlight />
-      <div className={styles.allPostsButtonBox}>
-        <Link href="/" className={styles.button}>
-          All posts
-        </Link>
-      </div>
+    <>
+      <Container maxWidth="md">
+        <Header />
+      </Container>
 
-      <h1 className={styles.title}>{post?.title}</h1>
+      <Container maxWidth="smd">
+        <SyntaxHighlight />
 
-      <div className={styles.content}>
-        <Content components={mdxComponents} />
-      </div>
+        <h1 className={styles.title}>{post?.title}</h1>
 
-      <p className={styles.publishedAt}>Published {format(parseISO(post?.date || ''), 'MMM d, yyyy')}</p>
+        <div className={styles.content}>
+          <Content components={mdxComponents} />
+        </div>
 
-      <div className={styles.tags}>
-        {post?.tags?.map((tag) => (
-          <Link key={tag} className={styles.button} href={`/tag/${slugify(tag)}`}>
-            {tag}
-          </Link>
-        ))}
-      </div>
+        <p className={styles.publishedAt}>Published {format(parseISO(post?.date || ''), 'MMM d, yyyy')}</p>
 
-      <Credits />
+        <div className={styles.tags}>
+          {post?.tags?.map((tag) => (
+            <Link key={tag} className={styles.button} href={`/tag/${slugify(tag)}`}>
+              {tag}
+            </Link>
+          ))}
+        </div>
 
-      <Comments />
-    </Container>
+        <Credits />
+
+        <Comments />
+      </Container>
+    </>
   );
 }
