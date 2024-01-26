@@ -12,7 +12,7 @@ Have you ever come across a situation where you have a deeply nested state and w
 
 The implementation is fairly easy to start with. You get a `produce` function from the library which does all the magic for you. It prevents direct state manipulation and returns a merged state consisting of the original state and the changed draft state. To make it more clear here's a working example:
 
-<iframe src="https://codesandbox.io/embed/immer-example-dly36?fontsize=14&view=editor" title="immer-example-2" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+<iframe src="https://codesandbox.io/embed/immer-example-dly36?fontsize=14&view=editor" title="immer-example-2" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media" style={{ width: '100%', height: '500px', border: 0, borderRadius: '4px', overflow:'hidden' }} sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 
 As you can see the `changeUser1OldWay` function works using destructuring, a lot of triple dots to make sure every layer is still intact except for the property to need to modify. The `changeUser2NewWay` function on the other hand looks much cleaner. This is thanks to immer! 🎉 
 
