@@ -5,6 +5,7 @@ import * as styles from './Navigation.css';
 import { List, X } from '@/utils/Icons';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { Socials } from '../Sidebar/Socials';
 
 export const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(true);
@@ -35,6 +36,7 @@ export const Navigation = () => {
             </li>
           </ul>
         </nav>
+        <Socials />
       </section>
     </>
   );
