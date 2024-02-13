@@ -5,6 +5,24 @@ import { useSpring, animated } from 'react-spring';
 import * as styles from './cloud.css';
 import ReactIcon from './icons/react.svg';
 import GraphqlIcon from './icons/graphql.svg';
+import TypescriptIcon from './icons/typescript.svg';
+import ViteIcon from './icons/vite.svg';
+import ApolloIcon from './icons/apollo.svg';
+import ReduxIcon from './icons/redux.svg';
+import NodejsIcon from './icons/nodejs.svg';
+import VercelIcon from './icons/vercel.svg';
+import GitIcon from './icons/git.svg';
+import SupabaseIcon from './icons/supabase.svg';
+import NextjsIcon from './icons/nextjs.svg';
+import MuiIcon from './icons/mui.svg';
+import RollupIcon from './icons/rollup.svg';
+import NpmIcon from './icons/npm.svg';
+import AzureIcon from './icons/azure.svg';
+import GithubActionsIcon from './icons/github-actions.svg';
+import TanstackIcon from './icons/tanstack.svg';
+import RjsfIcon from './icons/rjsf.svg';
+import StorybookIcon from './icons/storybook.svg';
+import NxIcon from './icons/nx.svg';
 
 export type TreeNode = {
   type: 'node';
@@ -31,18 +49,29 @@ const data: Tree = {
   children: [
     { type: 'leaf', name: 'React', value: 90, icon: ReactIcon, color: '#61dafb' },
     { type: 'leaf', name: 'GraphQL', value: 70, icon: GraphqlIcon, color: '#E535AB' },
-    { type: 'leaf', name: 'Emily', value: 34 },
-    { type: 'leaf', name: 'Marion', value: 53 },
-    { type: 'leaf', name: 'Nicolas', value: 98 },
-    { type: 'leaf', name: 'Malki', value: 22 },
-    { type: 'leaf', name: 'Djé', value: 20 },
-    { type: 'leaf', name: 'Mélanie', value: 45 },
-    { type: 'leaf', name: 'Einstein', value: 76 }
+    { type: 'leaf', name: 'TypeScript', value: 90, icon: TypescriptIcon, color: '#3178c6' },
+    { type: 'leaf', name: 'Vite', value: 53, icon: ViteIcon, color: '#636CFF' },
+    { type: 'leaf', name: 'Apollo GraphQL', value: 30, icon: ApolloIcon, color: '#FC5201' },
+    { type: 'leaf', name: 'Redux', value: 22, icon: ReduxIcon, color: '#764ABC' },
+    { type: 'leaf', name: 'Node.js', value: 70, icon: NodejsIcon, color: '#8CC84B' },
+    { type: 'leaf', name: 'Vercel', value: 45, icon: VercelIcon, color: '#000' },
+    { type: 'leaf', name: 'Git', value: 15, icon: GitIcon, color: '#F05133' },
+    { type: 'leaf', name: 'Supabase', value: 32, icon: SupabaseIcon, color: '#3DCF8E' },
+    { type: 'leaf', name: 'Next.js', value: 40, icon: NextjsIcon, color: '#000' },
+    { type: 'leaf', name: 'MUI', value: 25, icon: MuiIcon, color: '#0177ED' },
+    { type: 'leaf', name: 'Rollup', value: 15, icon: RollupIcon, color: '#FF2F2F' },
+    { type: 'leaf', name: 'npm', value: 15, icon: NpmIcon, color: '#CC3533' },
+    { type: 'leaf', name: 'Azure', value: 30, icon: AzureIcon, color: '#0089D6' },
+    { type: 'leaf', name: 'Github Actions', value: 25, icon: GithubActionsIcon, color: '#2088ff' },
+    { type: 'leaf', name: 'TanStack Query', value: 40, icon: TanstackIcon, color: '#EF4543' },
+    { type: 'leaf', name: 'RJSF', value: 25, icon: RjsfIcon, color: '#000' },
+    { type: 'leaf', name: 'Storybook', value: 40, icon: StorybookIcon, color: '#FF4785' },
+    { type: 'leaf', name: 'Nx', value: 50, icon: NxIcon, color: '#012F55' }
   ]
 };
 
 const width = 400;
-const height = 300;
+const height = 450;
 
 export const Cloud = () => {
   const svgRef = useRef<SVGSVGElement>(null);
@@ -75,6 +104,7 @@ export const Cloud = () => {
             cy={node.y}
             r={node.r}
             fill={node.data.color}
+            // opacity={.9}
             onMouseEnter={() => {
               setHoveredItem(node.data.name);
             }}
@@ -109,9 +139,9 @@ export const Cloud = () => {
         .map((node) => (
           <foreignObject
             key={node.data.name}
-            x={node.x - 100}
+            x={node.x - 125}
             y={node.y - node.r - 23}
-            width={200}
+            width={250}
             height={20}
             className={styles.tooltipContainer}
           >
