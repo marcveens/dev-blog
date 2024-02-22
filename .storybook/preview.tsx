@@ -1,6 +1,8 @@
+import React from 'react';
 import type { Preview } from '@storybook/react';
-import resolveConfig from 'tailwindcss/resolveConfig'
-import tailwindConfig from '../tailwind.config.js'
+import { Providers } from '../src/shared/Layout/providers';
+import resolveConfig from 'tailwindcss/resolveConfig';
+import tailwindConfig from '../tailwind.config.js';
 import '../src/styles/globals.css';
 
 export const fullConfig = resolveConfig(tailwindConfig) as any;
@@ -13,9 +15,9 @@ const preview: Preview = {
       values: [
         {
           name: 'dark',
-          value: fullConfig.theme.colors.background,
-        },
-      ],
+          value: fullConfig.theme.colors.background
+        }
+      ]
     },
     controls: {
       matchers: {
@@ -23,7 +25,14 @@ const preview: Preview = {
         date: /Date$/i
       }
     }
-  }
+  },
+  decorators: [
+    (Story) => (
+      <Providers>
+        <Story />
+      </Providers>
+    )
+  ]
 };
 
 export default preview;

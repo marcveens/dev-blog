@@ -4,5 +4,5 @@
   "tabWidth": 2,
   "trailingComma": "none",
   "plugins": ["prettier-plugin-tailwindcss"],
-  "tailwindFunctions": ["clsx", "cn", "twmerge", "cva"]
+  "tailwindFunctions": ["clsx", "cn", "twmerge", "cva", "twClass"]
 }

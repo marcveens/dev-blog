@@ -35,7 +35,11 @@ module.exports = {
       sans: ['Roboto', 'sans-serif'],
       serif: ['Merriweather', 'serif']
     },
-    extend: {}
+    extend: {
+      boxShadow: {
+        'underline': '0 1px 0 0 #FFF',
+      }
+    }
   },
   plugins: []
 };
