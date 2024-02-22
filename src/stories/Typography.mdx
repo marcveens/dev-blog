@@ -1,0 +1,43 @@
+import { Meta, Typeset } from "@storybook/blocks";
+import resolveConfig from 'tailwindcss/resolveConfig'
+import tailwindConfig from '../../tailwind.config.js'
+
+export const fullConfig = resolveConfig(tailwindConfig)
+
+<Meta title="Typography" />
+
+export const typography = {
+  type: {
+    primary: fullConfig.theme.fontFamily.sans.join(", "),
+  },
+  weight: {
+    light: "300",
+    normal: "400",
+    medium: "500",
+    bold: "700",
+  },
+  size: {
+    s16: 16, // 16px
+    s18: 18, // 18px
+    s20: 20, // 20px
+    s24: 24, // 24px
+    s32: 32, // 32px
+    s48: 48, // 48px
+  },
+};
+
+export const SampleText = "The five boxing wizards jump quickly";
+
+# Typography
+{Object.entries(typography.weight).map(([key, value]) => (
+  <>
+    <h2 className={`font-` + key}>{key}</h2>
+    <Typeset
+      key={key}
+      fontSizes={Object.values(typography.size).map(size => size)}
+      fontWeight={value}
+      sampleText={SampleText}
+      fontFamily={typography.type.primary}
+    />
+  </>
+))}
