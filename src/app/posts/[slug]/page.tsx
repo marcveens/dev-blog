@@ -11,7 +11,7 @@ import { SyntaxHighlight } from '@/shared/Mdx/SyntaxHighlight';
 import { Comments } from '@/shared/Post/Comments';
 import Link from 'next/link';
 import { Credits } from '@/shared/Post/Credits';
-import { Header } from '@/shared/Header/Header';
+import { Header } from '@/shared/header/header';
 
 type BlogPostProps = {
   params: {

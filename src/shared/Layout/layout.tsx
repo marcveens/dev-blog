@@ -1,7 +1,7 @@
 import { Container } from '@/shared/Container/Container';
 import { Sidebar } from '@/shared/Sidebar/Sidebar';
 import * as styles from './layout.css';
-import { Header } from '../Header/Header';
+import { Header } from '../header/header';
 
 type LayoutProps = {
   children: React.ReactNode;
