@@ -62,12 +62,11 @@ const buttonClass = twClass('inline-flex cursor-pointer select-none items-center
       size: 'large',
       class: '[&_svg:last-of-type]:-mr-3.5 [&_svg:last-of-type]:ml-3.5 [&_svg:last-of-type]:h-7 [&_svg:last-of-type]:w-7'
     }
-  ],
-  defaultVariants: { variant: 'contained', size: 'medium' }
+  ]
 });
 
 export const Button = (props: ButtonProps) => {
-  const { children, to, startIcon, endIcon, variant, size } = props;
+  const { children, to, startIcon, endIcon, variant = 'outlined', size = 'medium' } = props;
 
   const isExternal = to?.startsWith('http');
   const target = isExternal ? '_blank' : '_self';

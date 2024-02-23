@@ -4,7 +4,7 @@ import { Button } from './Button';
 import { Alien, ArrowRight, Play } from '@phosphor-icons/react';
 
 const meta = {
-  title: 'Components/Button',
+  title: 'Components/Buttons/Button',
   component: Button,
   parameters: {
     layout: 'centered'
@@ -35,9 +35,10 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const Contained: Story = {
   args: {
-    children: 'Button'
+    children: 'Button',
+    variant: 'contained'
   }
 };
 

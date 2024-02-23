@@ -4,7 +4,7 @@ import { LinkButton } from './LinkButton';
 import { Alien, ArrowRight, Play } from '@phosphor-icons/react';
 
 const meta = {
-  title: 'Components/LinkButton',
+  title: 'Components/Buttons/LinkButton',
   component: LinkButton,
   parameters: {
     layout: 'centered'
