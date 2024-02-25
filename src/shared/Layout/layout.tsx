@@ -1,5 +1,5 @@
 import { Container } from '@/shared/Container/Container';
-import { Sidebar } from '@/shared/Sidebar/Sidebar';
+import { Sidebar } from '@/shared/sidebar/Sidebar';
 import * as styles from './layout.css';
 import { Header } from '../header/header';
 

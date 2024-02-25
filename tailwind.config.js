@@ -38,6 +38,10 @@ module.exports = {
     extend: {
       boxShadow: {
         'underline': '0 1px 0 0 #FFF',
+      },
+      spacing: {
+        80: '80px',
+        120: '120px'
       }
     }
   },
