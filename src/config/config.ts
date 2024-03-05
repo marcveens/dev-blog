@@ -7,5 +7,6 @@ export const config = {
   social: {
     linkedIn: 'https://www.linkedin.com/in/marcveens/',
     github: 'https://github.com/marcveens'
-  }
+  },
+  footer: 'Copyright © 2024 Marc Veens'
 };

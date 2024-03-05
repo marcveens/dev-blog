@@ -1,5 +1,6 @@
 import { GithubLogo, Code, CodesandboxLogo, Play } from '@/utils/Icons';
 import { twClass } from '@/utils/twClass';
+import { cx } from 'class-variance-authority';
 
 type ButtonProps = {
   to?: string;
@@ -7,6 +8,7 @@ type ButtonProps = {
   size?: 'small' | 'medium' | 'large';
   startIcon?: React.ReactNode;
   endIcon?: React.ReactNode;
+  className?: string;
   children: React.ReactNode;
 };
 
@@ -32,8 +34,9 @@ const buttonClass = twClass('inline-flex cursor-pointer select-none items-center
     endIcon: { true: '[&_svg:last-of-type]:-mr-2.5 [&_svg:last-of-type]:ml-2.5' },
     variant: {
       outlined:
-        'border border-solid text-contrast hover:border-primary hover:text-primary active:border-myorange-500 active:text-myorange-500',
-      contained: 'bg-contrast text-background hover:bg-primary hover:text-contrast active:bg-myorange-500 active:text-contrast'
+        'border border-solid text-contrast hover:border-primary hover:text-primary active:border-myorange-500 active:text-myorange-500 group-hover:border-primary group-hover:text-primary group-active:border-myorange-500 group-active:text-myorange-500',
+      contained:
+        'bg-contrast text-background hover:bg-primary hover:text-contrast active:bg-myorange-500 active:text-contrast group-hover:bg-primary group-hover:text-contrast group-active:bg-myorange-500 group-active:text-contrast'
     },
     size: {
       small: 'px-5 py-2 text-sm',
@@ -66,14 +69,19 @@ const buttonClass = twClass('inline-flex cursor-pointer select-none items-center
 });
 
 export const Button = (props: ButtonProps) => {
-  const { children, to, startIcon, endIcon, variant = 'outlined', size = 'medium' } = props;
+  const { children, to, startIcon, endIcon, variant = 'outlined', size = 'medium', className } = props;
 
   const isExternal = to?.startsWith('http');
   const target = isExternal ? '_blank' : '_self';
   const rel = isExternal ? 'noopener noreferrer' : '';
 
   return (
-    <a href={to} target={target} rel={rel} className={buttonClass({ startIcon: !!startIcon, endIcon: !!endIcon, variant, size })}>
+    <a
+      href={to}
+      target={target}
+      rel={rel}
+      className={cx(buttonClass({ startIcon: !!startIcon, endIcon: !!endIcon, variant, size }), className)}
+    >
       {startIcon}
       {children}
       {endIcon}

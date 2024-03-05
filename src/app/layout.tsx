@@ -1,10 +1,11 @@
 import { config } from '@/config/config';
-import '../styles/global.css';
+import '../styles/globals.css';
 import { darkThemeClass, themeClass } from '@/styles/theme.css';
 import Script from 'next/script';
 import { DeleteOldCaches } from '@/shared/Cache/DeleteOldCaches';
 import * as style from './layout.css';
 import { getCurrentTheme } from '@/utils/colorScheme';
+import { Providers } from '@/shared/Layout/providers';
 
 export const metadata = {
   title: config.title,
@@ -24,8 +25,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           rel="stylesheet"
         />
       </head>
-      <body className={`${theme} ${style.body}`}>
-        {children}
+      <body className="bg-background">
+        <Providers>{children}</Providers>
 
         <DeleteOldCaches />
       </body>

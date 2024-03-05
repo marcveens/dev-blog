@@ -1,7 +1,6 @@
-import { Container } from '@/shared/Container/Container';
-import { Sidebar } from '@/shared/sidebar/Sidebar';
 import * as styles from './layout.css';
 import { Header } from '../header/header';
+import { Footer } from '../footer/footer';
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -11,15 +10,14 @@ const Layout = (props: LayoutProps) => {
   const { children } = props;
 
   return (
-    <Container maxWidth="md">
+    <div className="max-w-900 container mx-auto px-4 sm:px-6">
       <div className={styles.layout}>
         <Header />
-        {/* <Sidebar /> */}
-        <div className={styles.main}>
-        {children}
-        </div>
+        <div className={styles.main}>{children}</div>
+
+        <Footer />
       </div>
-    </Container>
+    </div>
   );
 };
 

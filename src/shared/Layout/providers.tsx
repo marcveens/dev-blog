@@ -1,3 +1,5 @@
+'use client';
+
 import { IconContext } from '@phosphor-icons/react';
 
 export const Providers = ({ children }: { children: React.ReactNode }) => {

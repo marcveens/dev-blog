@@ -35,13 +35,21 @@ module.exports = {
       sans: ['Roboto', 'sans-serif'],
       serif: ['Merriweather', 'serif']
     },
+    lineHeight: {
+      normal: 'normal'
+    },
     extend: {
       boxShadow: {
-        'underline': '0 1px 0 0 #FFF',
+        underline: '0 1px 0 0 #FFF',
+        'underline-primary': `0 1px 0 0 ${colors.myorange[400]}`,
       },
       spacing: {
         80: '80px',
-        120: '120px'
+        120: '120px',
+        900: '900px'
+      },
+      fontSize: {
+        28: '28px'
       }
     }
   },

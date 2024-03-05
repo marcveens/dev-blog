@@ -1,15 +1,17 @@
 import { twClass } from '@/utils/twClass';
+import { cx } from 'class-variance-authority';
 
 type ButtonProps = {
   to?: string;
   size?: 'small' | 'medium' | 'large';
   startIcon?: React.ReactNode;
   endIcon?: React.ReactNode;
+  className?: string;
   children: React.ReactNode;
 };
 
 const buttonClass = twClass(
-  'hover:shadow-underline inline-flex cursor-pointer select-none items-center text-contrast transition-colors duration-200 ease-in-out',
+  'inline-flex cursor-pointer select-none items-center text-contrast transition-colors duration-200 ease-in-out hover:shadow-underline',
   {
     variants: {
       startIcon: { true: '[&_svg:first-of-type]:mr-2.5' },
@@ -47,14 +49,14 @@ const buttonClass = twClass(
 );
 
 export const LinkButton = (props: ButtonProps) => {
-  const { children, to, startIcon, endIcon, size } = props;
+  const { children, to, startIcon, endIcon, size, className } = props;
 
   const isExternal = to?.startsWith('http');
   const target = isExternal ? '_blank' : '_self';
   const rel = isExternal ? 'noopener noreferrer' : '';
 
   return (
-    <a href={to} target={target} rel={rel} className={buttonClass({ startIcon: !!startIcon, endIcon: !!endIcon, size })}>
+    <a href={to} target={target} rel={rel} className={cx(buttonClass({ startIcon: !!startIcon, endIcon: !!endIcon, size }), className)}>
       {startIcon}
       {children}
       {endIcon}

@@ -1,3 +1,5 @@
+'use client';
+
 import { Logo } from '../logo/logo';
 import { IconButton } from '../Button/IconButton';
 import { List, X } from '@phosphor-icons/react';
