@@ -1,9 +1,9 @@
 import { getAllPosts } from '@/api/api';
-import { PostPreview } from './PostPreview';
 import * as styles from '../../styles/layout.css';
 import { slugify } from '@/utils/slugify';
 import { notFound } from 'next/navigation';
 import { Post } from 'contentlayer/generated';
+import { PostPreviewList } from './post-preview-list';
 
 type PostProps = {
   limit?: number;
@@ -40,16 +40,18 @@ export const Posts = (props: PostProps) => {
     <div>
       {pageTitle && <h1 className={styles.pageTitle}>{pageTitle}</h1>}
 
-      {postsToShow.map((post) => (
-        <PostPreview
-          key={post._id}
-          title={post.title}
-          description={post.excerpt || post.body.raw}
-          slug={post.url}
-          category={post.category}
-          date={post.date}
-        />
-      ))}
+      <div className="max-w-750 mx-auto flex flex-col gap-11">
+        {postsToShow.map((post) => (
+          <PostPreviewList
+            key={post._id}
+            title={post.title}
+            description={post.excerpt || post.body.raw}
+            slug={post.url}
+            category={post.category}
+            date={post.date}
+          />
+        ))}
+      </div>
     </div>
   );
 };

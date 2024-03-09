@@ -25,31 +25,40 @@ module.exports = {
     './src/**/*.{js,ts,jsx,tsx,mdx}'
   ],
   theme: {
-    colors: {
-      myorange: colors.myorange,
-      primary: colors.myorange[400],
-      background: '#1B1B1D',
-      contrast: '#FFF'
-    },
     fontFamily: {
-      sans: ['Roboto', 'sans-serif'],
-      serif: ['Merriweather', 'serif']
-    },
-    lineHeight: {
-      normal: 'normal'
+      sans: ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+      code: ['Fira Code', 'Consolas', 'Menlo', 'Monaco', 'monospace']
     },
     extend: {
+      colors: {
+        myorange: colors.myorange,
+        primary: colors.myorange[400],
+        background: '#1B1B1D',
+        'code-background': '#22272e',
+        'code-color': '#adbac7',
+        contrast: '#FFF',
+        link: '#cfe2f4'
+      },
       boxShadow: {
         underline: '0 1px 0 0 #FFF',
-        'underline-primary': `0 1px 0 0 ${colors.myorange[400]}`,
+        'underline-primary': `0 1px 0 0 ${colors.myorange[400]}`
       },
       spacing: {
         80: '80px',
         120: '120px',
-        900: '900px'
+        750: '750px',
+        1200: '1200px'
       },
       fontSize: {
-        28: '28px'
+        28: '28px',
+        h2: ['27px', '39px'],
+        h3: ['22px', '26px'],
+        h4: ['19px', '26px'],
+        h5: ['16px', '26px'],
+        h6: ['14px', '26px']
+      },
+      lineHeight: {
+        normal: 'normal'
       }
     }
   },

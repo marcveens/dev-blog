@@ -1,11 +1,8 @@
 import { config } from '@/config/config';
 import '../styles/globals.css';
-import { darkThemeClass, themeClass } from '@/styles/theme.css';
 import Script from 'next/script';
 import { DeleteOldCaches } from '@/shared/Cache/DeleteOldCaches';
-import * as style from './layout.css';
-import { getCurrentTheme } from '@/utils/colorScheme';
-import { Providers } from '@/shared/Layout/providers';
+import { Providers } from '@/shared/layout/providers';
 
 export const metadata = {
   title: config.title,
@@ -13,8 +10,6 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const theme = (await getCurrentTheme()) === 'dark' ? darkThemeClass : themeClass;
-
   return (
     <html lang="en">
       <head>

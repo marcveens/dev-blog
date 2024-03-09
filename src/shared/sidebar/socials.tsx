@@ -28,7 +28,7 @@ const socialLinks: SocialLink[] = [
 
 export const Socials = () => {
   return (
-    <div className="md:flex md:items-center md:ml-24">
+    <div className="md:flex md:items-center md:ml-20">
       <ul className="flex justify-center mt-6 md:mt-0">
         {socialLinks.map((link) => (
           <li key={link.label}>

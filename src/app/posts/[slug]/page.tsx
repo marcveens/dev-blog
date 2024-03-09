@@ -1,6 +1,4 @@
 import { getPostBySlug } from '@/api/api';
-import { Container } from '@/shared/Container/Container';
-import * as styles from './post.css';
 import { format, parseISO } from 'date-fns';
 import { slugify } from '@/utils/slugify';
 import { Metadata } from 'next';
@@ -8,10 +6,10 @@ import { getPageTitle } from '@/utils/getPageTitle';
 import { getMDXComponent } from 'next-contentlayer/hooks';
 import { mdxComponents } from '@/shared/Mdx/mdxComponents';
 import { SyntaxHighlight } from '@/shared/Mdx/SyntaxHighlight';
-import { Comments } from '@/shared/Post/Comments';
-import Link from 'next/link';
-import { Credits } from '@/shared/Post/Credits';
-import { Header } from '@/shared/header/header';
+import { Comments } from '@/shared/post/comments';
+import { Credits } from '@/shared/post/credits';
+import Layout from '@/shared/layout/layout';
+import { Button } from '@/shared/Button/Button';
 
 type BlogPostProps = {
   params: {
@@ -35,34 +33,30 @@ export default async function BlogPost(props: BlogPostProps) {
   const Content = getMDXComponent(post?.body.code || '');
 
   return (
-    <>
-      <Container maxWidth="md">
-        <Header />
-      </Container>
-
-      <Container maxWidth="smd">
+    <Layout>
+      <main>
         <SyntaxHighlight />
 
-        <h1 className={styles.title}>{post?.title}</h1>
+        <h1 className="mb-5 mt-3 text-center text-3xl">{post?.title}</h1>
 
-        <div className={styles.content}>
+        <div className="post-content">
           <Content components={mdxComponents} />
         </div>
 
-        <p className={styles.publishedAt}>Published {format(parseISO(post?.date || ''), 'MMM d, yyyy')}</p>
+        <p className="mb-7 italic">Published {format(parseISO(post?.date || ''), 'MMM d, yyyy')}</p>
 
-        <div className={styles.tags}>
+        <div className="mb-12 flex flex-wrap gap-3">
           {post?.tags?.map((tag) => (
-            <Link key={tag} className={styles.button} href={`/tag/${slugify(tag)}`}>
+            <Button key={tag} to={`/tag/${slugify(tag)}`} size="small">
               {tag}
-            </Link>
+            </Button>
           ))}
         </div>
 
         <Credits />
 
         <Comments />
-      </Container>
-    </>
+      </main>
+    </Layout>
   );
 }

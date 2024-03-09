@@ -1,5 +1,5 @@
-import Layout from '@/shared/Layout/layout';
-import { Posts } from '@/shared/Post/Posts';
+import Layout from '@/shared/layout/layout';
+import { Posts } from '@/shared/post/posts';
 
 export default function Page() {
   return (

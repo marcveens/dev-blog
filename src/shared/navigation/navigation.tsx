@@ -24,7 +24,7 @@ const navLinks: NavLink[] = [
   },
   {
     label: 'blog',
-    href: '/blog'
+    href: '/posts'
   },
   {
     label: 'contact',
@@ -39,7 +39,7 @@ export const Navigation = (props: NavigationProps) => {
     <>
       <section className={navigationClass({ isMobile })}>
         <nav className="mt-4 md:mt-0">
-          <ul className="flex flex-col text-center md:flex-row md:gap-x-12">
+          <ul className="flex flex-col text-center md:flex-row md:gap-x-11">
             {navLinks.map((link) => (
               <li key={link.label} className="py-2 md:py-0">
                 <Link href={link.href} className="block p-2 text-lg hover:underline">

@@ -2,7 +2,7 @@ import { format, parseISO } from 'date-fns';
 import { PostPreviewProps } from './post-types';
 import Link from 'next/link';
 import { cutStringToWholeWord } from './post-utils';
-import { ArrowRight } from '@phosphor-icons/react';
+import { ArrowRight } from '@/utils/Icons';
 import { slugify } from '@/utils/slugify';
 import { LinkButton } from '../Button/LinkButton';
 
@@ -28,7 +28,7 @@ export const PostPreviewList = (props: PostPreviewProps) => {
             {title}
           </Link>
         </h2>
-        <p className="text-base leading-normal text-contrast/[.8]">{cutStringToWholeWord(strippedDescription, 185)}</p>
+        <p className="text-base text-contrast/[.8]">{cutStringToWholeWord(strippedDescription, 185)}</p>
 
         <LinkButton to={slug} className="self-start" endIcon={<ArrowRight size={16} />}>
           Read more

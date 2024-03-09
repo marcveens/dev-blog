@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 
 export const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(true);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {

@@ -1,4 +1,3 @@
-import * as styles from './layout.css';
 import { Header } from '../header/header';
 import { Footer } from '../footer/footer';
 
@@ -10,10 +9,10 @@ const Layout = (props: LayoutProps) => {
   const { children } = props;
 
   return (
-    <div className="max-w-900 container mx-auto px-4 sm:px-6">
-      <div className={styles.layout}>
+    <div className="max-w-1200 container mx-auto text-contrast font-light">
+      <div className="flex flex-col">
         <Header />
-        <div className={styles.main}>{children}</div>
+        <div className="mb-12 flex-grow basis-0 px-4 pt-8 sm:px-6">{children}</div>
 
         <Footer />
       </div>
