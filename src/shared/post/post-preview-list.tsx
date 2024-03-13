@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { cutStringToWholeWord } from './post-utils';
 import { ArrowRight } from '@/utils/Icons';
 import { slugify } from '@/utils/slugify';
-import { LinkButton } from '../Button/LinkButton';
+import { LinkButton } from '../button/link-button';
 
 export const PostPreviewList = (props: PostPreviewProps) => {
   const { title, description, slug, category, date } = props;

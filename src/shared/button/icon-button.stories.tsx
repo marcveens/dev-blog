@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { IconButton } from './IconButton';
+import { IconButton } from './icon-button';
 import { Alien, ArrowRight, Play } from '@phosphor-icons/react';
 
 const meta = {

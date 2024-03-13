@@ -1,7 +1,7 @@
 import { config } from '@/config/config';
 import '../styles/globals.css';
 import Script from 'next/script';
-import { DeleteOldCaches } from '@/shared/Cache/DeleteOldCaches';
+import { DeleteOldCaches } from '@/shared/cache/delete-old-caches';
 import { Providers } from '@/shared/layout/providers';
 
 export const metadata = {

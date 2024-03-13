@@ -44,11 +44,11 @@
   }
 
   .post-content h2 {
-    @apply text-h2 mb-3 mt-12;
+    @apply text-h2 mb-3 mt-14;
   }
 
   .post-content h3 {
-    @apply text-h3 mb-3 mt-12;
+    @apply text-h3 mb-3 mt-14;
   }
 
   .post-content h4 {

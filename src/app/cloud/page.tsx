@@ -1,4 +1,4 @@
-import Layout from '@/shared/Layout/layout';
+import Layout from '@/shared/layout/layout';
 import { Cloud as CloudComponent } from './Cloud';
 
 export default function Cloud() {

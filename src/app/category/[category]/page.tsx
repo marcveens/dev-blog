@@ -1,6 +1,6 @@
 import { config } from '@/config/config';
-import Layout from '@/shared/Layout/layout';
-import { Posts } from '@/shared/Post/Posts';
+import Layout from '@/shared/layout/layout';
+import { Posts } from '@/shared/post/posts';
 import { getPageTitle } from '@/utils/getPageTitle';
 import { slugify } from '@/utils/slugify';
 import { capitalizeFirstLetter } from '@/utils/textUtils';

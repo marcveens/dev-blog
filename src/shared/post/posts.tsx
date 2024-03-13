@@ -1,5 +1,4 @@
 import { getAllPosts } from '@/api/api';
-import * as styles from '../../styles/layout.css';
 import { slugify } from '@/utils/slugify';
 import { notFound } from 'next/navigation';
 import { Post } from 'contentlayer/generated';
@@ -38,9 +37,8 @@ export const Posts = (props: PostProps) => {
 
   return (
     <div>
-      {pageTitle && <h1 className={styles.pageTitle}>{pageTitle}</h1>}
-
-      <div className="max-w-750 mx-auto flex flex-col gap-11">
+      <div className="mx-auto flex max-w-750 flex-col gap-11">
+        {pageTitle && <h1 className="text-4xl font-medium">{pageTitle}</h1>}
         {postsToShow.map((post) => (
           <PostPreviewList
             key={post._id}

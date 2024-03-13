@@ -8,7 +8,7 @@ import javascript from 'highlight.js/lib/languages/javascript';
 import xml from 'highlight.js/lib/languages/xml';
 
 import 'highlight.js/styles/github-dark-dimmed.css';
-import { addLineNumbers } from './SyntaxHighlightLineNumbers';
+import { addLineNumbers } from './syntax-highlight-line-numbers';
 
 hljs.registerLanguage('javascript', javascript);
 hljs.registerLanguage('typescript', typescript);

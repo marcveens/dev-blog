@@ -49,7 +49,7 @@ export const Navigation = (props: NavigationProps) => {
             ))}
           </ul>
         </nav>
-        <Socials />
+        <Socials className="md:ml-20 md:flex md:items-center" ulClassName="mt-6 md:mt-0 justify-center" />
       </section>
     </>
   );

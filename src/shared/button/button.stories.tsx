@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { LinkButton } from './LinkButton';
+import { Button } from './button';
 import { Alien, ArrowRight, Play } from '@phosphor-icons/react';
 
 const meta = {
-  title: 'Components/Buttons/LinkButton',
-  component: LinkButton,
+  title: 'Components/Buttons/Button',
+  component: Button,
   parameters: {
     layout: 'centered'
   },
@@ -30,14 +30,22 @@ const meta = {
       }
     }
   }
-} satisfies Meta<typeof LinkButton>;
+} satisfies Meta<typeof Button>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const Contained: Story = {
   args: {
-    children: 'LinkButton'
+    children: 'Button',
+    variant: 'contained'
+  }
+};
+
+export const Outlined: Story = {
+  args: {
+    children: 'Button',
+    variant: 'outlined'
   }
 };
 

@@ -4,12 +4,12 @@ import { slugify } from '@/utils/slugify';
 import { Metadata } from 'next';
 import { getPageTitle } from '@/utils/getPageTitle';
 import { getMDXComponent } from 'next-contentlayer/hooks';
-import { mdxComponents } from '@/shared/Mdx/mdxComponents';
-import { SyntaxHighlight } from '@/shared/Mdx/SyntaxHighlight';
+import { mdxComponents } from '@/shared/mdx/mdx-components';
+import { SyntaxHighlight } from '@/shared/mdx/syntax-highlight';
 import { Comments } from '@/shared/post/comments';
 import { Credits } from '@/shared/post/credits';
 import Layout from '@/shared/layout/layout';
-import { Button } from '@/shared/Button/Button';
+import { Button } from '@/shared/button/button';
 
 type BlogPostProps = {
   params: {
@@ -34,16 +34,16 @@ export default async function BlogPost(props: BlogPostProps) {
 
   return (
     <Layout>
-      <main>
+      <main className="max-w-640 mx-auto">
         <SyntaxHighlight />
 
-        <h1 className="mb-5 mt-3 text-center text-3xl">{post?.title}</h1>
+        <h1 className="mb-12 mt-3 text-center text-4xl font-medium">{post?.title}</h1>
 
         <div className="post-content">
           <Content components={mdxComponents} />
         </div>
 
-        <p className="mb-7 italic">Published {format(parseISO(post?.date || ''), 'MMM d, yyyy')}</p>
+        <p className="mb-7 mt-6 italic">Published {format(parseISO(post?.date || ''), 'MMM d, yyyy')}</p>
 
         <div className="mb-12 flex flex-wrap gap-3">
           {post?.tags?.map((tag) => (

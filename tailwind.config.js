@@ -37,7 +37,8 @@ module.exports = {
         'code-background': '#22272e',
         'code-color': '#adbac7',
         contrast: '#FFF',
-        link: '#cfe2f4'
+        link: '#cfe2f4',
+        'code-embed-footer': '#363f4a'
       },
       boxShadow: {
         underline: '0 1px 0 0 #FFF',
@@ -46,6 +47,8 @@ module.exports = {
       spacing: {
         80: '80px',
         120: '120px',
+        400: '400px',
+        640: '640px',
         750: '750px',
         1200: '1200px'
       },

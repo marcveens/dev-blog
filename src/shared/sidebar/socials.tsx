@@ -1,6 +1,12 @@
 import { config } from '@/config/config';
 import { GithubLogo, LinkedinLogo, Rss } from '@/utils/Icons';
-import { IconButton } from '../Button/IconButton';
+import { IconButton } from '../button/icon-button';
+import { cx } from 'class-variance-authority';
+
+type SocialsProps = {
+  className?: string;
+  ulClassName?: string;
+};
 
 type SocialLink = {
   label: string;
@@ -26,10 +32,12 @@ const socialLinks: SocialLink[] = [
   }
 ];
 
-export const Socials = () => {
+export const Socials = (props: SocialsProps) => {
+  const { className, ulClassName } = props;
+
   return (
-    <div className="md:flex md:items-center md:ml-20">
-      <ul className="flex justify-center mt-6 md:mt-0">
+    <div className={className}>
+      <ul className={cx('flex', ulClassName)}>
         {socialLinks.map((link) => (
           <li key={link.label}>
             <IconButton to={link.href} variant="icon" icon={link.icon} title={link.label} className="p-2" />

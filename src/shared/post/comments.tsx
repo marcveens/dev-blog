@@ -1,24 +1,10 @@
 'use client';
 
 import Giscus from '@giscus/react';
-import * as styles from './Comments.css';
-import { getCurrentTheme } from '@/utils/colorScheme';
-import { useEffect, useState } from 'react';
 
 export const Comments = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  useEffect(() => {
-    (async () => {
-      const currentTheme = await getCurrentTheme();
-      if (currentTheme === 'dark') {
-        setIsDarkMode(true);
-      }
-    })();
-  }, []);
-
   return (
-    <div className={styles.comments}>
+    <div className="mb-5">
       <Giscus
         id="comments"
         repo="marcveens/dev-blog"
@@ -29,7 +15,7 @@ export const Comments = () => {
         reactionsEnabled="1"
         emitMetadata="0"
         inputPosition="top"
-        theme={isDarkMode ? 'dark' : 'light'}
+        theme="dark"
         lang="en"
         loading="lazy"
       />

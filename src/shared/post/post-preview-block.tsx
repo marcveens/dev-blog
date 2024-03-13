@@ -3,7 +3,7 @@ import { PostPreviewProps } from './post-types';
 import Link from 'next/link';
 import { cutStringToWholeWord } from './post-utils';
 import { ArrowRight } from '@phosphor-icons/react';
-import { Button } from '../Button/Button';
+import { Button } from '../button/button';
 
 export const PostPreviewBlock = (props: PostPreviewProps) => {
   const { title, description, slug, date } = props;

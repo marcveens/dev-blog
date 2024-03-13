@@ -1,5 +1,3 @@
-import * as styles from './GithubEmbed.css';
-
 type GithubEmbedProps = {
   owner: string;
   repo: string;
@@ -15,10 +13,8 @@ export const GithubEmbed = (props: GithubEmbedProps) => {
 export const GithubEmbedInternal = async (props: GithubEmbedProps) => {
   const { owner, repo, file, startLine, endLine } = props;
 
-  console.log(process.env.GITHUB_ACCESS_TOKEN);
-
-   const response = fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${file}`, {
-    headers:{ 
+  const response = fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${file}`, {
+    headers: {
       Accept: 'application/vnd.github.raw',
       Authorization: `Bearer ${process.env.GITHUB_ACCESS_TOKEN}`,
       'X-GitHub-Api-Version': '2022-11-28'
@@ -45,12 +41,12 @@ export const GithubEmbedInternal = async (props: GithubEmbedProps) => {
 
   return (
     <>
-      <pre className={styles.codePre}>
+      <pre className="mb-0 mt-4">
         <code className={language ? `language-${language}` : ''} data-ln-start-from={startLine}>
           {fileContent}
         </code>
       </pre>
-      <footer className={styles.footer}>
+      <footer className="xm:py-6 border-code-embed-footer -mx-4 flex justify-between border-t bg-code-background px-4 py-2 text-sm text-code-color sm:-mx-6">
         <div>
           <a href={urlWithLineNumbers || url} target="_blank" rel="noopener noreferrer">
             {fileName}
