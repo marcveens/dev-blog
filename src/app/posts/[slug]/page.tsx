@@ -10,6 +10,8 @@ import { Comments } from '@/shared/post/comments';
 import { Credits } from '@/shared/post/credits';
 import Layout from '@/shared/layout/layout';
 import { Button } from '@/shared/button/button';
+import { LinkButton } from '@/shared/button/link-button';
+import { ArrowLeft } from '@/utils/Icons';
 
 type BlogPostProps = {
   params: {
@@ -36,6 +38,10 @@ export default async function BlogPost(props: BlogPostProps) {
     <Layout>
       <main className="max-w-640 mx-auto">
         <SyntaxHighlight />
+
+        <LinkButton to="/posts" size="small" className="text-contrast/60 hover:shadow-contrast/60" startIcon={<ArrowLeft size={16} />}>
+          Back to blog
+        </LinkButton>
 
         <h1 className="mb-12 mt-3 text-center text-4xl font-medium">{post?.title}</h1>
 

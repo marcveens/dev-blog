@@ -10,6 +10,14 @@
     @apply mb-6 mt-4;
   }
 
+  .post-content ul {
+    @apply list-disc pl-6;
+  }
+
+  .post-content ol {
+    @apply list-decimal pl-6;
+  }
+
   .post-content a:not([class]) {
     @apply text-link underline hover:text-primary;
   }
