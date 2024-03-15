@@ -15,6 +15,14 @@ export const Header = () => {
     setIsMenuOpen(false);
   }, [pathname]);
 
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'visible';
+    }
+  }, [isMenuOpen]);
+
   return (
     <>
       <header className="lg flex h-80 items-center p-2 sm:h-120 sm:p-4">
