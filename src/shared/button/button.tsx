@@ -75,6 +75,16 @@ export const Button = (props: ButtonProps) => {
   const target = isExternal ? '_blank' : '_self';
   const rel = isExternal ? 'noopener noreferrer' : '';
 
+  if (!to) {
+    return (
+      <button className={cx(buttonClass({ startIcon: !!startIcon, endIcon: !!endIcon, variant, size }), className)}>
+        {startIcon}
+        {children}
+        {endIcon}
+      </button>
+    );
+  }
+
   return (
     <a
       href={to}

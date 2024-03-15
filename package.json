@@ -11,6 +11,7 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@cutting/use-get-parent-size": "^2.1.9",
     "@giscus/react": "^2.3.0",
     "@phosphor-icons/react": "^2.0.15",
     "@types/node": "20.3.1",

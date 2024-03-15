@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Preview } from '@storybook/react';
-import { Providers } from '../src/shared/Layout/providers';
+import { Providers } from '../src/shared/layout/providers';
 import resolveConfig from 'tailwindcss/resolveConfig';
 import tailwindConfig from '../tailwind.config.js';
 import '../src/styles/globals.css';

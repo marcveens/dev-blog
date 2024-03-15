@@ -4,4 +4,5 @@ export type PostPreviewProps = {
   slug: string;
   date: string;
   category: string;
+  className?: string;
 };

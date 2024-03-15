@@ -2,7 +2,6 @@
 import { useMemo, useRef, useState } from 'react';
 import * as d3 from 'd3';
 import { useSpring, animated } from 'react-spring';
-import * as styles from './cloud.css';
 import ReactIcon from './icons/react.svg';
 import GraphqlIcon from './icons/graphql.svg';
 import TypescriptIcon from './icons/typescript.svg';
@@ -23,6 +22,7 @@ import TanstackIcon from './icons/tanstack.svg';
 import RjsfIcon from './icons/rjsf.svg';
 import StorybookIcon from './icons/storybook.svg';
 import NxIcon from './icons/nx.svg';
+import { twClass } from '@/utils/twClass';
 
 export type TreeNode = {
   type: 'node';
@@ -41,6 +41,11 @@ export type TreeLeaf = {
 };
 
 export type Tree = TreeNode | TreeLeaf;
+
+type CloudProps = {
+  width: number;
+  height: number;
+};
 
 const data: Tree = {
   type: 'node',
@@ -70,14 +75,16 @@ const data: Tree = {
   ]
 };
 
-const width = 400;
-const height = 450;
+const tooltipClass = twClass('absolute top-0 left-2/4 -translate-x-2/4 rounded bg-tooltip text-contrast text-xs leading-none py-1 px-2 transition-opacity', {
+  variants: {
+    active: { true: 'opacity-100', false: 'opacity-0' }
+  }
+});
 
-export const Cloud = () => {
+export const Cloud = (props: CloudProps) => {
+  const { width, height } = props;
   const svgRef = useRef<SVGSVGElement>(null);
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
-
-  console.log(hoveredItem);
 
   // Process the data to have a hierarchy structure;
   const hierarchy = useMemo(() => {
@@ -93,7 +100,7 @@ export const Cloud = () => {
   }, [hierarchy, width, height]);
 
   return (
-    <svg width={width} height={height} ref={svgRef}>
+    <svg ref={svgRef} className="w-full aspect-[100/115]">
       {root
         .descendants()
         .slice(1)
@@ -127,7 +134,7 @@ export const Cloud = () => {
               width={node.r}
               height={node.r}
               alignmentBaseline="middle"
-              className={styles.icon}
+              className="pointer-events-none [&_svg]:block"
             >
               {Icon && <Icon />}
             </AnimatedObject>
@@ -143,9 +150,9 @@ export const Cloud = () => {
             y={node.y - node.r - 23}
             width={250}
             height={20}
-            className={styles.tooltipContainer}
+            className="pointer-events-none relative"
           >
-            <div className={styles.tooltip[hoveredItem === node.data.name ? 'active' : 'inactive']}>{node.data.name}</div>
+            <div className={tooltipClass({ active: hoveredItem === node.data.name })}>{node.data.name}</div>
           </foreignObject>
         ))}
     </svg>

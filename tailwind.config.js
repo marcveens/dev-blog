@@ -38,7 +38,8 @@ module.exports = {
         'code-color': '#adbac7',
         contrast: '#FFF',
         link: '#cfe2f4',
-        'code-embed-footer': '#363f4a'
+        'code-embed-footer': '#363f4a',
+        tooltip: '#262628'
       },
       boxShadow: {
         underline: '0 1px 0 0 #FFF',
@@ -54,6 +55,8 @@ module.exports = {
       },
       fontSize: {
         28: '28px',
+        32: ['32px', '1'],
+        50: ['50px', '1'],
         h2: ['27px', '39px'],
         h3: ['22px', '26px'],
         h4: ['19px', '26px'],

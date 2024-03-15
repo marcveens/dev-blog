@@ -10,6 +10,26 @@ const config: StorybookConfig = {
   docs: {
     autodocs: 'tag'
   },
-  staticDirs: ['../public']
+  staticDirs: ['../public'],
+  webpackFinal(config, options) {
+    const fileLoaderRule = config?.module?.rules?.find((rule) => {
+      if (rule && typeof rule === 'object' && 'test' in rule) {
+        // @ts-ignore
+        return rule.test && rule.test.test('.svg');
+      }
+
+      return false;
+    });
+    if (fileLoaderRule && typeof fileLoaderRule === 'object') {
+      fileLoaderRule.exclude = /\.svg$/;
+    }
+
+    config.module?.rules?.push({
+      test: /\.svg$/,
+      use: ['@svgr/webpack']
+    });
+
+    return config;
+  }
 };
 export default config;
