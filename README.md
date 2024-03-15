@@ -1,3 +1,10 @@
 Hello blog
 
-Used: https://github.com/vercel/next.js/tree/canary/examples/blog-starter
+https://www.marcveens.nl
+
+Stack:
+- Next.js
+- Tailwind
+- Contentlayer 
+- Giscus
+- D3

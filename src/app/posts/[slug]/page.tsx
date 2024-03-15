@@ -1,16 +1,17 @@
 import { getPostBySlug } from '@/api/api';
-import { Container } from '@/shared/Container/Container';
-import * as styles from './post.css';
 import { format, parseISO } from 'date-fns';
 import { slugify } from '@/utils/slugify';
 import { Metadata } from 'next';
 import { getPageTitle } from '@/utils/getPageTitle';
 import { getMDXComponent } from 'next-contentlayer/hooks';
-import { mdxComponents } from '@/shared/Mdx/mdxComponents';
-import { SyntaxHighlight } from '@/shared/Mdx/SyntaxHighlight';
-import { Comments } from '@/shared/Post/Comments';
-import Link from 'next/link';
-import { Credits } from '@/shared/Post/Credits';
+import { mdxComponents } from '@/shared/mdx/mdx-components';
+import { SyntaxHighlight } from '@/shared/mdx/syntax-highlight';
+import { Comments } from '@/shared/post/comments';
+import { Credits } from '@/shared/post/credits';
+import Layout from '@/shared/layout/layout';
+import { Button } from '@/shared/button/button';
+import { LinkButton } from '@/shared/button/link-button';
+import { ArrowLeft } from '@/utils/Icons';
 
 type BlogPostProps = {
   params: {
@@ -34,33 +35,34 @@ export default async function BlogPost(props: BlogPostProps) {
   const Content = getMDXComponent(post?.body.code || '');
 
   return (
-    <Container maxWidth="smd">
-      <SyntaxHighlight />
-      <div className={styles.allPostsButtonBox}>
-        <Link href="/" className={styles.button}>
-          All posts
-        </Link>
-      </div>
+    <Layout>
+      <main className="max-w-640 mx-auto">
+        <SyntaxHighlight />
 
-      <h1 className={styles.title}>{post?.title}</h1>
+        <LinkButton to="/posts" size="small" className="text-contrast/60 hover:shadow-contrast/60" startIcon={<ArrowLeft size={16} />}>
+          Back to blog
+        </LinkButton>
 
-      <div className={styles.content}>
-        <Content components={mdxComponents} />
-      </div>
+        <h1 className="mb-12 mt-3 text-center text-4xl font-medium">{post?.title}</h1>
 
-      <p className={styles.publishedAt}>Published {format(parseISO(post?.date || ''), 'MMM d, yyyy')}</p>
+        <div className="post-content">
+          <Content components={mdxComponents} />
+        </div>
 
-      <div className={styles.tags}>
-        {post?.tags?.map((tag) => (
-          <Link key={tag} className={styles.button} href={`/tag/${slugify(tag)}`}>
-            {tag}
-          </Link>
-        ))}
-      </div>
+        <p className="mb-7 mt-6 italic">Published {format(parseISO(post?.date || ''), 'MMM d, yyyy')}</p>
 
-      <Credits />
+        <div className="mb-12 flex flex-wrap gap-3">
+          {post?.tags?.map((tag) => (
+            <Button key={tag} to={`/tag/${slugify(tag)}`} size="small">
+              {tag}
+            </Button>
+          ))}
+        </div>
 
-      <Comments />
-    </Container>
+        <Credits />
+
+        <Comments />
+      </main>
+    </Layout>
   );
 }

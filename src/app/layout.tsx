@@ -1,10 +1,8 @@
 import { config } from '@/config/config';
-import '../styles/global.css';
-import { darkThemeClass, themeClass } from '@/styles/theme.css';
+import '../styles/globals.css';
 import Script from 'next/script';
-import { DeleteOldCaches } from '@/shared/Cache/DeleteOldCaches';
-import * as style from './layout.css';
-import { getCurrentTheme } from '@/utils/colorScheme';
+import { DeleteOldCaches } from '@/shared/cache/delete-old-caches';
+import { Providers } from '@/shared/layout/providers';
 
 export const metadata = {
   title: config.title,
@@ -12,12 +10,18 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const theme = await getCurrentTheme() === 'dark' ? darkThemeClass : themeClass;
-
   return (
     <html lang="en">
-      <body className={`${theme} ${style.body}`}>
-        {children}
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body className="bg-background">
+        <Providers>{children}</Providers>
 
         <DeleteOldCaches />
       </body>

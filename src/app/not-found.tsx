@@ -1,11 +1,10 @@
-import Layout from '@/shared/Layout/layout';
-import * as styles from '../styles/layout.css';
+import Layout from '@/shared/layout/layout';
 
 export default function NotFound() {
   return (
     <Layout>
       <main>
-        <h1 className={styles.pageTitle}>Not found</h1>
+        <h1 className="text-4xl font-medium mb-8">Not found</h1>
         <p>You just hit a route that doesn&apos;t exist... the sadness.</p>
       </main>
     </Layout>
