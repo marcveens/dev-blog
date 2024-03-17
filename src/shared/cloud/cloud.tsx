@@ -100,7 +100,7 @@ export const Cloud = (props: CloudProps) => {
   }, [hierarchy, width, height]);
 
   return (
-    <svg ref={svgRef} className="w-full aspect-[100/115]">
+    <svg ref={svgRef} className="w-full aspect-[100/115] z-10 relative">
       {root
         .descendants()
         .slice(1)

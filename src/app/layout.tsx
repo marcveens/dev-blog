@@ -20,7 +20,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           rel="stylesheet"
         />
       </head>
-      <body className="bg-background">
+      <body className="bg-background overflow-x-hidden">
         <Providers>{children}</Providers>
 
         <DeleteOldCaches />
