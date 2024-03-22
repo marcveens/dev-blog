@@ -18,8 +18,10 @@ export const Header = () => {
   useEffect(() => {
     if (isMenuOpen) {
       document.body.style.overflowY = 'hidden';
+      document.documentElement.style.overflowY = 'hidden';
     } else {
       document.body.style.overflowY = 'visible';
+      document.documentElement.style.overflowY = 'visible';
     }
   }, [isMenuOpen]);
 
@@ -33,7 +35,7 @@ export const Header = () => {
         <IconButton icon={<List />} variant="icon" className="ml-auto p-2 md:hidden" onClick={() => setIsMenuOpen(true)} />
       </header>
 
-      <section className={`fixed inset-0 ${isMenuOpen ? 'block' : 'hidden'} md:hidden`}>
+      <section className={`fixed inset-0 z-10 ${isMenuOpen ? 'block' : 'hidden'} md:hidden`}>
         <div className="h-full w-full overflow-scroll bg-background">
           <header className="lg flex h-80 items-center p-2 sm:h-120 sm:p-4">
             <Logo />
