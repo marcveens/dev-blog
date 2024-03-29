@@ -4,7 +4,7 @@ import { LinkButton } from '../button/link-button';
 import { ArrowRight } from '@/utils/Icons';
 
 export const PostsBlocks = () => {
-  let posts = getAllPosts();
+  const posts = getAllPosts();
 
   return (
     <div className="mb-5 mt-10">
