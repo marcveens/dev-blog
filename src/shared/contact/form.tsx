@@ -16,7 +16,7 @@ export const ContactForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitted, isSubmitting, isValid }
+    formState: { errors, isSubmitting, isLoading }
   } = useForm<Form>({
     resolver: zodResolver(formSchema)
   });
@@ -60,7 +60,7 @@ export const ContactForm = () => {
             <div className="sm:col-span-2">
               <FieldInput label="Email" id="email" type="email" required errors={errors.email} {...register('email')} />
             </div>
-            <div className="sm:col-span-2 absolute -left-[9999px]" aria-hidden>
+            <div className="absolute -left-[9999px] sm:col-span-2" aria-hidden>
               <FieldInput
                 label="Confirm email"
                 id="confirm-email"
@@ -77,7 +77,13 @@ export const ContactForm = () => {
             </div>
           </div>
           <div className="mt-10">
-            <Button className="w-full justify-center" endIcon={<ArrowRight size={16} />} type="submit" disabled={isSubmitting}>
+            <Button
+              className="w-full justify-center"
+              endIcon={<ArrowRight size={16} />}
+              type="submit"
+              disabled={isSubmitting || isLoading}
+              isLoading={isSubmitting || isLoading}
+            >
               Submit
             </Button>
           </div>

@@ -62,3 +62,17 @@ export const EndIcon: Story = {
     endIcon: <ArrowRight />
   }
 };
+
+export const Disabled: Story = {
+  args: {
+    children: 'Button',
+    disabled: true
+  }
+};
+
+export const Loading: Story = {
+  args: {
+    children: 'Button',
+    isLoading: true
+  }
+};
