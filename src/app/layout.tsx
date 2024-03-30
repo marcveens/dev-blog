@@ -3,6 +3,7 @@ import '../styles/globals.css';
 import Script from 'next/script';
 import { DeleteOldCaches } from '@/shared/cache/delete-old-caches';
 import { Providers } from '@/shared/layout/providers';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 export const metadata = {
   title: config.title,
@@ -23,6 +24,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <body className="overflow-x-hidden bg-background">
         <Providers>{children}</Providers>
 
+        <SpeedInsights />
         <DeleteOldCaches />
       </body>
 
