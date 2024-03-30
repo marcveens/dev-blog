@@ -26,10 +26,10 @@ const navLinks: NavLink[] = [
     label: 'blog',
     href: '/posts'
   },
-  // {
-  //   label: 'contact',
-  //   href: '/contact'
-  // }
+  {
+    label: 'contact',
+    href: '/contact'
+  }
 ];
 
 export const Navigation = (props: NavigationProps) => {

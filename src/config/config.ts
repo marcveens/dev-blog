@@ -5,6 +5,7 @@ export const config = {
   logo: '/photo-illustrated.jpg',
   author: 'Marc Veens',
   siteUrl: 'https://marcveens.nl',
+  email: 'info@marcveens.nl',
   social: {
     linkedIn: 'https://www.linkedin.com/in/marcveens/',
     github: 'https://github.com/marcveens'

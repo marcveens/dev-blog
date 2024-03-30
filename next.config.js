@@ -2,6 +2,11 @@
 const { withContentlayer } = require('next-contentlayer');
 
 const nextConfig = {
+  experimental: {
+    serverActions: {
+      allowedOrigins: ['marcveens.nl', 'marcveens.nl'],
+    }
+  },
   webpack(config) {
     // Grab the existing rule that handles SVG imports
     const fileLoaderRule = config.module.rules.find((rule) => rule.test?.test?.('.svg'));

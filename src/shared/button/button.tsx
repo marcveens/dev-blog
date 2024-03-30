@@ -6,6 +6,8 @@ type ButtonProps = {
   to?: string;
   variant?: 'outlined' | 'contained';
   size?: 'small' | 'medium' | 'large';
+  type?: 'button' | 'submit' | 'reset';
+  disabled?: boolean;
   startIcon?: React.ReactNode;
   endIcon?: React.ReactNode;
   className?: string;
@@ -69,7 +71,7 @@ const buttonClass = twClass('inline-flex cursor-pointer select-none items-center
 });
 
 export const Button = (props: ButtonProps) => {
-  const { children, to, startIcon, endIcon, variant = 'outlined', size = 'medium', className } = props;
+  const { children, to, startIcon, endIcon, variant = 'outlined', size = 'medium', type, disabled, className } = props;
 
   const isExternal = to?.startsWith('http');
   const target = isExternal ? '_blank' : '_self';
@@ -77,7 +79,11 @@ export const Button = (props: ButtonProps) => {
 
   if (!to) {
     return (
-      <button className={cx(buttonClass({ startIcon: !!startIcon, endIcon: !!endIcon, variant, size }), className)}>
+      <button
+        disabled={disabled}
+        className={cx(buttonClass({ startIcon: !!startIcon, endIcon: !!endIcon, variant, size }), className)}
+        type={type}
+      >
         {startIcon}
         {children}
         {endIcon}
