@@ -4,6 +4,7 @@ import { Form } from '@/shared/contact/form';
 import { getMailTemplate } from '@/shared/contact/mailtemplate';
 import { formSchema } from '@/shared/contact/validation';
 import nodemailer from 'nodemailer';
+import { filterXSS } from 'xss';
 
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST,
@@ -26,12 +27,22 @@ export const submitContact = async (data: Form) => {
   }
 
   try {
+    const cleanedData = Object.keys(data).reduce<Form>((acc, key) => {
+      const value = data[key as keyof Form];
+
+      if (typeof value === 'string') {
+        acc[key as keyof Form] = filterXSS(value.replace(/<[^>]*>?/gm, ''));
+      }
+
+      return acc;
+    }, {} as Form);
+
     const info = await transporter.sendMail({
       from: `"${process.env.MAIL_SENDER}" <${process.env.MAIL_SENDER}>`, // sender address
       to: process.env.MAIL_TO, // list of receivers
       subject: 'Website contact request', // Subject line
-      text: JSON.stringify(data), // plain text body
-      html: getMailTemplate(data) // html body
+      text: JSON.stringify(cleanedData), // plain text body
+      html: getMailTemplate(cleanedData) // html body
     });
 
     console.log('Message sent: %s', info.messageId);
