@@ -6,7 +6,7 @@ type FieldInputProps = React.InputHTMLAttributes<HTMLInputElement> & {
   errors?: FieldError;
 };
 
-export const FieldInput = forwardRef<HTMLInputElement, FieldInputProps>((props, ref) => {
+export const FieldInput = forwardRef<HTMLInputElement, FieldInputProps>(function FieldInput(props, ref) {
   const { label, id, errors, ...inputProps } = props;
 
   return (

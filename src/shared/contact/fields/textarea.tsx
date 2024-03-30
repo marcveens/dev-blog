@@ -6,7 +6,7 @@ type FieldTextareaProps = React.InputHTMLAttributes<HTMLTextAreaElement> & {
   errors?: FieldError;
 };
 
-export const FieldTextarea = forwardRef<HTMLTextAreaElement, FieldTextareaProps>((props, ref) => {
+export const FieldTextarea = forwardRef<HTMLTextAreaElement, FieldTextareaProps>(function FieldTextarea(props, ref) {
   const { label, id, errors, ...inputProps } = props;
 
   return (
