@@ -27,15 +27,20 @@ export function getAllPosts() {
 export async function getOpenSourceProjects(): Promise<OpenSourceBlockProps[]> {
   const projects = config.openSourceProjects;
   const props: OpenSourceBlockProps[] = [];
+  const dayInMs = 1000 * 60 * 60 * 24;
 
   for (const project of projects) {
-    const downloadsResponse = await fetch(`https://api.npmjs.org/downloads/point/last-month/${project.name}`);
+    const downloadsResponse = await fetch(`https://api.npmjs.org/downloads/point/last-month/${project.name}`, {
+      next: { revalidate: dayInMs }
+    });
     const downloads = (await downloadsResponse.json()).downloads;
 
-    const starsResponse = await fetch(`https://api.github.com/repos/${project.githubAccount}/${project.name}`);
+    const starsResponse = await fetch(`https://api.github.com/repos/${project.githubAccount}/${project.name}`, {
+      next: { revalidate: dayInMs }
+    });
     const stars = (await starsResponse.json()).stargazers_count;
 
-    const npmResponse = await fetch(`https://registry.npmjs.org/${project.name}/latest`);
+    const npmResponse = await fetch(`https://registry.npmjs.org/${project.name}/latest`, { next: { revalidate: dayInMs } });
     const npm = await npmResponse.json();
     const version = npm.version;
     const description = npm.description;
