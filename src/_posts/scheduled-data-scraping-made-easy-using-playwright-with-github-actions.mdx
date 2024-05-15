@@ -1,0 +1,74 @@
+---
+date: '2024-05-17T00:00:00.000Z'
+title: 'Scheduled data scraping made easy: using Playwright with GitHub Actions'
+description: 'Learn how to automate and schedule data scraping tasks using Playwright and GitHub Actions. This guide simplifies the process, making data extraction efficient and hassle-free.'
+category: 'Front-end'
+tags:
+  - 'Typescript'
+  - 'GitHub Actions'
+  - 'Playwright'
+  - 'scraping'
+  - 'automation'
+---
+
+<div className="flex flex-col items-start gap-2 xs:flex-row">
+  <GithubButton to="https://github.com/marcveens/random-wikipedia-article-of-the-day">View on GitHub</GithubButton>
+  <DemoButton to="https://random-wikipedia-article-of-the-day.vercel.app/">Go to demo</DemoButton>
+</div>
+
+## Playwright
+Playwright is fantastic software for end-to-end testing. It works both headless and head-ful, so while developing you can actually see what happens in the browser. <a href="https://playwright.dev/" target="_blank" rel="noopener noreferrer">Playwright</a> is next to a testing tool also a great tool for data scraping. It renders full webpages, so also including JavaScript. That means that using the Playwright API, you can interact with the page by clicking elements, filling in forms, uploading files and dragging elements around. In my experience it's really stable and fast, perfect for scraping data! 
+
+In the most basic form, you navigate to a page, select the element you're looking for, extract the text from it and store it anywhere you like. 
+
+## GitHub Actions
+GitHub Actions is a CI/CD tool that allows you to automate tasks in your repository. It's a great tool for automating tasks like testing, building, and deploying your code. But it can also be used for other tasks, like data scraping.
+
+The useful part in this is that you decide when it runs. Most people will probably use it when a new commit is pushed to the repository, but you can also schedule it to run at a specific time. This is perfect for scraping data from a website that updates daily, like a weather forecast or a stock price.
+
+## The combination
+The combination of Playwright and GitHub Actions is very powerful. The way I usually set up my tests is as follows:
+
+```typescript
+import { test, expect } from "@playwright/test";
+import { scraper } from "../src/scraper";
+
+const hypothesis = true;
+
+// Make sure tests run in serial mode, so if we write to a database, we know the order of operations
+test.describe.configure({ mode: "serial" });
+// Run indefinitely
+test.setTimeout(0);
+
+test("Scrape data", async ({ page }) => {
+  await scraper(page);
+
+  expect(hypothesis).toBe(true);
+});
+```
+
+Now the cool thing is, the `scraper` function can be anything you like. You can get data from a page, store it to a JSON file, write it to a database, or send it to an API. The possibilities are endless. 
+
+I have prepared a demo repository where I scrape a random Wikipedia article every day and store it in a JSON file. You can find the repository <a href="https://github.com/marcveens/random-wikipedia-article-of-the-day/blob/main/src/scraper/index.ts" target="_blank" rel="noopener noreferrer">here</a>. More about that later, first let's dive into how we can easily set-up such a workflow.
+
+## Setting up Playwright with GitHub Actions
+
+
+1. Install Next.json
+2. Install Playwright
+  - Choose to generate GitHub Actions workflow file
+3. Create a Playwright script
+
+
+## GitHub Actions limits
+A little piece on what to keep in mind
+
+## Conclusion
+You can use it for:
+"5 examples"
+
+
+<div className="flex flex-col items-start gap-2 xs:flex-row">
+  <GithubButton to="https://github.com/marcveens/random-wikipedia-article-of-the-day">View on GitHub</GithubButton>
+  <DemoButton to="https://random-wikipedia-article-of-the-day.vercel.app/">Go to demo</DemoButton>
+</div>
