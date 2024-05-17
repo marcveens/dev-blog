@@ -4,7 +4,7 @@ import { cx } from 'class-variance-authority';
 
 type ButtonProps = {
   to?: string;
-  variant?: 'outlined' | 'contained';
+  variant?: 'outlined' | 'contained' | 'subtle';
   size?: 'small' | 'medium' | 'large';
   type?: 'button' | 'submit' | 'reset';
   disabled?: boolean;
@@ -39,7 +39,9 @@ const buttonClass = twClass('inline-flex cursor-pointer select-none items-center
       outlined:
         'border border-solid text-contrast hover:border-primary hover:text-primary active:border-myorange-500 active:text-myorange-500 group-hover:border-primary group-hover:text-primary group-active:border-myorange-500 group-active:text-myorange-500',
       contained:
-        'bg-contrast text-background hover:bg-primary hover:text-contrast active:bg-myorange-500 active:text-contrast group-hover:bg-primary group-hover:text-contrast group-active:bg-myorange-500 group-active:text-contrast'
+        'bg-contrast text-background hover:bg-primary hover:text-contrast active:bg-myorange-500 active:text-contrast group-hover:bg-primary group-hover:text-contrast group-active:bg-myorange-500 group-active:text-contrast',
+      subtle:
+        'bg-white/5 text-white/60 hover:bg-white/10 hover:text-white/80 active:bg-white/15 active:text-white/80 group-hover:bg-white/10 group-hover:text-white/80 group-active:bg-white/15 group-active:text-white/80'
     },
     size: {
       small: 'px-5 py-2 text-sm',

@@ -49,6 +49,13 @@ export const Outlined: Story = {
   }
 };
 
+export const Subtle: Story = {
+  args: {
+    children: 'Button',
+    variant: 'subtle'
+  }
+};
+
 export const StartIcon: Story = {
   args: {
     children: 'Button',

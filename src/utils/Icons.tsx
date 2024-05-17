@@ -16,5 +16,6 @@ export {
   Package,
   Star,
   DownloadSimple,
-  Mailbox
+  Mailbox,
+  Info
 } from '@phosphor-icons/react';
