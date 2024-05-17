@@ -1,0 +1,192 @@
+---
+date: '2024-05-16T00:00:00.000Z'
+title: 'Scheduled web scraping made easy: using Playwright with GitHub Actions'
+description: 'Learn how to automate and schedule web scraping tasks using Playwright and GitHub Actions. This guide simplifies the process, making data extraction efficient and hassle-free.'
+category: 'Front-end'
+tags:
+  - 'Typescript'
+  - 'GitHub Actions'
+  - 'Playwright'
+  - 'scraping'
+  - 'automation'
+---
+
+<div className="flex flex-col items-start gap-2 xs:flex-row mb-10">
+  <GithubButton to="https://github.com/marcveens/random-wikipedia-article-of-the-day">View on GitHub</GithubButton>
+  <DemoButton to="https://random-wikipedia-article-of-the-day.vercel.app/">Go to demo</DemoButton>
+</div>
+
+Web scraping is a beautiful thing. It allows you to extract data from websites that don't provide an API. Use it to monitor prices, collect data for research, aggregate news from your favorite sources, or even to build your own search engine. As long as you keep in mind the legal and ethical boundaries, web scraping can be a powerful tool.
+
+In this blog post I'll explain how you can automate and schedule web scraping tasks using Playwright and GitHub Actions. This means scraping web pages for free! 
+
+## Playwright
+Playwright is fantastic software for end-to-end testing. It works both headless and head-ful, so while developing, you can actually see what happens in the browser. Besides being a testing tool, <a href="https://playwright.dev/" target="_blank" rel="noopener noreferrer">Playwright</a> is also great for data scraping. It renders full webpages, so also including JavaScript. This means that using the Playwright API, you can interact with the page by clicking elements, filling out forms, uploading files and dragging elements around. 
+
+## GitHub Actions
+GitHub Actions is a CI/CD tool that allows you to automate tasks in your repository. While it's commonly used for automating workflows such as testing, building, and deploying code, it can also be used for tasks beyond traditional CI/CD processes, such as data scraping.
+
+GitHub Actions can be triggered by events in your repository, such as a push to a branch, a pull request, or a new release. Additionally, you can also schedule a workflow to run at specific times using cron syntax. That's what we'll use for our web scraping task.
+
+## Setting up the workflow
+Now that we've got the boring theoretical stuff out of the way, let's dive into the fun part: setting up the workflow.
+
+I've created an example repository where I scrape a random Wikipedia article every day and store it in a JSON file. This JSON file is then served using Next.js to render a beautiful website. You can find the repository <a href="https://github.com/marcveens/random-wikipedia-article-of-the-day" target="_blank" rel="noopener noreferrer">here</a>.
+
+### 1. Installing Playwright
+First install Playwright in your project.
+
+```bash
+npm init playwright@latest
+```
+
+The script willl ask you a few questions to configure Playwright exactly the way you want. Make sure to choose to generate a GitHub Actions workflow file!
+
+### 2. Create a Playwright script
+Playwright will generate a few example scripts. You can make use of them as an example. Here's the <a href="https://github.com/marcveens/random-wikipedia-article-of-the-day/blob/main/tests/scrape.spec.ts" target="_blank" rel="noopener noreferrer">setup</a> I use in my repository:
+
+```typescript
+import { test, expect } from "@playwright/test";
+import { scraper } from "../src/scraper";
+
+const hypothesis = true;
+
+// Make sure tests run in serial mode, so if we write to a database, we know the order of operations
+test.describe.configure({ mode: "serial" });
+// Run indefinitely
+test.setTimeout(0);
+
+test("Scrape data", async ({ page }) => {
+  await scraper(page);
+
+  expect(hypothesis).toBe(true);
+});
+```
+
+Now the cool thing is, the `scraper` function can contain anything you like. You can get data from a page, store it to a JSON file, write it to a database, or send it to an API. The possibilities are endless. 
+
+## 3. Create scraper script
+My scraper file looks like this:
+
+```typescript
+import fs from "fs";
+import path from "path";
+import { WikiRecord } from "@/types/WikiRecord";
+import { Page } from "@playwright/test";
+import db from "@/data/db.json";
+import { getRandomWikiArticle } from "./wiki";
+
+export const scraper = async (page: Page) => {
+  let list: WikiRecord[] = db || [];
+
+  const article = await getRandomWikiArticle(page);
+
+  list = [article, ...list];
+
+  // Store file
+  const data = JSON.stringify(list, null, 2);
+  const filePath = path.join(__dirname, "..", "data", "db.json");
+
+  fs.writeFileSync(filePath, data);
+
+  return list;
+};
+```
+
+In this file, I call a function to get a random Wikipedia article. I then store this article in a JSON file. 
+
+The `getRandomWikiArticle` function looks like this:
+
+```typescript
+import { WikiRecord } from "@/types/WikiRecord";
+import { Page } from "@playwright/test";
+
+export const getRandomWikiArticle = async (page: Page): Promise<WikiRecord> => {
+  await page.goto("https://en.wikipedia.org/wiki/Special:Random");
+
+  const title = await page.innerText("h1");
+  const summary = await page.innerText("#mw-content-text > div > p:not([class])");
+
+  return {
+    date: new Date().toISOString(),
+    title,
+    url: page.url(),
+    summary,
+  };
+};
+```
+
+This is where I make use of Playwright to navigate to a random Wikipedia article, find the heading and the first paragraph on the page.
+
+Note that this is a very simple example. As long as your scrape function returns a promise, you can write to a database, send data to an API, basically do whatever you like using Node.js.
+
+## 4. Schedule the workflow
+Now let's finish things up by scheduling the workflow to run every day. This is what my `.github/workflows/playwright.yml` file looks like:
+
+```yml
+name: Playwright Scraper
+on:
+  workflow_dispatch:
+  schedule:
+    # Runs every day at 4am UTC
+    - cron: '0 4 * * *'
+
+jobs:
+  test:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version: lts/*
+    - name: Install dependencies
+      run: npm ci
+    - name: Install Playwright Browsers
+      run: npx playwright install --with-deps
+    - name: Run Playwright tests
+      run: npx playwright test
+    - name: Commit file changes
+      run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          # Your commands to make changes and commit
+          git commit -am "New random Wiki page added"
+          git push
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+```
+
+Let's go through the steps. First, we have some steps to checkout the repository, install Node.js, install the dependencies, and install the Playwright browsers. Then, we run the Playwright tests.
+Because we save a JSON file during the "test", we're able to commit and push the changes to the repository! This can automatically trigger a deployment if you host your website on Vercel, Netlify, or GitHub Pages.
+
+<Hint>
+  If you want a GitHub action to push to your repository, you need to enable **Workflow Read and write permissions** in your repository under **Settings > Actions > General**.
+</Hint>
+
+## Legal, ethical and technical considerations
+- **Terms of Service Compliance** - Ensure that the websites you are scraping do not prohibit scraping in their terms of service. Violating these terms can lead to legal consequences or your IP being banned.
+- **Rate Limiting** - Be mindful of the website's server load. Implement rate limiting to avoid overwhelming the server, which could lead to your IP being banned or legal action.
+- **Data Privacy** - Ensure you are not scraping sensitive or personal data without consent. Be aware of data protection laws like GDPR and CCPA.
+- **GitHub Action Limits** - You need to be aware of a few GitHub Action <a href="https://docs.github.com/en/actions/learn-github-actions/usage-limits-billing-and-administration" target="_blank" rel="noopener noreferrer">limits</a>.
+  - **Job execution time** - Each job in a workflow can run for up to 6 hours of execution time. If a job reaches this limit, the job is terminated and fails to complete.
+  - **Workflow run time** - Each workflow run is limited to 35 days. If a workflow run reaches this limit, the workflow run is canceled. This period includes execution duration, and time spent on waiting and approval.
+
+## Conclusion
+Playwright and GitHub Actions are a very powerful combination. You can automate and schedule web scraping tasks with ease. Here are 5 example use cases for inspiration:
+
+- Monitoring website changes and storing them in a Supabase database.
+- Collect local weather data for long-term analysis.
+- Detect trends in e-commerce products for your dropshipping business.
+- Aggregate news from your favorite sources and send them to your email.
+- Detect cryptocurrency price changes and send notifications to Telegram using a <a href="https://www.marcveens.nl/posts/deploy-telegram-bot-as-azure-function-app" target="_blank" rel="noopener noreferrer">bot</a>.
+
+Cheers!
+
+<div className="flex flex-col items-start gap-2 xs:flex-row mb-12">
+  <GithubButton to="https://github.com/marcveens/random-wikipedia-article-of-the-day">View on GitHub</GithubButton>
+  <DemoButton to="https://random-wikipedia-article-of-the-day.vercel.app/">Go to demo</DemoButton>
+</div>
