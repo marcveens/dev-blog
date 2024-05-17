@@ -36,7 +36,7 @@ export default async function BlogPost(props: BlogPostProps) {
 
   return (
     <Layout>
-      <main className="max-w-640 mx-auto">
+      <main className="mx-auto max-w-640">
         <SyntaxHighlight />
 
         <LinkButton to="/posts" size="small" className="text-contrast/60 hover:shadow-contrast/60" startIcon={<ArrowLeft size={16} />}>
@@ -53,7 +53,7 @@ export default async function BlogPost(props: BlogPostProps) {
 
         <div className="mb-12 flex flex-wrap gap-3">
           {post?.tags?.map((tag) => (
-            <Button key={tag} to={`/tag/${slugify(tag)}`} size="small">
+            <Button key={tag} to={`/tag/${slugify(tag)}`} size="small" variant="subtle">
               {tag}
             </Button>
           ))}
