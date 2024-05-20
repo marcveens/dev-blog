@@ -1,5 +1,6 @@
 'use client';
 import { useMemo, useRef, useState } from 'react';
+import { cx } from 'class-variance-authority';
 import * as d3 from 'd3';
 import { useSpring, animated } from 'react-spring';
 import ReactIcon from './icons/react.svg';
@@ -14,7 +15,6 @@ import GitIcon from './icons/git.svg';
 import SupabaseIcon from './icons/supabase.svg';
 import NextjsIcon from './icons/nextjs.svg';
 import MuiIcon from './icons/mui.svg';
-import RollupIcon from './icons/rollup.svg';
 import NpmIcon from './icons/npm.svg';
 import AzureIcon from './icons/azure.svg';
 import GithubActionsIcon from './icons/github-actions.svg';
@@ -22,6 +22,7 @@ import TanstackIcon from './icons/tanstack.svg';
 import RjsfIcon from './icons/rjsf.svg';
 import StorybookIcon from './icons/storybook.svg';
 import NxIcon from './icons/nx.svg';
+import TailwindIcon from './icons/tailwind.svg';
 import { twClass } from '@/utils/twClass';
 
 export type TreeNode = {
@@ -45,6 +46,7 @@ export type Tree = TreeNode | TreeLeaf;
 type CloudProps = {
   width: number;
   height: number;
+  className?: string;
 };
 
 const data: Tree = {
@@ -64,25 +66,29 @@ const data: Tree = {
     { type: 'leaf', name: 'Supabase', value: 32, icon: SupabaseIcon, color: '#3DCF8E' },
     { type: 'leaf', name: 'Next.js', value: 40, icon: NextjsIcon, color: '#000' },
     { type: 'leaf', name: 'MUI', value: 25, icon: MuiIcon, color: '#0177ED' },
-    { type: 'leaf', name: 'Rollup', value: 15, icon: RollupIcon, color: '#FF2F2F' },
+    // { type: 'leaf', name: 'Rollup', value: 15, icon: RollupIcon, color: '#FF2F2F' },
     { type: 'leaf', name: 'npm', value: 15, icon: NpmIcon, color: '#CC3533' },
     { type: 'leaf', name: 'Azure', value: 30, icon: AzureIcon, color: '#0089D6' },
     { type: 'leaf', name: 'Github Actions', value: 25, icon: GithubActionsIcon, color: '#2088ff' },
     { type: 'leaf', name: 'TanStack Query', value: 40, icon: TanstackIcon, color: '#EF4543' },
     { type: 'leaf', name: 'RJSF', value: 25, icon: RjsfIcon, color: '#000' },
     { type: 'leaf', name: 'Storybook', value: 40, icon: StorybookIcon, color: '#FF4785' },
-    { type: 'leaf', name: 'Nx', value: 50, icon: NxIcon, color: '#012F55' }
+    { type: 'leaf', name: 'Nx', value: 50, icon: NxIcon, color: '#012F55' },
+    { type: 'leaf', name: 'Tailwind.css', value: 70, icon: TailwindIcon, color: '#37BCF8' },
   ]
 };
 
-const tooltipClass = twClass('absolute top-0 left-2/4 -translate-x-2/4 rounded bg-tooltip text-contrast text-xs leading-none py-1 px-2 transition-opacity', {
-  variants: {
-    active: { true: 'opacity-100', false: 'opacity-0' }
+const tooltipClass = twClass(
+  'absolute left-2/4 top-0 -translate-x-2/4 rounded bg-tooltip px-2 py-1 text-xs leading-none text-contrast transition-opacity',
+  {
+    variants: {
+      active: { true: 'opacity-100', false: 'opacity-0' }
+    }
   }
-});
+);
 
 export const Cloud = (props: CloudProps) => {
-  const { width, height } = props;
+  const { width, height, className } = props;
   const svgRef = useRef<SVGSVGElement>(null);
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
 
@@ -100,7 +106,7 @@ export const Cloud = (props: CloudProps) => {
   }, [hierarchy, width, height]);
 
   return (
-    <svg ref={svgRef} className="w-full aspect-[100/115] relative">
+    <svg ref={svgRef} className={cx('aspect-[100/115] w-full', className)}>
       {root
         .descendants()
         .slice(1)
