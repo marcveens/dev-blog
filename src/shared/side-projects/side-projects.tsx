@@ -14,7 +14,7 @@ const sideProjects: SideProject[] = [
     title: "TinyDeskDB",
     description: "A search engine for NPR's Tiny Desk Concerts",
     url: "https://www.tinydeskdb.com",
-    image: "/media/tinydeskdb/tinydeskdb-com.jpg"
+    image: "/media/tinydeskdb/tinydeskdb-com-small.jpg"
   }
 ];
 
