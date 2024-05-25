@@ -1,0 +1,56 @@
+---
+date: '2024-05-25T00:00:00.000Z'
+title: 'Introducing TinyDeskDB: Your New Go-To for Tiny Desk Concerts'
+description: "Explore the creation of tinydeskdb.com, a small search engine for NPR's Tiny Desk Concerts. Discover how I gathered data, designed the interface, and implemented features to help fans easily find and enjoy their favorite performances. Learn about the tools and techniques I used, from web scraping to leveraging ChatGPT for recommendations."
+excerpt: "Explore the creation of tinydeskdb.com, a small search engine for NPR's Tiny Desk Concerts. Discover how I gathered data, designed the interface, and implemented features to help fans easily find and enjoy their favorite performances."
+category: 'Side projects'
+tags:
+  - 'Next.js'
+  - 'Tailwind'
+  - 'Typescript'
+  - 'ChatGPT'
+---
+
+<CdnVideo src="https://iframe.mediadelivery.net/embed/246141/1267ca76-4355-4bef-9ffc-a20b4124c008?autoplay=true&loop=true&muted=true&preload=true&responsive=true" />
+
+<br />
+<DemoButton to="https://www.tinydeskdb.com">Go to tinydeskdb.com</DemoButton>
+
+<br />I am proud to present to you: <a href="https://www.tinydeskdb.com" target="_blank" rel="noopener noreferrer">tinydeskdb.com</a>
+. It’s live!
+
+## The idea
+
+<a href="https://www.tinydeskdb.com" target="_blank" rel="noopener noreferrer">Tinydeskdb.com</a> is a side project I’ve been working on for quite a while now. For those of you who don’t know; Tiny Desk Concerts is a video series of live
+music performances hosted by <a href="https://www.npr.org/music" target="_blank" rel="noopener noreferrer">NPR Music</a>
+. They provide a platform for up-and-coming artists, as well as big names in the industry like Adele, Dua Lipa, and Justin Bieber.
+
+The great thing about these performances is that they take place at a literal desk in the NPR office, hence the name. It’s a small venue, but the ambiance and quality of the performances is outstanding.
+
+## The problem
+
+I’ve been a fan of the series for quite a while, but what bothered me was that I had to stumble upon recordings by coincidence. There was no easy-to-access list of the performances, let alone finding similar Tiny Desk concerts of the ones I had listened to. NPR posted all the concerts on their website, but that was nothing more than just a blog. All the videos are on YouTube, but it doesn’t do a good job of finding me similar performances. That’s when the idea came up to create a small search engine of my own.
+
+## The solution
+
+The great thing about being a developer is that you can create anything that comes up as an idea, so I did. I started with gathering all the data I needed. I use the <a href="https://en.wikipedia.org/wiki/List_of_Tiny_Desk_Concerts" target="_blank" rel="noopener noreferrer">NPR Wiki page</a> to find all the concerts that have taken place so far, which are more than 1500 of them! Then I use the wiki page of the artists and Spotify to gather information about genres, YouTube for information about the video, and the NPR website for the setlist. Using the web scraping technique I <a href="https://www.marcveens.nl/posts/scheduled-web-scraping-made-easy-using-playwright-with-github-actions" target="_blank" rel="noopener noreferrer">recently posted about</a>, I wrote a script that could run once a day to add data to the database. Data that’s already there doesn’t have to be scraped anymore, but since I wanted to be able to sort on likes and views, I made sure the last 30 videos are updated on a daily basis.
+
+## Design and development
+
+Once I had the dataset complete, I started working on the design. I’m a decent developer, but not such a great designer. Luckily, there’s the internet to help out! There are so many websites for getting inspiration, so I gathered all kinds of elements I liked, and started working on a design in Figma. Truth be told, I actually really liked the process of building up the design. Maybe even more so than developing the actual UI itself…
+
+When I had a decent part of the design done, I switched to VS Code for the development part. I used Next.js for the site itself, and Tailwind for styling. First I started using DaisyUI, but soon I realised it had some non-React ways of handling modals, for example, and the customisation was also not really a thing I fancied. That’s when I switched to Flowbite, which provided me almost all of the components I needed.
+
+I had an idea for the header, where I wanted to put the names of the most recent performers and highlight a couple of them every few seconds. Have a look at it on desktop, since it doesn't fit on a mobile screen. I'm pretty satistied with it to be honest!
+
+## Adding functionality
+
+When I had all the basic filtering and sorting in place, as well as the main lister page and the detail page, I started working on the ”similar concerts” part. I had no idea where to start, but in that case ChatGPT is your best friend.
+
+I asked for ways to create a model that can find similar records from a database. First I thought of using the OpenAI API to do that, but soon realised I wanted something way more simple. For a start I wanted to find all the concerts done by the same artists, followed by artists that have the same genres. I wanted to weigh in that if for example 5 of the 5 genres between artists are similar, they should be ranked higher than if 3 of the 5 genres were the same. Well, ChatGPT surprised me once more and came up with a bunch of TypeScript code that did exactly this! I was amazed.
+
+## Conclusion
+
+Now that everything is in place, it's ready for the world to see: <a href="https://www.tinydeskdb.com" target="_blank" rel="noopener noreferrer">tinydeskdb.com</a>. Simple, yet very effective. From here on I will probably start adding more functionality and we'll see where it goes!
+
+<DemoButton to="https://www.tinydeskdb.com">Go to tinydeskdb.com</DemoButton>

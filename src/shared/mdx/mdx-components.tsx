@@ -2,6 +2,7 @@ import { MDXComponents } from 'mdx/types';
 import { GithubEmbed } from '../github-embed/github-embed';
 import { Button, CodesandboxButton, DemoButton, GithubButton, GithubCodeSpaceButton } from '../button/button';
 import { Hint } from './hint';
+import { CdnVideo } from '../video/cdn-video';
 
 const Img = (props: React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>) => {
   return <img {...props} alt="" className="markdown-img" loading="lazy" />;
@@ -28,5 +29,6 @@ export const mdxComponents: MDXComponents = {
   GithubCodeSpaceButton: GithubCodeSpaceButton,
   CodesandboxButton: CodesandboxButton,
   DemoButton: DemoButton,
-  Hint: Hint
+  Hint: Hint,
+  CdnVideo: CdnVideo
 };

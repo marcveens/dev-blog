@@ -45,7 +45,7 @@ export default async function BlogPost(props: BlogPostProps) {
 
         <h1 className="mb-12 mt-3 text-center text-4xl font-medium">{post?.title}</h1>
 
-        <div className="post-content">
+        <div className="post-content mb-12">
           <Content components={mdxComponents} />
         </div>
 
