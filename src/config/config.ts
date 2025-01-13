@@ -10,7 +10,7 @@ export const config = {
     linkedIn: 'https://www.linkedin.com/in/marcveens/',
     github: 'https://github.com/marcveens'
   },
-  footer: 'Copyright © 2024 Marc Veens',
+  footer: 'Copyright © 2025 Marc Veens',
   openSourceProjects: [
     {
       name: 'react-context-mutex',
