@@ -1,17 +1,17 @@
-import fs from 'fs';
-import { join } from 'path';
-import { allPosts } from 'contentlayer/generated';
-import { OpenSourceBlockProps } from '@/shared/open-source/open-source-block';
-import { config } from '@/config/config';
+import fs from "fs";
+import { join } from "path";
+import { allPosts } from "contentlayer/generated";
+import { OpenSourceBlockProps } from "@/shared/open-source/open-source-block";
+import { config } from "@/config/config";
 
-const postsDirectory = join(process.cwd(), 'src/_posts');
+const postsDirectory = join(process.cwd(), "src/_posts");
 
 export function getPostSlugs() {
   return fs.readdirSync(postsDirectory);
 }
 
 export function getPostBySlug(slug: string) {
-  const post = allPosts.find((post) => post._id.replace(/\.mdx$/, '') === slug);
+  const post = allPosts.find((post) => post._id.replace(/\.mdx$/, "") === slug);
 
   return post;
 }
