@@ -4,7 +4,7 @@ export function cutStringToWholeWord(str: string, maxLength: number) {
   }
 
   // Trim the string to the maximum length
-  var trimmedString = str.substring(0, maxLength);
+  let trimmedString = str.substring(0, maxLength);
 
   // Re-trim the string to the last whole word
   trimmedString = trimmedString.substring(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(' ')));

@@ -22,7 +22,7 @@ export const OpenSourceBlock = (props: OpenSourceBlockProps) => {
     >
       <div>
         <div className="mb-1 text-xl font-extralight text-contrast/[.8]">{title}</div>
-        {description && <div className="text-[14px] font-extralight text-contrast/[.5]">{description}</div>}
+        {description && <div className="text-[14px] font-extralight text-contrast/[.6]">{description}</div>}
       </div>
       <div className="flex gap-8 opacity-50">
         <InfoBlock icon={<Package size={20} />} label={version} />

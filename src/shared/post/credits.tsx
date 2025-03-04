@@ -5,7 +5,7 @@ import { Socials } from '../sidebar/socials';
 
 export const Credits = () => {
   return (
-    <div className="max-w-400 mx-auto mb-14 rounded-md bg-white/5 p-5 sm:flex">
+    <div className="max-w-[400px] mx-auto mb-14 rounded-md bg-white/5 p-5 sm:flex">
       <Link href="/" className="block">
         <Image className="max-w-none rounded-full" src={config.logo} alt={config.title} width={100} height={100} />
       </Link>

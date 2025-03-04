@@ -1,4 +1,4 @@
-import Layout from '@/shared/layout/layout';
+import { Layout } from "@/shared/layout/layout";
 
 export default function NotFound() {
   return (

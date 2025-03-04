@@ -1,7 +1,7 @@
-import { getAllPosts } from '@/api/api';
-import { PostPreviewBlock } from './post-preview-block';
-import { LinkButton } from '../button/link-button';
-import { ArrowRight } from '@/utils/Icons';
+import { getAllPosts } from "@/api/api";
+import { PostPreviewBlock } from "./post-preview-block";
+import { LinkButton } from "../button/link-button";
+import { ArrowRight } from "@/utils/Icons";
 
 export const PostsBlocks = () => {
   const posts = getAllPosts();
@@ -14,7 +14,7 @@ export const PostsBlocks = () => {
           <PostPreviewBlock
             key={post._id}
             title={post.title}
-            description={post.excerpt || post.body.raw}
+            description={post.excerpt || post.body}
             slug={post.url}
             category={post.category}
             date={post.date}
@@ -22,7 +22,11 @@ export const PostsBlocks = () => {
         ))}
       </div>
       <div className="flex justify-end mt-5">
-        <LinkButton endIcon={<ArrowRight size={16} />} to="/posts" className="self-center">
+        <LinkButton
+          endIcon={<ArrowRight size={16} />}
+          to="/posts"
+          className="self-center"
+        >
           View all posts
         </LinkButton>
       </div>
