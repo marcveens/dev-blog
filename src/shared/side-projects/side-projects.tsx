@@ -1,5 +1,3 @@
-import { ArrowRight } from "@/utils/Icons";
-import { Button } from "../button/button";
 import Image from "next/image";
 
 type SideProject = {
