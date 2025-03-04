@@ -27,7 +27,7 @@ export const Header = () => {
 
   return (
     <>
-      <header className="lg flex h-80 items-center p-2 sm:h-120 sm:p-4">
+      <header className="lg flex h-[80px] items-center p-2 sm:h-[120px] sm:p-4">
         <Logo />
 
         <Navigation />
@@ -37,7 +37,7 @@ export const Header = () => {
 
       <section className={`fixed inset-0 z-10 ${isMenuOpen ? 'block' : 'hidden'} md:hidden`}>
         <div className="h-full w-full overflow-scroll bg-background">
-          <header className="lg flex h-80 items-center p-2 sm:h-120 sm:p-4">
+          <header className="lg flex h-[80px] items-center p-2 sm:h-[120px] sm:p-4">
             <Logo />
 
             <IconButton icon={<X />} variant="icon" className="ml-auto p-2" onClick={() => setIsMenuOpen(false)} />

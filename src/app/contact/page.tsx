@@ -1,10 +1,10 @@
-import { config } from '@/config/config';
-import { ContactForm } from '@/shared/contact/form';
-import Layout from '@/shared/layout/layout';
-import { Mailbox, LinkedinLogo } from '@/utils/Icons';
+import { config } from "@/config/config";
+import { ContactForm } from "@/shared/contact/form";
+import { Layout } from "@/shared/layout/layout";
+import { Mailbox, LinkedinLogo } from "@/utils/Icons";
 
 export const metadata = {
-  title: `Contact | ${config.title}`
+  title: `Contact | ${config.title}`,
 };
 
 export default function Page() {
@@ -15,17 +15,25 @@ export default function Page() {
         <div className="flex flex-col gap-12 sm:flex-row">
           <div className="w-full sm:w-[50%]">
             <p>
-              You can easily get in touch with me via the email address provided below, through social media channels, or by using the
-              contact form.
+              You can easily get in touch with me via the email address provided
+              below, through social media channels, or by using the contact
+              form.
             </p>
 
             <div className="mt-8 flex flex-col gap-2">
-              <a href={`mailto:${config.email}?subject=Contact via website`} className="flex items-center gap-3 text-link underline hover:text-primary">
+              <a
+                href={`mailto:${config.email}?subject=Contact via website`}
+                className="flex items-center gap-3 text-link underline hover:text-primary"
+              >
                 <Mailbox size={26} />
                 {config.email}
               </a>
 
-              <a href={config.social.linkedIn} target="_blank" className="flex items-center gap-3 text-link underline hover:text-primary">
+              <a
+                href={config.social.linkedIn}
+                target="_blank"
+                className="flex items-center gap-3 text-link underline hover:text-primary"
+              >
                 <LinkedinLogo size={26} />
                 LinkedIn
               </a>
