@@ -1,0 +1,75 @@
+---
+date: '2025-03-05T00:00:00.000Z'
+title: 'Handling API data in React - all the tools you need'
+description: 'Fetching data in React is easy. fetch is all you need, right? But what about loading state? Well, just use useState to keep track of it. And error state? Uhm, another useState? And what about reusing the data in another component without refetching? Ermmm...'
+excerpt: 'Fetching data in React is easy. fetch is all you need, right? But what about loading state? Well, just use useState to keep track of it. And error state? Uhm, another useState? And what about reusing the data in another component without refetching? Ermmm...'
+category: 'React'
+tags:
+  - 'Typescript'
+  - 'API'
+---
+
+<DemoButton to="https://codesandbox.io/p/sandbox/api-handling-react-v9ql6s">Go to demo</DemoButton>
+
+Fetching data in React is easy. `fetch` is all you need, right? But what about loading state? Well, just use `useState` to keep track of it. And error state? Uhm, another `useState`? And what about reusing the data in another component without refetching? Ermmm...
+
+No worries, [TanStack Query](https://tanstack.com/query), [Axios](https://www.npmjs.com/package/axios) and [custom hooks](https://react.dev/learn/reusing-logic-with-custom-hooks) to the rescue!
+
+This stack will solve all of your API problems:
+- Structuring API management files in a predictable, reusable way
+- Caching of data in the browser
+- Loading states
+- Error states
+- Mapping of data
+- Handling authentication headers/cookies
+- And more...
+
+## Folder structure
+I like a feature-based folder structure. It keeps the codebase organized and it takes no effort to find files.
+
+- src
+	- posts
+		- api
+			- api-endpoints.ts
+		- components
+			- posts.tsx
+			- post.tsx
+		- hooks
+			- use-posts.tsx
+			- use-post.tsx
+		- types
+			- api-types.ts
+
+See it in action:
+
+<div className="breakout">
+<iframe src="https://codesandbox.io/embed/v9ql6s?view=editor+%2B+preview&module=%2Fsrc%2FApp.tsx"
+      style={{
+      width: '100%',
+      height: '500px',
+      border: 0,
+      borderRadius: '4px',
+      overflow: 'hidden'
+      }}
+     title="api-handling-react"
+     allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+     sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+   ></iframe>
+</div>
+
+This way of working is what saved me a lot of headache in different projects. It's simple, clean, reusable and supports separation of concerns. 
+
+## The components
+First we have 2 React components: `Posts` and `Post`, they speak for themselves. Both components contain a custom hook. `Posts` uses `usePosts` and the `Post` component uses `usePost`. Those custom hooks are reusable throughout your whole application. Because of the brilliant TanStack Query library, the results are cached in your browser by default, so use the hooks as many times as you like, the data is fetched only once. 
+
+## The hooks
+The custom hooks are simple: they call the `useQuery` function provided by TanStack Query.  The query key makes sure the results are cached correctly. `queryFn` is only calling the Axios fetch function maintained in the `posts/api/api-endpoints.ts` file. 
+
+## The API endpoints
+In `posts/api/api-endpoints.ts` we define all the endpoints that are used in post components. This should be a simple list of functions. They are responsible for fetching the data and passing it through, no more, no less. By using a `apiClient` we don't have to state the baseURL again and again, it's simply maintained in a single file. 
+
+## Tying it all together
+The result is seen in the Codesandbox demo above. I would even recommend this setup for smaller projects, since it doesn't contain any unnecessary large or complex files. 
+
+#### Why Axios instead of fetch
+By using Axios, you can create a client that can contain default properties for your entire app. Think of values like a base URL, headers for authentication or a proxy. With Axios you define these values in a single file and reuse them throughout your application. 
