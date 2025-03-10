@@ -13,11 +13,6 @@ export const ResponsiveCloud = () => {
       ref={ref}
       className="relative mx-auto w-full min-w-0 max-w-[350px] md:w-1/2 lg:min-w-[350px]"
     >
-      <Cloud
-        width={width}
-        height={height}
-        className="pointer-events-none absolute left-0 top-0 h-full blur-3xl opacity-60"
-      />
       <Cloud width={width} height={height} className="relative" />
     </div>
   );
