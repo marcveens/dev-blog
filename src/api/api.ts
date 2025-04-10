@@ -21,7 +21,6 @@ const allPosts = (): MdxPage[] => {
       _id: slug,
       slug,
       body: content,
-      category: data.category,
       date: parseISO(data.date),
       description: data.description,
       excerpt: data.excerpt,

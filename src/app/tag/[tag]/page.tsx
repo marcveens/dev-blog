@@ -7,6 +7,7 @@ import { slugify } from "@/utils/slugify";
 import { capitalizeFirstLetter } from "@/utils/textUtils";
 import { Metadata } from "next";
 import { ArrowLeft } from "@/utils/Icons";
+import { getAllPosts } from "@/api/api";
 
 type TagPageProps = {
   params: Promise<{
@@ -23,6 +24,17 @@ export async function generateMetadata({
     title: getPageTitle(capitalizeFirstLetter(tag)),
     description: config.subtitle,
   };
+}
+
+export async function generateStaticParams() {
+  const posts = getAllPosts();
+  const tags = new Set<string>();
+
+  posts.forEach((post) => {
+    post.tags?.forEach((tag) => tags.add(slugify(tag)));
+  });
+
+  return Array.from(tags).map((tag) => ({ tag }));
 }
 
 export default async function TagPage({ params }: TagPageProps) {
