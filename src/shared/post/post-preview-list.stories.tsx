@@ -23,6 +23,5 @@ export const Default: Story = {
       "I've spent a good amount of months developing an Azure DevOps extension for a customer, and I'd like to share my learnings so you can have an easy start.",
     slug: "the-slug",
     date: new Date(2024, 3, 12),
-    category: "The category",
   },
 };

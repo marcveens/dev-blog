@@ -16,7 +16,6 @@ export const PostsBlocks = () => {
             title={post.title}
             description={post.excerpt || post.body}
             slug={post.url}
-            category={post.category}
             date={post.date}
           />
         ))}

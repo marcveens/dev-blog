@@ -3,6 +3,5 @@ export type PostPreviewProps = {
   description: string;
   slug: string;
   date: Date;
-  category: string;
   className?: string;
 };

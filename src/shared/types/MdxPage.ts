@@ -11,8 +11,6 @@ export type MdxPage = {
   excerpt?: string | undefined;
   /** The description of the post */
   description: string;
-  /** The category of the post */
-  category: string;
   /** The tags of the post */
   tags?: string[] | undefined;
   /** MDX file body */
