@@ -1,0 +1,33 @@
+---
+date: '2025-04-12T00:00:00.000Z'
+title: 'Bye Vercel, hello Coolify'
+description: "I'm moving resources away from Vercel and Heroku to Coolify. No more SaaS subscriptions, everything in one place."
+excerpt: "I'm moving resources away from Vercel and Heroku to Coolify. No more SaaS subscriptions, everything in one place."
+tags:
+  - 'Vercel'
+  - 'Coolify'
+  - 'Infrastructure'
+---
+
+I'm moving resources away from Vercel and Heroku to Coolify. Here's why.
+
+## Where it started
+Yesterday I wanted to start a new hobby project that required a database. I really like Supabase for its ease of use and the developer experience, so for me it was a no-brainer to set up the new database there. "You've exceeded the free project limit of 2 projects". Oh uh — let's see what it costs to upgrade my plan. I don't mind paying a bit for services I like. Wait, 25 dollars per month...? 
+
+That amount itself wasn't the issue — it's the fact that all the SaaS costs are adding up. A Vercel subscription of $20 per month, a small Node application running on Heroku for $7 a month, $25 for Supabase. Hobby projects should be fun, and in my opinion not cost over $50 per month. There must be good alternatives.
+
+## The alternative
+So I started looking for alternatives. The goal was to pay less, and preferably have my web apps, Node apps and databases hosted at the same place. Azure and AWS were quickly ruled out, because they're simply too expensive for hobby projects. Then I read some articles about hosting everything on a VPS (Virtual Private Server). That seemed more like what I was looking for: cheap, and everything hosted on a single server. The only downside was that everything is usually configured using the command line. I'm not great with command line stuff. There must be something that gives me a UI.
+
+And there it was: [Coolify](https://coolify.io/). I read really positive reviews about it so I decided to try it out. Coolify is a self-hosted PaaS; platform as a service. You run the software on a server and it allows you to add all kinds of services in the form of Docker containers. It can run things like web servers, proxies, databases and CDNs. All done in a couple of clicks. The server you run it on can be a VPS, but it can also be a Raspberry Pi, an old computer that you use as a server, or a Synology server. 
+
+## Setting it up
+I chose to rent a VPS from [Hetzner](https://www.hetzner.com/cloud/). It's ridiculously cheap and hosted in Europe. I'm using a VPS with 3 VCPU, 4GB of RAM, a 80GB SSD and 20TB of traffic included, for less than 10 euros per month. That should be more than enough for a while.
+
+Installing Coolify is as simple as running 1 curl command from the VPS terminal. That's basically the only thing you need to do from the terminal. After that you get a neat UI from which you do everything. With just a few more clicks, I imported the repo of [tinydeskdb.com](https://www.tinydeskdb.com/), and deployed the web app. After changing the DNS settings everything ran without any issues. That was so quick... I then decided to move my personal website and Node application to Coolify, and within an afternoon I had everything running on my own VPS. 
+
+## The downside
+Functionally everything was running the same, but I noticed right away that the performance of my Next.js projects was a bit worse than when I was running them on Vercel. Which makes sense, since Next.js was created by Vercel. They have so many optimizations going on, that it's almost impossible to get the same performance on any other environment. That's why I'm not sure if this is the best way to go for large production websites. It shows why paying for a SaaS like Vercel can be a benefit - setup is effortless a project there and performance is great out of the box. 
+
+## Conclusion
+For my hobby projects though, the performance won't matter much. It's absolutely still running fine, and I will spend some time to do improvements myself. I'm really glad to have everything in one place, with the flexibility to add as many web apps, Node apps, and databases as I need. It's even possible to add a self-hosted Supabase instance to Coolify. That's what I will experiment with next - to see how it compares with a cloud hosted instance. For now I can cancel most of my other subscriptions. Yay! 
