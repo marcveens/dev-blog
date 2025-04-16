@@ -31,6 +31,7 @@ export default async function RootLayout({
           href="https://fonts.gstatic.com"
           crossOrigin=""
         />
+        <script defer src="http://umami-oo4co804s0wcwo8s8kc440gc.138.199.205.250.sslip.io/script.js" data-website-id="31fb76f5-7bf4-4d4c-929d-c6911521abaf"></script>
       </head>
       <body className="overflow-x-hidden bg-background">
         <Providers>{children}</Providers>
