@@ -9,7 +9,7 @@ import { parseISO } from "date-fns";
 const postsDirectory = join(process.cwd(), "src/_posts");
 
 const allPosts = (): MdxPage[] => {
-  return fs.readdirSync(postsDirectory).map((filename) => {
+  return fs.readdirSync(postsDirectory).reduce<MdxPage[]>((acc, filename) => {
     const slug = filename.replace(/\.mdx$/, "");
     const fileContents = fs.readFileSync(
       join(postsDirectory, filename),
@@ -17,7 +17,11 @@ const allPosts = (): MdxPage[] => {
     );
     const { data, content } = matter(fileContents);
 
-    return {
+    if (data.enabled === false) {
+      return acc;
+    }
+
+    acc.push({
       _id: slug,
       slug,
       body: content,
@@ -28,8 +32,10 @@ const allPosts = (): MdxPage[] => {
       title: data.title,
       url: `/posts/${slug}`,
       type: "Post",
-    } satisfies MdxPage;
-  });
+    } satisfies MdxPage);
+
+    return acc;
+  }, []);
 };
 
 export function getPostSlugs() {
