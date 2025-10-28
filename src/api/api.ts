@@ -17,22 +17,20 @@ const allPosts = (): MdxPage[] => {
     );
     const { data, content } = matter(fileContents);
 
-    if (data.enabled === false) {
-      return acc;
+    if (data.enabled !== false) {
+      acc.push({
+        _id: slug,
+        slug,
+        body: content,
+        date: parseISO(data.date),
+        description: data.description,
+        excerpt: data.excerpt,
+        tags: data.tags,
+        title: data.title,
+        url: `/posts/${slug}`,
+        type: "Post",
+      } satisfies MdxPage);
     }
-
-    acc.push({
-      _id: slug,
-      slug,
-      body: content,
-      date: parseISO(data.date),
-      description: data.description,
-      excerpt: data.excerpt,
-      tags: data.tags,
-      title: data.title,
-      url: `/posts/${slug}`,
-      type: "Post",
-    } satisfies MdxPage);
 
     return acc;
   }, []);
