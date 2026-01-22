@@ -10,14 +10,14 @@ export const config = {
     linkedIn: 'https://www.linkedin.com/in/marcveens/',
     github: 'https://github.com/marcveens'
   },
-  footer: 'Copyright © 2025 Marc Veens',
+  footer: 'Copyright © 2026 Marc Veens',
   openSourceProjects: [
     {
-      name: 'react-context-mutex',
+      name: 'react-drawio',
       githubAccount: 'marcveens'
     },
     {
-      name: 'react-drawio',
+      name: 'react-context-mutex',
       githubAccount: 'marcveens'
     },
     {
