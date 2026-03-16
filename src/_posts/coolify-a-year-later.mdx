@@ -1,0 +1,36 @@
+---
+date: '2026-03-16T00:00:00.000Z'
+title: 'Self-hosting on Coolify - a year later'
+description: "After a year of self-hosting with Coolify on a VPS, here are 4 lessons I learned about builds, security, firewalls, and why running your own infrastructure is worth it."
+excerpt: "After a year of self-hosting with Coolify on a VPS, here are 4 lessons I learned about builds, security, firewalls, and why running your own infrastructure is worth it."
+tags:
+  - 'Coolify'
+  - 'Infrastructure'
+---
+
+It's been a year since I moved from Vercel and Heroku to Coolify, as you can read in <a href="posts/bye-vercel-hello-coolify">this post</a>. Initially, I didn't know much about self-hosting. I just followed a tutorial on how to set up a VPS and ran a script to install Coolify. I managed to point the DNS of my domain name to the right server, and everything seemed to work fine. It did for a while though, until I ran into performance and security issues. Whoops... 
+
+Since it was basically a whole new world for me to discover, I had to learn so much. I began to understand why most people chose to deploy to Vercel or Netlify. That's by far the easiest way to go, and they handle all the difficult stuff for you. There ain't no such thing as a free lunch, though. It <a href="https://news.ycombinator.com/item?id=46960517" target="_blank" rel="noopener noreferrer">can</a> <a href="https://www.reddit.com/r/statichosting/comments/1nz40v4/accidentally_racked_up_a_huge_bill_on_netlify_how/" target="_blank" rel="noopener noreferrer">cost</a> <a href="https://www.reddit.com/r/webdev/comments/1b14bty/netlify_just_sent_me_a_104k_bill_for_a_simple/" target="_blank" rel="noopener noreferrer">you</a> if you're not careful. 
+
+Ok, here are 4 things I learned about self hosting on a VPS in the past year. 
+
+## Offload your builds
+Quite fast I ran into issues where my whole Coolify environment froze and I basically had to reset my VPS in order to get it working again. A bit of reading and debugging later, I found out that it always happened when I pushed new code to my GitHub repository. Coolify was trying to build the new code, but apparently the build process was intensive enough to cause the whole server to freeze. Even for a relatively simple React app.
+
+The Coolify docs <a href="https://coolify.io/docs/troubleshoot/server/crash-during-build#_2-troubleshooting-performance-issues" target="_blank" rel="noopener noreferrer">mention</a> that this can be an issue, and offloading your builds to a separate server is suggested. Luckily, all of my code is on GitHub, so let's make them do the heavy lifting! Now I run builds for all my apps using GitHub Actions, then they're pushed to the GitHub Container Registry and I trigger a webhook on Coolify just to let the app know a new version of my app Image is available. Coolify then only has to get the latest image, which is done in a matter of seconds.
+
+Fixed!
+
+## Keep your packages up to date
+December last year I received an email from Hetzner (my VPS hosting provider), stating "We have indications that there was an attack from your server.". Uhm, what? After some research, I found out that this was most likely the issue: <a href="https://react.dev/blog/2025/12/03/critical-security-vulnerability-in-react-server-components" target="_blank" rel="noopener noreferrer">Critical Security Vulnerability in React Server Components</a>. I did read about it earlier but thought, oh well, I'll update it later. No I should not have waited. Of course people built scanners to see what Next.js sites are vulnerable. Of course they immediately run IP scanners through that exploit, on my server... Luckily this was relatively easy to fix, and no big harm was done. Just had to make sure all references of Next.js were set to the latest version, also in the package-lock. 
+
+Fixed!
+
+## A firewall for your VPS is important
+Networking is not really my cup of tea. I learned about subnets, firewalls and those kinds of things when I was still at school, but they never really interested me much. That's also why I didn't set up a firewall for my VPS initially. That was maybe a dumb thing to do. I have a few databases running, which I made publically so I can see the data using a local database management tool. Soon after that I got another mail from Hetzner, stating "access to the DBMS should be limited to the application server and trusted management networks or a VPN connection. The DBMS should never be exposed to the Internet". I think they did some port scanning and saw that it was accessible from my server. Still, there was an authentication layer of course, so no one got access to my database, but it was another valuable lesson. A firewall can protect against these things and it's actually really easy to set up. All databases can now only be accessed by my IP, and the internal URL is used for comminucation within Coolify apps.
+
+Fixed!
+
+## It's really fun to do!
+Yes, self-hosting is more labour intensive than just pushing things to SaaS solutions, but I learned so much more doing it on my own. The open source community is simply amazing, there is so much software that you can run and configure yourself. Sure, things will break along the way, but that's OK. I don't run any apps that require 99.99% uptime, so if things break, I take the time to figure out why they did, and try to fix them as good as possible. It's progress, it's fun! 
+
