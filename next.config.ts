@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  output: "standalone",
   pageExtensions: ["ts", "tsx", "mdx"],
   transpilePackages: ["next-mdx-remote"],
   experimental: {
